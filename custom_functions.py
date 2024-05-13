@@ -1,59 +1,273 @@
 import pyproj
 import pandas as pd
-import folium
 import streamlit as st
-from streamlit_folium import st_folium, folium_static
-import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
+import plotly.express as px
+import plotly.graph_objects as go
+import math
 
 def convert_l93_to_latlon(x, y):
     transformer = pyproj.Transformer.from_crs("epsg:2154", "epsg:4326", always_xy=True)
     lon, lat = transformer.transform(x, y)
     return lat, lon
 
-def create_interactive_map(df):
+def haversine_distance(lat1, lon1, lat2, lon2):
+    # Convertir les degrés en radians
+    lat1, lon1, lat2, lon2 = map(math.radians, [lat1, lon1, lat2, lon2])
+    
+    # Rayon de la Terre en kilomètres
+    R = 6371.0
+    
+    # Différences de coordonnées
+    dlat = lat2 - lat1
+    dlon = lon2 - lon1
+    
+    # Formule de Haversine
+    a = math.sin(dlat / 2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2)**2
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+    
+    # Distance en kilomètres
+    distance = R * c
+    return distance
+
+def create_interactive_map(df, width=1000, height=1000):
     if df.empty:
-        # Créer une carte vide
-        m = folium.Map(location=[46.493889, 2.602778], zoom_start=6)
-    else:
-        # Centre de la carte (peut être ajusté selon vos données)
-        df = df.dropna(subset=['LAT_WGS', 'LONG_WGS'])
-        m = folium.Map(location=[df['LAT_WGS'].mean(), df['LONG_WGS'].mean()], zoom_start=9)
+        fig = go.Figure(go.Scattermapbox())
+        fig.update_layout(mapbox_style="open-street-map", mapbox_zoom=6, mapbox_center={"lat": 46.493889, "lon": 2.602778}, width=width, height=height)
+        return st.plotly_chart(fig)
 
-        # Générer une palette de couleurs pour les trajectoires
-        num_individuals = df['NUM_PIT'].nunique()
-        cmap_trajectories = plt.get_cmap('tab10', num_individuals)
-        colors_trajectories = {ind: mcolors.rgb2hex(cmap_trajectories(i / num_individuals)) for i, ind in enumerate(df['NUM_PIT'].unique())}
+    # Définir les centres de la carte basés sur les moyennes des latitudes et longitudes
+    center_lat, center_lon = df['LAT_WGS'].mean(), df['LONG_WGS'].mean()
 
-        # Tracer les trajectoires entre les sites pour chaque individu
-        trajectories = folium.FeatureGroup(name='Trajectoires')
-        for ind, color in colors_trajectories.items():
-            individual_data = df[df['NUM_PIT'] == ind].sort_values('DATE')
-            lat_lon_pairs = list(zip(individual_data['LAT_WGS'], individual_data['LONG_WGS']))
-            folium.PolyLine(lat_lon_pairs, color=color, weight=2).add_to(trajectories)
-        trajectories.add_to(m)
+    fig = go.Figure()
 
-        # Ajouter des marqueurs pour chaque site
-        site_markers = folium.FeatureGroup(name='Sites')
-        for i, (_, row) in enumerate(df.drop_duplicates('LIEU_DIT').iterrows()):
-            lat, lon = row['LAT_WGS'], row['LONG_WGS']
-            lieu_dit = row['LIEU_DIT']
-            dept = row['DEPARTEMENT']
-            popup_content = f'<div class="custom-popup">{dept}<br>{lieu_dit}</div>'
-            popup = folium.Popup(popup_content, max_width=300)
-            folium.CircleMarker(location=[lat, lon], radius=3, popup=popup, color='red', fill=True, fill_opacity=1).add_to(site_markers)
-        site_markers.add_to(m)
+    # Générer une palette de couleurs pour les trajectoires
+    num_individuals = df['NUM_PIT'].nunique()
+    colors = px.colors.qualitative.Plotly * (num_individuals // len(px.colors.qualitative.Plotly) + 1)  # Assurer assez de couleurs
+    color_dict = dict(zip(df['NUM_PIT'].unique(), colors))
 
-        # Ajouter les contrôles de couches
-        folium.LayerControl().add_to(m)
+    # Tracer les trajectoires pour chaque individu
+    tracked_connections = set()
+    for ind, color in color_dict.items():
+        individual_data = df[df['NUM_PIT'] == ind].sort_values('DATE')
+        previous_coords = None
+        for _, row in individual_data.iterrows():
+            current_coords = (row['LAT_WGS'], row['LONG_WGS'])
+            if previous_coords and (previous_coords, current_coords) not in tracked_connections:
+                fig.add_trace(go.Scattermapbox(
+                    lat=[previous_coords[0], current_coords[0]],
+                    lon=[previous_coords[1], current_coords[1]],
+                    mode='lines',
+                    line=dict(color=color, width=2),
+                    showlegend=False
+                ))
+                # Ajouter la trajectoire dans les deux directions pour éviter les doublons
+                tracked_connections.add((previous_coords, current_coords))
+                tracked_connections.add((current_coords, previous_coords))
+            previous_coords = current_coords
 
-        # Ajouter le style CSS pour ajuster la largeur de la popup
-        m.get_root().header.add_child(folium.Element("<style>.custom-popup {max-width:100%;}</style>"))
+    # Ajouter des marqueurs pour chaque site
+    unique_sites = df.drop_duplicates(subset=['LAT_WGS', 'LONG_WGS', 'LIEU_DIT'])
+    for _, site in unique_sites.iterrows():
+        fig.add_trace(go.Scattermapbox(
+            lat=[site['LAT_WGS']],
+            lon=[site['LONG_WGS']],
+            mode='markers+text',
+            marker=go.scattermapbox.Marker(size=9, color='red'),
+            text=f"{site['DEPARTEMENT']}<br>{site['LIEU_DIT']}",
+            textposition="bottom right",
+            showlegend=False
+        ))
 
-    return m
+    fig.update_layout(
+        mapbox_style="open-street-map",
+        mapbox_zoom=9,
+        mapbox_center={"lat": center_lat, "lon": center_lon},
+        height=height,
+        width=width,
+        showlegend=False
+    )
+    return st.plotly_chart(fig)
 
-def show_map(df, width = 700, height = 500):
-    m = create_interactive_map(df)
-    folium_static(m, width = width, height = height)
+def create_trajectories_map(df, width = 1000, height = 1000):
+    if df.empty:
+        fig = go.Figure(go.Scattermapbox())
+        fig.update_layout(mapbox_style="open-street-map", mapbox_zoom=6, mapbox_center={"lat": 46.493889, "lon": 2.602778}, height = height, width = width)
+        return st.plotly_chart(fig)
 
+    # Définir les centres de la carte basés sur les moyennes des latitudes et longitudes
+    center_lat, center_lon = df['LAT_WGS'].mean(), df['LONG_WGS'].mean()
 
+    fig = go.Figure()
+
+    # Extraction des liaisons uniques entre sites
+    unique_connections = df.sort_values('DATE').drop_duplicates(subset=['LAT_WGS', 'LONG_WGS'], keep='first')
+
+    # Tracer les liaisons
+    last_point = None
+    for _, row in unique_connections.iterrows():
+        if last_point is not None:
+            fig.add_trace(go.Scattermapbox(
+                lat=[last_point['LAT_WGS'], row['LAT_WGS']],
+                lon=[last_point['LONG_WGS'], row['LONG_WGS']],
+                mode='lines',
+                line=dict(width=2),
+                showlegend=False
+            ))
+        last_point = row
+
+    # Ajouter les marqueurs pour les sites, avec noms dans la légende
+    sites = df.drop_duplicates(subset=['LAT_WGS', 'LONG_WGS', 'LIEU_DIT'])
+    for _, site in sites.iterrows():
+        fig.add_trace(go.Scattermapbox(
+            lat=[site['LAT_WGS']],
+            lon=[site['LONG_WGS']],
+            mode='markers+text',
+            marker=go.scattermapbox.Marker(size=9, color='blue'),
+            text=site['LIEU_DIT'],
+            textposition="bottom right",
+            name=site['LIEU_DIT'],  # Utiliser le lieu dit comme nom dans la légende
+            showlegend = False
+        ))
+
+    fig.update_layout(
+        mapbox_style="open-street-map",
+        mapbox_zoom=6,
+        mapbox_center={"lat": center_lat, "lon": center_lon},
+        height = height,
+        width = width
+    )
+    return st.plotly_chart(fig)
+
+def plot_trajectories_from_site(df, site, width=1000, height=1000):
+    if df.empty:
+        fig = go.Figure(go.Scattermapbox())
+        fig.update_layout(mapbox_style="open-street-map", mapbox_zoom=6, mapbox_center={"lat": 46.493889, "lon": 2.602778}, width=width, height=height)
+        return st.plotly_chart(fig)
+
+    # Définir les centres de la carte basés sur les moyennes des latitudes et longitudes
+    center_lat, center_lon = df['LAT_WGS'].mean(), df['LONG_WGS'].mean()
+    fig = go.Figure()
+
+    # Filtrer les individus par site sélectionné
+    individuals = df[df['LIEU_DIT'] == site]['NUM_PIT'].unique()
+
+    # Tracer les trajectoires pour chaque individu
+    for ind in individuals:
+        ind_df = df[df['NUM_PIT'] == ind].sort_values('DATE')
+        fig.add_trace(go.Scattermapbox(
+            lat=ind_df['LAT_WGS'],
+            lon=ind_df['LONG_WGS'],
+            mode='lines+markers',
+            line=dict(color='blue', width=1),
+            marker=dict(color='blue', size=5),
+            showlegend = False
+        ))
+
+    # Ajouter un marqueur pour chaque site unique
+    unique_sites = df.drop_duplicates(subset=['LAT_WGS', 'LONG_WGS', 'LIEU_DIT'])
+    for _, site in unique_sites.iterrows():
+        fig.add_trace(go.Scattermapbox(
+            lat=[site['LAT_WGS']],
+            lon=[site['LONG_WGS']],
+            mode='markers',
+            marker=go.scattermapbox.Marker(size=9, color='red'),
+            text=f"{site['DEPARTEMENT']}<br>{site['LIEU_DIT']}",
+            showlegend = False
+        ))
+
+    fig.update_layout(
+        mapbox_style="open-street-map",
+        mapbox_zoom=9,
+        mapbox_center={"lat": center_lat, "lon": center_lon},
+        height=height,
+        width=width
+    )
+    return st.plotly_chart(fig)
+
+def gant_diagram_site(df):
+    df['Prev_DATE'] = df.groupby(['NUM_PIT', 'LIEU_DIT'])['DATE'].shift(1)
+    df['New_Visit'] = (df['DATE'] - df['Prev_DATE']).dt.days > 1
+    df['Visit_ID'] = df.groupby(['NUM_PIT', 'LIEU_DIT'])['New_Visit'].cumsum()
+
+    # Calculer min/max dates pour chaque visite
+    result = df.groupby(['NUM_PIT', 'LIEU_DIT', 'Visit_ID']).agg(
+        Start=pd.NamedAgg(column='DATE', aggfunc='min'),
+        Finish=pd.NamedAgg(column='DATE', aggfunc='max')
+    ).reset_index()
+
+    # Assurez-vous que les colonnes de date sont au format datetime si ce n'est pas déjà le cas
+    result['Start'] = pd.to_datetime(result['Start'])
+    result['Finish'] = pd.to_datetime(result['Finish'])
+
+    # Créer le diagramme de Gantt
+    fig = px.timeline(
+        result,
+        x_start='Start',
+        x_end='Finish',
+        y='LIEU_DIT',  # ou 'NUM_PIT' si vous préférez regrouper par individu
+        color='NUM_PIT',  # Changer la couleur selon l'individu
+        color_discrete_sequence=px.colors.qualitative.Plotly,
+        labels={'LIEU_DIT': 'Site', 'NUM_PIT': 'Individu'},
+        title='Présence des individus sur chaque site'
+    )
+
+    # Mise à jour des étiquettes et de l'orientation de l'axe des ordonnées
+    fig.update_yaxes(categoryorder='total ascending')  # Cela trie les sites par date de début si nécessaire
+    fig.update_layout(
+        xaxis_title='Date',
+        yaxis_title='Site',
+        xaxis=dict(tickformat='%Y-%m'),  # Format des dates sur l'axe X pour plus de clarté
+        legend_title_text='Individu',
+        legend_orientation="h",  # Horizontale
+        legend=dict(
+            x=0,  # Centre la légende horizontalement
+            y=-0.3,  # Positionne la légende en dessous du graphique
+            xanchor="left",  # Ancrage au centre pour le centrage horizontal
+            yanchor="top"  # Ancrage en haut pour positionnement au-dessous
+        )
+    )
+    return st.plotly_chart(fig)
+
+def gant_diagram(df):
+    df['Prev_DATE'] = df.groupby(['LIEU_DIT'])['DATE'].shift(1)
+    df['New_Visit'] = (df['DATE'] - df['Prev_DATE']).dt.days > 1
+    df['Visit_ID'] = df.groupby(['LIEU_DIT'])['New_Visit'].cumsum()
+
+    # Calculer min/max dates pour chaque visite
+    result = df.groupby(['LIEU_DIT', 'Visit_ID']).agg(
+        Start=pd.NamedAgg(column='DATE', aggfunc='min'),
+        Finish=pd.NamedAgg(column='DATE', aggfunc='max'),
+        Department=pd.NamedAgg(column='DEPARTEMENT', aggfunc='first')
+    ).reset_index()
+
+    # Trier les sites par ordre alphabétique et les départements pour la légende
+    result = result.sort_values(by=['Department', 'LIEU_DIT'])
+
+    # Assurez-vous que les colonnes de date sont au format datetime si ce n'est pas déjà le cas
+    result['Start'] = pd.to_datetime(result['Start'])
+    result['Finish'] = pd.to_datetime(result['Finish'])
+
+    # Créer le diagramme de Gantt
+    fig = px.timeline(
+        result,
+        x_start='Start',
+        x_end='Finish',
+        y='LIEU_DIT',
+        color='Department',  # Changer la couleur en fonction du département
+        color_discrete_sequence=px.colors.qualitative.Plotly,
+        labels={'LIEU_DIT': 'Site'},
+        title='Présence sur chaque site'
+    )
+
+    # La légende est implicitement triée par le tri des données
+    fig.update_layout(legend=dict(traceorder="normal"))
+
+    # Mise à jour des étiquettes et de l'orientation de l'axe des ordonnées
+    fig.update_yaxes(categoryorder='total ascending')  # Cela trie les sites par date de début si nécessaire
+    fig.update_layout(
+        xaxis_title='Date',
+        yaxis_title='Site',
+        xaxis=dict(tickformat='%Y-%m-%d'),  # Format des dates sur l'axe X pour plus de clarté
+        height=1000
+    )
+    return st.plotly_chart(fig, use_container_width=True)  # Hauteur fixe avec possibilité de scroller
