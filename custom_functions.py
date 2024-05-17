@@ -29,6 +29,20 @@ def haversine_distance(lat1, lon1, lat2, lon2):
     distance = R * c
     return distance
 
+def distance_parcourue_par_individu(df):
+    total_distance = 0
+    
+    # Trier le DataFrame par ordre chronologique
+    df = df.sort_values(by='DATE')
+    
+    # Itérer sur les lignes du DataFrame
+    for i in range(len(df) - 1):
+        lat1, lon1 = df.iloc[i]['LAT_WGS'], df.iloc[i]['LONG_WGS']
+        lat2, lon2 = df.iloc[i + 1]['LAT_WGS'], df.iloc[i + 1]['LONG_WGS']
+        total_distance += haversine_distance(lat1, lon1, lat2, lon2)
+    
+    return total_distance
+
 def create_interactive_map(df, width=1000, height=1000):
     if df.empty:
         fig = go.Figure(go.Scattermapbox())
