@@ -159,10 +159,10 @@ with tab1:
                 st.dataframe(df_filtered[['DEPARTEMENT', 'LIEU_DIT']].drop_duplicates().reset_index(drop = True))
 
             with col1:
-                create_interactive_map(df_filtered, width = 1200, height = 800)
+                create_interactive_map(df_filtered, height = 1000)
         else:
             with col1:
-                create_interactive_map(df_filtered, width = 1200, height = 800)
+                create_interactive_map(df_filtered, height = 1000)
             with col2:    
                 st.warning("Veuillez sélectionner au moins un département", icon="⚠️")
 
