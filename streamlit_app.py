@@ -51,6 +51,7 @@ def load_data_antenna():
     return df_antenna
 
 df_antenna = load_data_antenna()
+df_filtered = pd.DataFrame()
 
 st.markdown("""
         <style>
@@ -94,24 +95,13 @@ with tab1:
             placeholder = "Sélectionner un ou plusieurs département(s)...",
         )
 
-        if select_dept:
-            df_filtered = df[df['DEPARTEMENT'].isin(select_dept)]
-        else:
-            df_filtered = df[df['NUM_PIT'] != df['NUM_PIT']]
-
-        sites = df_filtered['LIEU_DIT'].sort_values().unique()
+        sites = df[df['DEPARTEMENT'].isin(select_dept)]['LIEU_DIT'].sort_values().unique()
         selected_site = st.selectbox(
             "Filtrer par site de première capture :",
             sites,
             index = None,
             placeholder = "Choisissez un site..."
         )
-
-        if selected_site is not None:
-            df_filtered = df_filtered[df_filtered['LIEU_DIT'] == selected_site]
-            df_filtered = df_filtered[df_filtered['ACTION'] == 'T']
-            pit_with_action_c = df_filtered['NUM_PIT'].unique()
-            df_filtered = df[df['NUM_PIT'].isin(pit_with_action_c)]
 
         selected_dates = st.slider(
             "Filtrer un intervalle de dates :",
@@ -121,11 +111,21 @@ with tab1:
             format="YYYY-MM-DD"
                 )
 
-        if select_dept is not None:
-            start_date, end_date = selected_dates
-            start_date = pd.to_datetime(start_date)
-            end_date = pd.to_datetime(end_date)
-            df_filtered = df_filtered[(df_filtered['DATE'] >= start_date) & (df_filtered['DATE'] <= end_date)]
+        button = st.button("Filtrer la carte", type = 'primary')
+
+        if button:
+            if select_dept:
+                df_filtered = df[df['DEPARTEMENT'].isin(select_dept)]
+            if selected_site:
+                df_filtered = df_filtered[df_filtered['LIEU_DIT'] == selected_site]
+                df_filtered = df_filtered[df_filtered['ACTION'] == 'T']
+                pit_with_action_c = df_filtered['NUM_PIT'].unique()
+                df_filtered = df[df['NUM_PIT'].isin(pit_with_action_c)]
+            if select_dept:
+                start_date, end_date = selected_dates
+                start_date = pd.to_datetime(start_date)
+                end_date = pd.to_datetime(end_date)
+                df_filtered = df_filtered[(df_filtered['DATE'] >= start_date) & (df_filtered['DATE'] <= end_date)]
 
             cola, colb, colc = st.columns([1, 1, 1])
             st.write(
@@ -156,7 +156,18 @@ with tab1:
                 st.metric(label = "Nombre de sites", value = df_filtered['LIEU_DIT'].nunique())
                 st.metric(label = "Nombre d'espèces", value = df_filtered['CODE_ESP'].nunique())
             with cole:
-                st.dataframe(df_filtered[['DEPARTEMENT', 'LIEU_DIT']].drop_duplicates().reset_index(drop = True))
+                if selected_site:
+                    individuals = df[df['LIEU_DIT'] == selected_site]['NUM_PIT'].unique()
+                    df_filtered = df[df['NUM_PIT'].isin(individuals)]
+                    df_filtered['DISTANCE'] = df_filtered.apply(
+                        lambda row: haversine_distance(df[df['LIEU_DIT'] == selected_site]['LAT_WGS'].unique(), 
+                                                    df[df['LIEU_DIT'] == selected_site]['LONG_WGS'].unique(), 
+                                                    row['LAT_WGS'], 
+                                                    row['LONG_WGS']), 
+                                                    axis=1)
+                    st.dataframe(df_filtered[['DEPARTEMENT', 'LIEU_DIT', 'DISTANCE']].drop_duplicates().reset_index(drop = True))
+                else:
+                    st.dataframe(df_filtered[['DEPARTEMENT', 'LIEU_DIT']].drop_duplicates().reset_index(drop = True))
 
             with col1:
                 create_interactive_map(df_filtered, height = 1000)
@@ -234,7 +245,15 @@ with tab2:
             else:
                 individuals = df[df['LIEU_DIT'] == selected_site_antenna]['NUM_PIT'].unique()
                 df_antenna_filtered = df[df['NUM_PIT'].isin(individuals)]
-                st.dataframe(df_antenna_filtered[['DEPARTEMENT', 'LIEU_DIT']].drop_duplicates().reset_index(drop = True))
+                if df_antenna_filtered['LIEU_DIT'].nunique() > 2:
+                    df_antenna_filtered['DISTANCE'] = df_antenna_filtered.apply(
+                        lambda row: haversine_distance(df[df['LIEU_DIT'] == selected_site_antenna]['LAT_WGS'].unique(), 
+                                                    df[df['LIEU_DIT'] == selected_site_antenna]['LONG_WGS'].unique(), 
+                                                    row['LAT_WGS'], 
+                                                    row['LONG_WGS']), 
+                                                    axis=1)
+                    st.dataframe(df_antenna_filtered[['DEPARTEMENT', 'LIEU_DIT', 'DISTANCE']].drop_duplicates().reset_index(drop = True))
+
 
         with col1:
             if on:
