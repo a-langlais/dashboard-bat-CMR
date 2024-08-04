@@ -111,7 +111,7 @@ def create_interactive_map(df, selected_site=None, height=1500):
         height=height,
         showlegend=False
     )
-    return fig
+    return st.plotly_chart(fig, use_container_width=True)
 
 def create_trajectories_map(df, width = 1000, height = 1000):
     if df.empty:
@@ -162,7 +162,7 @@ def create_trajectories_map(df, width = 1000, height = 1000):
         height = height,
         width = width
     )
-    return fig
+    return st.plotly_chart(fig)
 
 def plot_trajectories_from_site(df, site, width=1000, height=1000):
     if df.empty:
@@ -209,7 +209,7 @@ def plot_trajectories_from_site(df, site, width=1000, height=1000):
         height=height,
         width=width
     )
-    return fig
+    return st.plotly_chart(fig)
 
 def gant_diagram_site(df):
     df['Prev_DATE'] = df.groupby(['NUM_PIT', 'LIEU_DIT'])['DATE'].shift(1)
