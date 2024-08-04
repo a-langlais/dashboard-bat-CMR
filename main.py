@@ -519,7 +519,7 @@ def chord_diagram(transition_matrix, labels):
     fig = ocd.Chord(transition_matrix, labels)
     fig.radius = 1000
     fig.plot_area = {"x": -1300, "y": -1300, "w": 2600, "h": 2600}
-    return fig.show()
+    return fig
 
 plot_detection_year = detection_by_year(df_antenna)
 plot_capture_year = capture_by_year(df_antenna)
