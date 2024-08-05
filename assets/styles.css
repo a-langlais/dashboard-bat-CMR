@@ -1,11 +1,7 @@
 .card {
-    padding: 1rem;
     border-radius: 0.5rem;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
+    margin: 5px;
     display: inline-block;
-    text-align: center;
     width: 100%;
 }
 
@@ -13,12 +9,13 @@
     font-size: 1rem;
     font-weight: bold;
     margin-bottom: 0.5rem;
-    text-align: center;
+    text-align: left;
 }
 
 .values {
     font-size: 2.5rem;
-    text-align: center;
+    text-align: right;
+    display: block; /* Ensure it takes up the full width */
 }
 
 .percent {
@@ -26,3 +23,21 @@
     text-align: center;
 }
 
+.styled-text {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #ffffff18;
+    font-family: Arial, sans-serif;
+}
+
+.styled-text h3 {
+    margin-bottom: 10px;
+    font-weight: bold;
+    border-bottom: 2px solid #ffffff; /* Add horizontal line */
+    padding-bottom: 5px; /* Space between text and line */
+}
+
+.styled-text p {
+    text-align: justify;
+}
