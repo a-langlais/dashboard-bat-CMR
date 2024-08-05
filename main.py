@@ -604,4 +604,4 @@ pages = {
 }
 
 gui = Gui(pages=pages, css_file="assets/styles.css")
-gui.run()
+gui.run(host='0.0.0.0', port=5000, use_session=True)
