@@ -144,7 +144,7 @@ def create_transition_matrix(df, remove_self_loops=True, reduce_self_loops=False
         transition_matrix.at[row['LIEU_PRECEDENT'], row['LIEU_DIT']] = row['count']
 
     return transition_matrix, lieux
-def process_transition_matrix(transition_matrix, df):
+def process_transition_matrix(transition_matrix, df, threshold = 9):
     # Transformer la matrice en table de connexions
     transition_table = transition_matrix.stack().reset_index()
     transition_table.columns = ['source', 'target', 'count']
@@ -163,7 +163,7 @@ def process_transition_matrix(transition_matrix, df):
     transition_table[['source', 'target']] = pd.DataFrame(transition_table['site_pair'].tolist(), index=transition_table.index)
 
     # Filtrer pour ne garder que les connexions avec au moins 10 occurrences
-    transition_table = transition_table[transition_table['count'] > 9]
+    transition_table = transition_table[transition_table['count'] > threshold]
 
     # Obtenir les limites pour normaliser les valeurs de count
     min_count = transition_table['count'].min()
@@ -313,7 +313,7 @@ def gant_diagram(df_original):
     result = df_filtered.groupby(['LIEU_DIT', 'Visit_ID']).agg(
         Start=pd.NamedAgg(column='DATE', aggfunc='min'),
         Finish=pd.NamedAgg(column='DATE', aggfunc='max'),
-        Department=pd.NamedAgg(column='DEPARTEMENT', aggfunc='first')
+        Departement=pd.NamedAgg(column='DEPARTEMENT', aggfunc='first')
     ).reset_index()
     
     # Supprimer les LIEU_DIT qui n'ont pas de dates valides
@@ -323,7 +323,7 @@ def gant_diagram(df_original):
     result = result[result['Finish'] > result['Start']]
 
     # Trier les sites par ordre alphabétique et les départements pour la légende
-    result = result.sort_values(by=['Department', 'LIEU_DIT'])
+    result = result.sort_values(by=['Departement', 'LIEU_DIT'])
 
     # Assurez-vous que les colonnes de date sont au format datetime si ce n'est pas déjà le cas
     result['Start'] = pd.to_datetime(result['Start'])
@@ -342,7 +342,7 @@ def gant_diagram(df_original):
         x_start='Start',
         x_end='Finish',
         y='LIEU_DIT',
-        color='Department',  # Changer la couleur en fonction du département
+        color='Departement',  # Changer la couleur en fonction du département
         color_discrete_sequence=px.colors.qualitative.Plotly,
         labels={'LIEU_DIT': 'Site'},
         title='Présence sur chaque site'
@@ -366,7 +366,8 @@ def gant_diagram(df_original):
         xaxis_title='Date',
         yaxis_title='Site',
         xaxis=dict(tickformat='%Y-%m-%d'),  # Format des dates sur l'axe X pour plus de clarté
-        height=fig_height
+        height=fig_height,
+        legend=dict(bgcolor='rgba(0, 0, 0, 0)')
     )
 
     return fig
@@ -395,32 +396,85 @@ def update_gant(state):
 def detection_by_year(df_antenna):
     df_antenna['YEAR'] = df_antenna['DATE'].dt.year
     grouped_data = df_antenna.groupby(['YEAR', 'CODE_ESP']).size().reset_index(name='Detections')
+    
     fig = px.bar(grouped_data, x='YEAR', y='Detections', color='CODE_ESP',
-                title="Détections par année et par espèce",
-                labels={'Detections': 'Nombre de détections', 'YEAR': 'Année', 'CODE_ESP': 'Espèce'},
-                )
-    fig.update_layout(xaxis_title='Année',
-                    yaxis_title='Nombre de détections',
-                    xaxis={'type': 'category'},
-                    barmode='stack') 
+                 labels={'Detections': 'Nombre de détections', 'CODE_ESP': 'Espèce'},
+                 )
+
+    fig.update_layout(
+        height=400,  # Hauteur uniforme
+        width=400,   # Largeur uniforme
+        yaxis_title='Nombre de détections',
+        xaxis_title=None,  # Supprimer l'étiquette "Année"
+        xaxis={'type': 'category', 'tickmode': 'linear'},  # Afficher toutes les années
+        barmode='stack',
+        legend=dict(
+            bgcolor='rgba(0, 0, 0, 0)',
+            orientation='h',  # Légende horizontale
+            x=0.5,            # Centrer la légende horizontalement
+            y=-0.2,           # Placer la légende en dessous de la figure
+            xanchor='center', # Ancrer la légende au centre
+            yanchor='top'     # Ancrer la légende au-dessus de l'axe x
+        ),
+        margin=dict(b=100)  # Ajouter de l'espace sous la figure
+    )
+
     return fig
 def capture_by_year(df_antenna):
     df_filtre = df_antenna[df_antenna['ACTION'] == 'T']
     df_filtre['YEAR'] = df_filtre['DATE'].dt.year
     df_grouped = df_filtre.groupby(['YEAR', 'CODE_ESP'])['NUM_PIT'].nunique().reset_index()
     df_grouped.rename(columns={'NUM_PIT': 'Nombre d\'individus uniques'}, inplace=True)
+    
     fig = px.bar(df_grouped, x='YEAR', y='Nombre d\'individus uniques', color='CODE_ESP',
-                 labels={'YEAR': 'Année', 'Nombre d\'individus uniques': 'Nombre d\'individus uniques', 'CODE_ESP': 'Espèce'},
-                 title='Individus transpondés par année et par espèce')
+                 labels={'Nombre d\'individus uniques': 'Nombre d\'individus uniques', 'CODE_ESP': 'Espèce'}
+                 )
+
+    fig.update_layout(
+        height=400,  # Hauteur uniforme
+        width=400,   # Largeur uniforme
+        yaxis_title='Nombre d\'individus uniques',
+        xaxis_title=None,  # Supprimer l'étiquette "Année"
+        xaxis={'type': 'category', 'tickmode': 'linear'},  # Afficher toutes les années
+        legend=dict(
+            bgcolor='rgba(0, 0, 0, 0)',
+            orientation='h',  # Légende horizontale
+            x=0.5,            # Centrer la légende horizontalement
+            y=-0.2,           # Placer la légende en dessous de la figure
+            xanchor='center', # Ancrer la légende au centre
+            yanchor='top'     # Ancrer la légende au-dessus de l'axe x
+        ),
+        margin=dict(b=100)  # Ajouter de l'espace sous la figure
+    )  
+
     return fig
 def control_by_year(df_antenna):
     df_filtre = df_antenna[df_antenna['ACTION'] == 'C']
     df_filtre['YEAR'] = df_filtre['DATE'].dt.year
     df_grouped = df_filtre.groupby(['YEAR', 'CODE_ESP'])['NUM_PIT'].nunique().reset_index()
     df_grouped.rename(columns={'NUM_PIT': 'Nombre d\'individus'}, inplace=True)
+    
     fig = px.bar(df_grouped, x='YEAR', y='Nombre d\'individus', color='CODE_ESP',
-                 labels={'YEAR': 'Année', 'Nombre d\'individus': 'Nombre d\'individus', 'CODE_ESP': 'Espèce'},
-                 title='Individus contrôlés par année et par espèce')
+                 labels={'Nombre d\'individus': 'Nombre d\'individus', 'CODE_ESP': 'Espèce'},
+                 )
+
+    fig.update_layout(
+        height=400,  # Hauteur uniforme
+        width=400,   # Largeur uniforme
+        yaxis_title='Nombre d\'individus',
+        xaxis_title=None,  # Supprimer l'étiquette "Année"
+        xaxis={'type': 'category', 'tickmode': 'linear'},  # Afficher toutes les années
+        legend=dict(
+            bgcolor='rgba(0, 0, 0, 0)',
+            orientation='h',  # Légende horizontale
+            x=0.5,            # Centrer la légende horizontalement
+            y=-0.2,           # Placer la légende en dessous de la figure
+            xanchor='center', # Ancrer la légende au centre
+            yanchor='top'     # Ancrer la légende au-dessus de l'axe x
+        ),
+        margin=dict(b=100)  # Ajouter de l'espace sous la figure
+    )  
+
     return fig
 def detection_frequencies(df_antenna):
     df_antenna['MONTH_DAY'] = df_antenna['DATE'].dt.strftime('%m-%d')  # Cela crée une chaîne de caractères 'MM-DD'
@@ -452,10 +506,10 @@ def detection_frequencies(df_antenna):
 
     # Mise à jour du layout
     fig.update_layout(
-        title='Fréquence de détection en fonction du jour de l\'année par site',
         xaxis_title='Jour de l\'année',
         yaxis_title='Nombre de détections',
         xaxis=dict(type='category', categoryorder='array', categoryarray=[md for md in months_days]),
+        legend=dict(bgcolor='rgba(0, 0, 0, 0)'),
         #yaxis=dict(range=[0, global_freq['Global Detections'].max() + 10])
     )
     return fig
@@ -466,15 +520,13 @@ def pie_controled(df_antenna):
     # Créer un diagramme circulaire
     fig = px.pie(species_counts, 
                 values='Count', names='Species', 
-                title="Proportion d'espèces détectées",
                 color_discrete_sequence=px.colors.qualitative.Pastel,
                 hole = 0.5,)
 
     # Personnalisation supplémentaire
-    fig.update_traces(textposition='outside', textinfo='percent+label', insidetextorientation='radial')
     fig.update_layout(legend_title_text='Espèce',
-                    margin=dict(t=150, b=150, l=0, r=0),
-                    showlegend = False
+                    showlegend = True,
+                    legend=dict(bgcolor='rgba(0, 0, 0, 0)')
                         )
     return fig
 def pie_marked(df_antenna):
@@ -485,34 +537,42 @@ def pie_marked(df_antenna):
     # Créer un diagramme circulaire
     fig = px.pie(species_counts, 
                 values='Count', names='Species', 
-                title="Proportion d'espèces marquées",
                 color_discrete_sequence=px.colors.qualitative.Pastel,
                 hole = 0.5)
 
     # Personnalisation supplémentaire
-    fig.update_traces(textposition='outside', textinfo='percent+label', insidetextorientation='radial')
     fig.update_layout(legend_title_text='Espèce',
-                    margin=dict(t=150, b=150, l=0, r=0),
-                    showlegend = False
+                    showlegend = True,
+                    legend=dict(bgcolor='rgba(0, 0, 0, 0)')
                         )
     return fig
 def top_detection(df_antenna):
     df_antenna['NUM_PIT'] = "n° " + df_antenna['NUM_PIT'].astype(str)
 
-    # Obtenir les cinq catégories les plus fréquentes avec leurs occurrences
+    # Obtenir les dix catégories les plus fréquentes avec leurs occurrences
     top_categories = df_antenna['NUM_PIT'].value_counts().head(10)
 
-    # Créer un DataFrame à partir des cinq premières catégories
+    # Créer un DataFrame à partir des dix premières catégories
     df_top_categories = pd.DataFrame({'NUM_PIT': top_categories.index, 'Occurrences': top_categories.values})
     df_top_categories = df_top_categories.sort_values(by='Occurrences', ascending=False)
 
     # Créer le diagramme en barres horizontales avec Plotly Express
     fig = px.bar(df_top_categories, x='Occurrences', y='NUM_PIT', orientation='h',
-                title='TOP 10 des individus les plus contrôlés',
-                labels={'Occurrences': 'Nombre d\'occurrences', 'NUM_PIT': 'Catégories'},
-                color='NUM_PIT', color_discrete_sequence = px.colors.qualitative.Pastel,)
+                 labels={'Occurrences': "Nombre d'occurrences", 'NUM_PIT': ''},
+                 color='NUM_PIT', color_discrete_sequence=px.colors.qualitative.Set3)
 
-    fig.update_layout(showlegend=False)
+    # Ajuster la hauteur en fonction du nombre de catégories (avec une hauteur minimale de 400 pixels)
+    bar_height = 50  # Hauteur de chaque barre
+    min_height = 400  # Hauteur minimale du graphique
+    calculated_height = max(min_height, len(df_top_categories) * bar_height)
+
+    # Mettre à jour la mise en page avec des marges ajustées
+    fig.update_layout(
+        height=calculated_height,  # Hauteur dynamique
+        showlegend=False,
+        margin=dict(l=200),  # Augmenter la marge gauche pour mieux lire les annotations
+        legend=dict(bgcolor='rgba(0, 0, 0, 0)')
+    )
 
     return fig
 def chord_diagram(transition_matrix, labels):
@@ -528,9 +588,11 @@ plot_frequencies = detection_frequencies(df_antenna)
 plot_pie_controled = pie_controled(df_antenna)
 plot_pie_marked = pie_marked(df_antenna)
 plot_top_detection = top_detection(df_antenna)
+table_plot_raw = process_transition_matrix(transition_matrix, df_antenna, threshold = 0)
+transition_table_plot = table_plot_raw[['source', 'target', 'count']].sort_values(by='count', ascending=False)
 
-transition_matrix, labels = create_transition_matrix(df_antenna)
-plot_chord_diagram = chord_diagram(transition_matrix, labels)
+#transition_matrix, labels = create_transition_matrix(df_antenna)
+#plot_chord_diagram = chord_diagram(transition_matrix, labels)
 
 total_captured = len(df_antenna[(df_antenna['ACTION'] == 'T') | (df_antenna['ACTION'] == 'M')])
 total_recaptured = df_antenna[df_antenna['ACTION'] == 'C']['NUM_PIT'].nunique()
