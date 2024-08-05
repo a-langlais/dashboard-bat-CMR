@@ -4,7 +4,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
-import openchord as ocd
 
 # CHARGEMENT DES DONNEES
 
@@ -575,11 +574,6 @@ def top_detection(df_antenna):
     )
 
     return fig
-def chord_diagram(transition_matrix, labels):
-    fig = ocd.Chord(transition_matrix, labels)
-    fig.radius = 1000
-    fig.plot_area = {"x": -1300, "y": -1300, "w": 2600, "h": 2600}
-    return fig
 
 plot_detection_year = detection_by_year(df_antenna)
 plot_capture_year = capture_by_year(df_antenna)
@@ -590,9 +584,6 @@ plot_pie_marked = pie_marked(df_antenna)
 plot_top_detection = top_detection(df_antenna)
 table_plot_raw = process_transition_matrix(transition_matrix, df_antenna, threshold = 0)
 transition_table_plot = table_plot_raw[['source', 'target', 'count']].sort_values(by='count', ascending=False)
-
-#transition_matrix, labels = create_transition_matrix(df_antenna)
-#plot_chord_diagram = chord_diagram(transition_matrix, labels)
 
 total_captured = len(df_antenna[(df_antenna['ACTION'] == 'T') | (df_antenna['ACTION'] == 'M')])
 total_recaptured = df_antenna[df_antenna['ACTION'] == 'C']['NUM_PIT'].nunique()
