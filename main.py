@@ -143,36 +143,33 @@ def create_transition_matrix(df, remove_self_loops = True, reduce_self_loops = F
 
     return transition_matrix, lieux
 
-def process_transition_matrix(transition_matrix, df, threshold = 9):
+def process_transition_matrix(transition_matrix, df, threshold=9):
     # Transformer la matrice en table de connexions
     transition_table = transition_matrix.stack().reset_index()
     transition_table.columns = ['source', 'target', 'count']
 
     # Assurer l'ordre alphabétique des paires (source, target) pour un regroupement correct
     transition_table['site_pair'] = transition_table.apply(
-        lambda row: tuple(sorted([row['source'], row['target']])), axis = 1
+        lambda row: tuple(sorted([row['source'], row['target']])), axis=1
     )
 
     # Grouper par paire de sites et sommer les counts
-    transition_table = transition_table.groupby('site_pair', as_index = False).agg(
-        count = ('count', 'sum')  # Somme des counts
+    transition_table = transition_table.groupby('site_pair', as_index=False).agg(
+        count=('count', 'sum')  # Somme des counts
     )
 
     # Séparer les paires de sites dans des colonnes distinctes
-    transition_table[['source', 'target']] = pd.DataFrame(transition_table['site_pair'].tolist(), index = transition_table.index)
+    transition_table[['source', 'target']] = pd.DataFrame(transition_table['site_pair'].tolist(), index=transition_table.index)
 
     # Filtrer pour ne garder que les connexions avec au moins un certain nombre d'occurrences
-    transition_table = transition_table[transition_table['count'] > threshold] # Valeur du seuil de significativité à sélectionner
+    transition_table = transition_table[transition_table['count'] > threshold]  # Valeur du seuil de significativité à sélectionner
 
     # Obtenir les limites pour normaliser les valeurs de count
-    min_count = transition_table['count'].min()
-    max_count = transition_table['count'].max()
     mean_count = transition_table['count'].mean()
     std_count = transition_table['count'].std()
 
     # Normaliser les valeurs de count entre 0 et 1
-    #transition_table['normalized_count'] = (transition_table['count'] - min_count) / (max_count - min_count) # Normer
-    transition_table['normalized_count'] = (transition_table['count'] - mean_count) / std_count # Centrer-normer
+    transition_table['normalized_count'] = (transition_table['count'] - mean_count) / std_count  # Centrer-normer
 
     # Création d'une colormap personnalisée
     cmap = mcolors.LinearSegmentedColormap.from_list(
@@ -187,9 +184,9 @@ def process_transition_matrix(transition_matrix, df, threshold = 9):
     coords = df[['LIEU_DIT', 'LAT_WGS', 'LONG_WGS']].drop_duplicates()
     coords = coords.set_index('LIEU_DIT')
 
-    transition_table = transition_table.merge(coords, left_on = 'source', right_index = True)
-    transition_table = transition_table.merge(coords, left_on = 'target', right_index = True, suffixes = ('_source', '_target'))
-
+    transition_table = transition_table.merge(coords, left_on='source', right_index=True)
+    transition_table = transition_table.merge(coords, left_on='target', right_index=True, suffixes=('_source', '_target'))
+    
     return transition_table
 
 def create_trajectories_map_from_matrix(df, transition_table, width = 1200, height = 1000):
