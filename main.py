@@ -143,7 +143,7 @@ def create_transition_matrix(df, remove_self_loops = True, reduce_self_loops = F
 
     return transition_matrix, lieux
 
-def process_transition_matrix(transition_matrix, df, threshold=9):
+def process_transition_matrix(transition_matrix, df, threshold = 9):
     # Transformer la matrice en table de connexions
     transition_table = transition_matrix.stack().reset_index()
     transition_table.columns = ['source', 'target', 'count']
