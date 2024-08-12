@@ -1,9 +1,11 @@
 from taipy import Gui
 import pandas as pd
+import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
+import matplotlib.cm as cm
 
 # CHARGEMENT DES DONNEES
 
@@ -113,7 +115,7 @@ def create_trajectories_map(df, width = 1200, height = 1000):
     )
     return fig
 
-def create_transition_matrix(df, remove_self_loops = True, reduce_self_loops = False, reduction_factor = 0.5):
+def create_transition_matrix(df, remove_self_loops=True, reduce_self_loops=False, reduction_factor=0.5):
     # Tri par individu et date pour suivre les transitions
     df = df.sort_values(by = ['NUM_PIT', 'DATE'])
 
@@ -136,90 +138,102 @@ def create_transition_matrix(df, remove_self_loops = True, reduce_self_loops = F
 
     # Construire une matrice de transition
     lieux = sorted(set(df['LIEU_DIT'].unique()) | set(df['LIEU_PRECEDENT'].dropna().unique()))
-    transition_matrix = pd.DataFrame(0, index = lieux, columns = lieux)
-
-    for _, row in transition_counts.iterrows():
-        transition_matrix.at[row['LIEU_PRECEDENT'], row['LIEU_DIT']] = row['count']
+    transition_matrix = transition_counts.pivot(index='LIEU_PRECEDENT', columns='LIEU_DIT', values='count').fillna(0)
 
     return transition_matrix, lieux
 
-def process_transition_matrix(transition_matrix, df, threshold = 9):
+def process_transition_matrix(transition_matrix, df, threshold=9):
     # Transformer la matrice en table de connexions
     transition_table = transition_matrix.stack().reset_index()
     transition_table.columns = ['source', 'target', 'count']
 
     # Assurer l'ordre alphabétique des paires (source, target) pour un regroupement correct
-    transition_table['site_pair'] = transition_table.apply(
-        lambda row: tuple(sorted([row['source'], row['target']])), axis=1
-    )
+    transition_table['site_pair'] = transition_table.apply(lambda row: tuple(sorted([row['source'], row['target']])), axis = 1)
 
     # Grouper par paire de sites et sommer les counts
-    transition_table = transition_table.groupby('site_pair', as_index=False).agg(
-        count=('count', 'sum')  # Somme des counts
-    )
+    transition_table = transition_table.groupby('site_pair', as_index = False).agg(count = ('count', 'sum'))
 
     # Séparer les paires de sites dans des colonnes distinctes
     transition_table[['source', 'target']] = pd.DataFrame(transition_table['site_pair'].tolist(), index=transition_table.index)
 
     # Filtrer pour ne garder que les connexions avec au moins un certain nombre d'occurrences
-    transition_table = transition_table[transition_table['count'] > threshold]  # Valeur du seuil de significativité à sélectionner
+    transition_table = transition_table[transition_table['count'] > threshold]
 
     # Obtenir les limites pour normaliser les valeurs de count
     mean_count = transition_table['count'].mean()
     std_count = transition_table['count'].std()
 
     # Normaliser les valeurs de count entre 0 et 1
-    transition_table['normalized_count'] = (transition_table['count'] - mean_count) / std_count  # Centrer-normer
+    transition_table['normalized_count'] = (transition_table['count'] - mean_count) / std_count
 
-    # Création d'une colormap personnalisée
+    # Calcul des quantiles pour déterminer les couleurs
+    quantiles = np.quantile(transition_table['count'], [0, 0.25, 0.5, 0.75, 1])
+
+    # Création de la liste des couleurs
     cmap = mcolors.LinearSegmentedColormap.from_list(
-        "CustomGreenYellowOrangeRed",
-        ["#808080", "#4B4B4B", "#FC4C02", "#FF8C00", "#FF0000"]
+        "CustomBlackRed",
+        ["#D3D3D3", "#606060 ", "#FFA500", "#FF7F50", "#FF0000"]
     )
 
-    # Calculer les couleurs basées sur les counts standardisés
-    transition_table['color'] = transition_table['normalized_count'].apply(lambda x: mcolors.to_hex(cmap(x)))
+    # Fonction pour appliquer la bonne couleur en fonction des quantiles
+    def calculate_color(count):
+        if count <= quantiles[0]:
+            return mcolors.to_hex(cmap(0))
+        elif count <= quantiles[1]:
+            return mcolors.to_hex(cmap(0.25))
+        elif count <= quantiles[2]:
+            return mcolors.to_hex(cmap(0.5))
+        elif count <= quantiles[3]:
+            return mcolors.to_hex(cmap(0.75))
+        else:
+            return mcolors.to_hex(cmap(1))
+
+    transition_table['color'] = transition_table['count'].apply(calculate_color)
 
     # Fusionner les coordonnées du df dans transition_table pour source et target
     coords = df[['LIEU_DIT', 'LAT_WGS', 'LONG_WGS']].drop_duplicates()
     coords = coords.set_index('LIEU_DIT')
 
-    transition_table = transition_table.merge(coords, left_on='source', right_index=True)
-    transition_table = transition_table.merge(coords, left_on='target', right_index=True, suffixes=('_source', '_target'))
-    
+    transition_table = transition_table.merge(coords, left_on = 'source', right_index = True)
+    transition_table = transition_table.merge(coords, left_on = 'target', right_index = True, suffixes = ('_source', '_target'))
+
     return transition_table
 
-def create_trajectories_map_from_matrix(df, transition_table, width = 1200, height = 1000):
+def create_trajectories_map_from_matrix(df, transition_table, width=1200, height=1000):
     fig = go.Figure()
 
-    # Tracer chaque connexion individuellement avec sa couleur
-    for _, row in transition_table.iterrows():
+    # Créer une trace distincte pour chaque segment de ligne avec la couleur appropriée
+    for index, row in transition_table.iterrows():
         fig.add_trace(go.Scattermapbox(
             lat = [row['LAT_WGS_source'], row['LAT_WGS_target']],
             lon = [row['LONG_WGS_source'], row['LONG_WGS_target']],
             mode = 'lines',
-            line = dict(width = 1, color = row['color']),  # Utiliser la couleur calculée
-            hovertext = f"Count: {row['count']}",          # Ajout du texte de survol
-            hoverinfo = 'text',                            # Afficher le texte de survol
+            line = dict(
+                color = row['color'],  # Utiliser la couleur calculée pour cette trajectoire
+                width = 1  # Ajuster la largeur selon votre besoin
+            ),
             showlegend = False
         ))
 
     # Ajouter tous les marqueurs pour les lieux d'un seul coup
     coords = df[['LIEU_DIT', 'LAT_WGS', 'LONG_WGS']].drop_duplicates()
-    for _, coord in coords.iterrows():
-            fig.add_trace(go.Scattermapbox(
-                lat = [coord['LAT_WGS']],
-                lon = [coord['LONG_WGS']],
-                mode = 'markers+text',
-                marker = go.scattermapbox.Marker(
-                    size = 6,
-                    color = '#8467D7',  # Violet clair
-                ),
-                textfont = dict(color = 'grey'),
-                text = [coord['LIEU_DIT']],
-                textposition = "bottom right",
-                showlegend = False
-                ))
+    fig.add_trace(go.Scattermapbox(
+        lat = coords['LAT_WGS'],
+        lon = coords['LONG_WGS'],
+        mode = 'markers+text',  # Ensure 'text' is included here
+        marker = go.scattermapbox.Marker(
+            size = 6,
+            color = '#8467D7',  # Light violet
+        ),
+        text = coords['LIEU_DIT'],
+        textposition = "top right",
+        textfont = dict(
+            size = 12,
+            color = 'black'
+        ),
+        hoverinfo = 'text',
+        showlegend = False
+    ))
 
     # Définir le centre de la carte
     center_lat, center_lon = df['LAT_WGS'].mean(), df['LONG_WGS'].mean()
