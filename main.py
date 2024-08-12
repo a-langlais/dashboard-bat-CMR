@@ -115,7 +115,7 @@ def create_trajectories_map(df, width = 1200, height = 1000):
     )
     return fig
 
-def create_transition_matrix(df, remove_self_loops=True, reduce_self_loops=False, reduction_factor=0.5):
+def create_transition_matrix(df, remove_self_loops = True, reduce_self_loops = False, reduction_factor = 0.5):
     # Tri par individu et date pour suivre les transitions
     df = df.sort_values(by = ['NUM_PIT', 'DATE'])
 
@@ -142,7 +142,7 @@ def create_transition_matrix(df, remove_self_loops=True, reduce_self_loops=False
 
     return transition_matrix, lieux
 
-def process_transition_matrix(transition_matrix, df, threshold=9):
+def process_transition_matrix(transition_matrix, df, threshold = 9):
     # Transformer la matrice en table de connexions
     transition_table = transition_matrix.stack().reset_index()
     transition_table.columns = ['source', 'target', 'count']
@@ -172,7 +172,7 @@ def process_transition_matrix(transition_matrix, df, threshold=9):
     # Création de la liste des couleurs
     cmap = mcolors.LinearSegmentedColormap.from_list(
         "CustomBlackRed",
-        ["#D3D3D3", "#606060 ", "#FFA500", "#FF7F50", "#FF0000"]
+        ["#D3D3D3", "#606060", "#FFA500", "#FF7F50", "#FF0000"]
     )
 
     # Fonction pour appliquer la bonne couleur en fonction des quantiles
@@ -199,7 +199,7 @@ def process_transition_matrix(transition_matrix, df, threshold=9):
 
     return transition_table
 
-def create_trajectories_map_from_matrix(df, transition_table, width=1200, height=1000):
+def create_trajectories_map_from_matrix(df, transition_table, width = 1200, height = 1000):
     fig = go.Figure()
 
     # Créer une trace distincte pour chaque segment de ligne avec la couleur appropriée
