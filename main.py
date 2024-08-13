@@ -68,7 +68,7 @@ dates = [df_antenna['DATE'].min(), df_antenna['DATE'].max()]
 def create_trajectories_map(df, width = 1200, height = 1000):
     if df.empty:
         fig = go.Figure(go.Scattermapbox())
-        fig.update_layout(mapbox_style = "carto-positron", mapbox_zoom = 6, mapbox_center = {"lat": 46.493889, "lon": 2.602778}, height = height, width = width)
+        fig.update_layout(mapbox_style = "carto-darkmatter", mapbox_zoom = 6, mapbox_center = {"lat": 46.493889, "lon": 2.602778}, height = height, width = width)
         return fig
 
     center_lat, center_lon = df['LAT_WGS'].mean(), df['LONG_WGS'].mean() # Centre de la carte définie sur la moyenne des coordonnées des points
@@ -172,7 +172,7 @@ def process_transition_matrix(transition_matrix, df, threshold = 9):
     # Création de la liste des couleurs
     cmap = mcolors.LinearSegmentedColormap.from_list(
         "CustomBlackRed",
-        ["#D3D3D3", "#606060", "#FFA500", "#FF7F50", "#FF0000"]
+        ["#ffffff", "#606060", "#FFA500", "#FF7F50", "#FF0000"]
     )
 
     # Fonction pour appliquer la bonne couleur en fonction des quantiles
@@ -220,7 +220,7 @@ def create_trajectories_map_from_matrix(df, transition_table, width = 1200, heig
     fig.add_trace(go.Scattermapbox(
         lat = coords['LAT_WGS'],
         lon = coords['LONG_WGS'],
-        mode = 'markers+text',  # Ensure 'text' is included here
+        mode = 'markers+text',
         marker = go.scattermapbox.Marker(
             size = 6,
             color = '#8467D7',  # Light violet
@@ -229,7 +229,7 @@ def create_trajectories_map_from_matrix(df, transition_table, width = 1200, heig
         textposition = "top right",
         textfont = dict(
             size = 12,
-            color = 'black'
+            color = 'white'
         ),
         hoverinfo = 'text',
         showlegend = False
@@ -239,7 +239,7 @@ def create_trajectories_map_from_matrix(df, transition_table, width = 1200, heig
     center_lat, center_lon = df['LAT_WGS'].mean(), df['LONG_WGS'].mean()
 
     fig.update_layout(
-        mapbox_style = "carto-positron",  # Utiliser le style de carte noir et blanc
+        mapbox_style = "carto-darkmatter",  # Utiliser le style de carte noir et blanc
         mapbox_zoom = 6,
         mapbox_center = {"lat": center_lat, "lon": center_lon},
         font = dict(color = 'black'),
