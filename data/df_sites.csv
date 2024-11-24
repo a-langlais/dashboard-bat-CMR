@@ -1,0 +1,475 @@
+DEPARTEMENT,COMMUNE,LIEU_DIT,PRECISION_MILIEU,LONG_L93,LAT_L93,LAT_WGS,LONG_WGS,Département,Ancienne Région,Nouvelle Région
+17,LA CLISSE,Carrière de la Roche,Carrière souterraine,408177.549,6520712.591,45.72356732162969,-0.753226089090488,17,Poitou-Charentes,Nouvelle-Aquitaine
+16,RANCOGNE,Grotte de Rancogne,Grotte naturelle,498180.0,6514240.0,45.69789346262592,0.40604020194317025,16,Poitou-Charentes,Nouvelle-Aquitaine
+79,MELLE,Grottes de Loubeau,Grotte naturelle,457196.0,6573023.0,46.21346044795033,-0.15034094434111642,79,Poitou-Charentes,Nouvelle-Aquitaine
+17,ANNEPONT,Mairie d'Annepont,Bati,419441.0,6533475.0,45.843097576527214,-0.6160807684101542,17,Poitou-Charentes,Nouvelle-Aquitaine
+79,ALLONNE,La Marchandière,Bati,438774.0,6615298.0,46.586910805512176,-0.4127702787867246,79,Poitou-Charentes,Nouvelle-Aquitaine
+79,LE BUSSEAU,La Bourtière,Bati,424330.0,6612547.0,46.55639101132339,-0.5995811493237055,79,Poitou-Charentes,Nouvelle-Aquitaine
+79,LE PIN,Beauregard,Bati,422223.0,6648476.0,46.8786878392889,-0.6487177519156989,79,Poitou-Charentes,Nouvelle-Aquitaine
+79,MONCOUTANT-SUR-SÈVRE,Guibaud,Bati,426089.0,6625887.0,46.67710436676944,-0.584546398231854,79,Poitou-Charentes,Nouvelle-Aquitaine
+79,XAINTRAY,Puy-Chenin,Bati,433080.0,6606415.0,46.504763010677834,-0.4819495563105937,79,Poitou-Charentes,Nouvelle-Aquitaine
+79,AIRVAULT,Pont de Vernay (Four à chaux),Bati,460281.0,6640539.0,46.82202755267544,-0.1452306213848066,79,Poitou-Charentes,Nouvelle-Aquitaine
+79,SAINT-LOUP-LAMAIRÉ,Desmoulines,Bati,460088.0,6637956.0,46.79871974014693,-0.14641049028980965,79,Poitou-Charentes,Nouvelle-Aquitaine
+79,FAYE-L'ABBESSE,Faye-L'Abbesse - Bourg,Bati,444460.0,6641969.0,46.82903202411051,-0.3533644760110153,79,Poitou-Charentes,Nouvelle-Aquitaine
+16,LESSAC,Viaduc de Lessac,Ouvrage d'art,520915.52,6554352.67,46.06529582616559,0.682954841946891,16,Poitou-Charentes,Nouvelle-Aquitaine
+79,FENIOUX,Cézelle,Bati,434029.0,6613188.0,46.56606718956285,-0.4734699588826316,79,Poitou-Charentes,Nouvelle-Aquitaine
+17,SAINT-SORNIN,Carrière de l'Enfer,Carrière souterraine,391425.0,6525391.0,45.75826964866496,-0.9713568523284476,17,Poitou-Charentes,Nouvelle-Aquitaine
+85,SAINT-MICHEL-LE-CLOUCQ,Brelouze,Carrière souterraine,411374.0,6605240.0,46.48522924882638,-0.7639597410140808,85,Pays de la Loire,Pays de la Loire
+17,JONZAC,Carrière de Bellevue (Jonzac),Carrière souterraine,432277.0,6487237.0,45.432299354338504,-0.42502021648138455,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,SAINT-BONNET-SUR-GIRONDE,Goizet (W),Carrière souterraine,414271.0,6479520.0,45.3556193233304,-0.6504946308304114,17,Poitou-Charentes,Nouvelle-Aquitaine
+16,CHAMPAGNE-MOUTON,Grotte de Grosbot,Grotte naturelle,499279.0,6548629.0,46.00772118436309,0.4056384677291189,16,Poitou-Charentes,Nouvelle-Aquitaine
+33,CISSAC-MÉDOC,Château Larrivaux,Cavité souterraine,401032.0,6466202.0,45.23020263046502,-0.811173654794792,33,Aquitaine,Nouvelle-Aquitaine
+17,SAINT-SAVINIEN,La Roche,Carrière souterraine,414270.7379999911,6538042.598999979,45.882032720691846,-0.6853693363701813,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,SAINT-SAVINIEN,Bois de l'Héraudière,Carrière souterraine,413612.0,6541466.0,45.912549374705044,-0.6959186647118211,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,SAINT-SAVINIEN,La Quine (S),Carrière souterraine,411977.0,6539292.0,45.89230350536274,-0.7156685117321632,17,Poitou-Charentes,Nouvelle-Aquitaine
+86,SAINT-GENEST-D'AMBIÈRE,"La Poulasserie, cave",Caves,501795.129501067,6640103.48917487,46.831705993091134,0.39920814806896937,86,Poitou-Charentes,Nouvelle-Aquitaine
+79,MELLE,Musée des Mines d'Argent,Mine,457425.9800000003,6573293.5500000045,46.215977330121845,-0.1475000043176256,79,Poitou-Charentes,Nouvelle-Aquitaine
+16,SAINT-SULPICE-DE-COGNAC,Carrière des Chaudrolles (NW),Carrière souterraine,437041.306436,6522306.293838,45.74964529756208,-0.3833563176676343,16,Poitou-Charentes,Nouvelle-Aquitaine
+16,GARAT,Carrière de Bellevue (Garat),Carrière souterraine,486251.0,6506073.0,45.62076324859372,0.25648441449301146,16,Poitou-Charentes,Nouvelle-Aquitaine
+79,IRAIS,Rivière souterraine d'Irais,Cavité souterraine,464185.15,6644233.48,46.85665487754885,-0.09595871479908119,79,Poitou-Charentes,Nouvelle-Aquitaine
+86,RANTON,Ranton - centre-bourg,Cavité souterraine,469946.0,6660152.0,47.00188188738862,-0.028412121417879292,86,Poitou-Charentes,Nouvelle-Aquitaine
+79,TOURTENAY,Boulogne,Cavité souterraine,462943.0,6664366.0,47.037338006612664,-0.12269705657093588,79,Poitou-Charentes,Nouvelle-Aquitaine
+16,SAINT-MÊME-LES-CARRIÈRES,Saint-Même-les-Carrières-Le bourg,Carrière souterraine,455251.184059,6509767.821651,45.643608967193366,-0.142898354301214,16,Poitou-Charentes,Nouvelle-Aquitaine
+17,SAINT-SAVINIEN,Vaufraîche,Carrière souterraine,412426.576481602,6538617.37543932,45.88642554852676,-0.709468695516155,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,SAINT-SAVINIEN,Les Hubles,Carrière souterraine,417708.514538961,6539428.2506925,45.89593278316201,-0.6419154410334069,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,SAINT-SULPICE-D'ARNOULT,Carrière de Fief de Foye (principale),Carrière souterraine,404441.0,6534113.0,45.84248756299886,-0.8095175854708275,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,SAINT-SAVINIEN,Bois Vachon,Carrière souterraine,415377.2665619,6541046.0761224,45.90951355528732,-0.6729184542609985,17,Poitou-Charentes,Nouvelle-Aquitaine
+49,LE PUY-NOTRE-DAME,Cave Billard,Caves,455891.0,6674479.0,47.125763766332334,-0.22092102233234515,49,Pays de la Loire,Pays de la Loire
+17,TESSON,Carrière du Clône,Carrière souterraine,415839.735988028,6511644.78875646,45.64523589011928,-0.6494362978051386,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,THÉNAC,Les Mauds (Est),Carrière souterraine,414044.42160804,6513766.20708542,45.663568954863855,-0.6737268279537976,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,THÉNAC,Les Mauds (Centre),Carrière souterraine,413573.46,6514321.63,45.66836761245344,-0.6801009335356643,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,CHANIERS,Bois de Chez Villain (W),Carrière souterraine,424108.326832947,6522079.42438372,45.74249348511664,-0.5494084661042337,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,RÉTAUD,Chez Griffon,Carrière souterraine,412028.0,6514009.0,45.66490541902356,-0.6997404660657516,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,TESSON,Les Chaboisseaux (N),Carrière souterraine,416275.0977797,6511009.9306597,45.63970618393443,-0.6434769914743126,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,VÉNÉRAND,Chez Bruneteau,Carrière souterraine,423245.0,6527814.0,45.79373028278226,-0.563827835741405,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,MARIGNAC,Carrière de Cordis,Carrière souterraine,428391.7373948,6495994.6495433,45.509554322504655,-0.47959511022581947,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,SAINT-SAVINIEN,Chez Bibi,Carrière souterraine,418523.0,6538781.0,45.89044817140516,-0.6310386683978143,17,Poitou-Charentes,Nouvelle-Aquitaine
+85,PISSOTTE,Tunnel ferroviaire,Tunnel/Souterrain,408214.16,6607714.77,46.506124278424146,-0.8066582836723615,85,Pays de la Loire,Pays de la Loire
+79,CHAMPDENIERS-SAINT-DENIS,Rivière souterraine de Champdeniers,Cavité souterraine,439064.0,6603874.0,46.48425249975208,-0.40255905258382624,79,Poitou-Charentes,Nouvelle-Aquitaine
+86,BIARD,Grotte de la Norée,Grotte naturelle,493483.7526000001,6611809.707999999,46.574578504224384,0.302908107907631,86,Poitou-Charentes,Nouvelle-Aquitaine
+86,LES TROIS-MOUTIERS,Carrière de la Roche Vernaize ,Carrière souterraine,474459.222644618,6663852.84980353,47.03672109041329,0.029110903903998963,86,Poitou-Charentes,Nouvelle-Aquitaine
+86,MIREBEAU,Carrière de la Boule d'Or,Carrière souterraine,487513.633086464,6636320.11726566,46.793275197964114,0.2137115599955383,86,Poitou-Charentes,Nouvelle-Aquitaine
+86,GLÉNOUZE,Cave de la Corbinière,Caves,472189.537764296,6659917.32842523,47.000541310702275,0.0012103604644908802,86,Poitou-Charentes,Nouvelle-Aquitaine
+86,SAINT-LÉGER-DE-MONTBRILLAIS,6 rue de Chalon,Cavité souterraine,470092.567863435,6667870.17539633,47.07137028874167,-0.030381903341248975,86,Poitou-Charentes,Nouvelle-Aquitaine
+86,TERNAY,Montjaugin - cave long de la route,Caves,468189.537514312,6664792.33470675,47.04302044660761,-0.05387239025400731,86,Poitou-Charentes,Nouvelle-Aquitaine
+33,OMET,Carrière de la Boye,Carrière souterraine,440335.0,6401111.0,44.66061409717407,-0.2763638318800439,33,Aquitaine,Nouvelle-Aquitaine
+24,LA TOUR-BLANCHE-CERCLES,Carrière de Jovelle n°2,Carrière souterraine,498998.0,6476984.0,45.362834565463594,0.43211304761874686,24,Aquitaine,Nouvelle-Aquitaine
+24,PAUSSAC-ET-SAINT-VIVIEN,Gouffre de Paussac,Grotte naturelle,506176.0,6474668.0,45.34405453304926,0.5246811027330895,24,Aquitaine,Nouvelle-Aquitaine
+16,VERTEUIL-SUR-CHARENTE,Château de Verteuil,Bati,485643.0,6546307.0,45.98265410722283,0.23058241268944574,16,Poitou-Charentes,Nouvelle-Aquitaine
+79,ARGENTONNAY,Château d'Argenton,Bati,438127.0,6659611.0,46.98527279005848,-0.4464646411388007,79,Poitou-Charentes,Nouvelle-Aquitaine
+79,SAINTE-GEMME,Le Plessis,Bati,449558.0,6648789.0,46.892313821561245,-0.29027032214330506,79,Poitou-Charentes,Nouvelle-Aquitaine
+19,SARRAN,Le Moulin du Cher,Bati,615250.0,6479411.0,45.4088852171043,1.9165428582533972,19,Limousin,Nouvelle-Aquitaine
+19,VIGNOLS,Viaduc de Rouchat,Ouvrage d'art,573233.0,6471398.0,45.33026982489062,1.3816159373522041,19,Limousin,Nouvelle-Aquitaine
+85,RÉAUMUR,Le Petit Pin,Bati,407321.13,6632999.22,46.7331374749374,-0.8342957042177908,85,Pays de la Loire,Pays de la Loire
+79,MELLE,Château de Gagemont,Bati,455935.0,6572907.0,46.21196264378818,-0.16662438949899636,79,Poitou-Charentes,Nouvelle-Aquitaine
+40,ARGELOUSE,Pont de l'Espine,Ouvrage d'art,409475.65,6369663.93,44.36561789375365,-0.64689709547957,40,Aquitaine,Nouvelle-Aquitaine
+17,LA RONDE,Caillaude,Bati,409697.0,6585129.0,46.3036226880898,-0.7732731186359781,17,Poitou-Charentes,Nouvelle-Aquitaine
+79,AZAY-SUR-THOUET,La Bufferie,Bati,440486.0,6619124.0,46.62199344688829,-0.39257778932851234,79,Poitou-Charentes,Nouvelle-Aquitaine
+49,LE PUY-NOTRE-DAME,Cave Lepidi,Caves,455341.0,6673214.0,47.11418230258108,-0.22748813065084827,49,Pays de la Loire,Pays de la Loire
+86,ORCHES,Les Poiriers (carrières),Carrière souterraine,498070.89739702,6644077.81432755,46.86635524124579,0.34862570248231217,86,Poitou-Charentes,Nouvelle-Aquitaine
+86,SOSSAIS,"Les Raboteaux, carrière",Carrière souterraine,500320.9416,6643872.66259619,46.86518545496666,0.3782368600245155,86,Poitou-Charentes,Nouvelle-Aquitaine
+86,THURÉ,Le Parc,Cavité souterraine,506091.258810353,6643913.85216254,46.86725594027036,0.4539297490901533,86,Poitou-Charentes,Nouvelle-Aquitaine
+79,MAULÉON,Château de La Blandinière,Tunnel/Souterrain,412250.0,6655066.0,46.9337318595734,-0.7836652170441255,79,Poitou-Charentes,Nouvelle-Aquitaine
+19,NOAILLES,Gouffre de la Fage,Grotte naturelle,583900.0,6443237.0,45.07863272818359,1.5244813243881419,19,Limousin,Nouvelle-Aquitaine
+86,SENILLÉ-SAINT-SAUVEUR,"Les Pieds Grimaud, CAVEPRINCI",Cavité souterraine,518273.270663817,6633243.24646686,46.77464814105033,0.6180073886509977,86,Poitou-Charentes,Nouvelle-Aquitaine
+86,BEAUMONT,Carrière de La Madeleine,Carrière souterraine,505285.2444,6631068.888,46.75142729212766,0.44880120145588465,86,Poitou-Charentes,Nouvelle-Aquitaine
+49,BRISSAC-LOIRE-AUBANCE,Caves de Vau Robert,Caves,448403.0,6699730.0,47.350096091228856,-0.33366492841894935,49,Pays de la Loire,Pays de la Loire
+86,MIGNÉ-AUXANCES,Carriere des Sablons Limbre,Carrière souterraine,492788.5798,6618484.126,46.63442767009747,0.2908467960345843,86,Poitou-Charentes,Nouvelle-Aquitaine
+86,SENILLÉ-SAINT-SAUVEUR,La Grande Narbonne,Cavité souterraine,516915.56,6633784.36,46.77914796646464,0.6000065325450802,86,Poitou-Charentes,Nouvelle-Aquitaine
+16,SOYAUX,Grande Carrière du Lion de Saint-Marc,Carrière souterraine,480803.0,6507650.0,45.633228948730945,0.18589551777589516,16,Poitou-Charentes,Nouvelle-Aquitaine
+16,SERS,Carrière de la Brousse,Carrière souterraine,489377.145837,6500845.827664,45.5746920431392,0.2988718002879875,16,Poitou-Charentes,Nouvelle-Aquitaine
+16,SIREUIL,Carrière de Sireuil,Carrière souterraine,466885.126914,6507897.5952,45.63084976906174,0.007260013853055767,16,Poitou-Charentes,Nouvelle-Aquitaine
+17,SAINT-SAVINIEN,Chez Renard,Carrière souterraine,418240.08,6538970.7,45.89203742562013,-0.6347957371742683,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,BORDS,Les Chaumes (E),Carrière souterraine,409715.277912,6540247.812587,45.899939072794766,-0.7453869395180316,17,Poitou-Charentes,Nouvelle-Aquitaine
+33,CAMBLANES-ET-MEYNAC,Le Pine,Carrière souterraine,425125.2,6413054.0,44.76218583544063,-0.4746623264846891,33,Aquitaine,Nouvelle-Aquitaine
+33,CESSAC,Champignonnière de Barreau,Carrière souterraine,448581.291,6408819.279,44.7329853144973,-0.17633915000620623,33,Aquitaine,Nouvelle-Aquitaine
+49,DOUÉ-EN-ANJOU,Caves du Petit Saumur,Cavité souterraine,453639.0,6681663.0,47.189555153249884,-0.2545064626325262,49,Pays de la Loire,Pays de la Loire
+49,GENNES-VAL-DE-LOIRE,Sablon - Passedroit,Cavité souterraine,447962.0,6697035.0,47.32568899544359,-0.3379926064395923,49,Pays de la Loire,Pays de la Loire
+49,GENNES-VAL-DE-LOIRE,Caves du Chapeau (droite et gauche),Caves,454954.0,6697930.0,47.33636244494636,-0.2459832722288289,49,Pays de la Loire,Pays de la Loire
+49,GENNES-VAL-DE-LOIRE,Cave Prieur,Caves,458345.0,6696913.0,47.32846052223668,-0.20056843950971778,49,Pays de la Loire,Pays de la Loire
+17,SAINT-GEORGES-DES-COTEAUX,Carriere de la Fontaine,Carrière souterraine,411424.059,6524861.064,45.762263852791214,-0.7140412254178932,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,SAINT-PORCHAIRE,Carrière des Champs Taunais,Carrière souterraine,404887.0,6533812.0,45.839973766527535,-0.8035911632331608,17,Poitou-Charentes,Nouvelle-Aquitaine
+16,SOYAUX,Carrière de la Simonette,Carrière souterraine,482243.0,6506884.0,45.626796101759304,0.2047150777508166,16,Poitou-Charentes,Nouvelle-Aquitaine
+16,VŒUIL-ET-GIGET,Carrieres de Giget,Carrière souterraine,478800.948267,6504807.127476,45.60700073243548,0.16152615103748166,16,Poitou-Charentes,Nouvelle-Aquitaine
+17,BUSSAC-SUR-CHARENTE,La Roche (Bussac),Carrière souterraine,418073.0,6527096.0,45.78515071399444,-0.6299110090705866,17,Poitou-Charentes,Nouvelle-Aquitaine
+33,CISSAC-MÉDOC,Carrière Larrivaux,Carrière souterraine,401119.1,6466122.7,45.22952725732024,-0.8100163083642251,33,Aquitaine,Nouvelle-Aquitaine
+17,ÉCOYEUX,Chez Richard,Carrière souterraine,425129.771721,6529621.311544,45.81075174140068,-0.5406327388397077,17,Poitou-Charentes,Nouvelle-Aquitaine
+49,FONTEVRAUD-L'ABBAYE,Caves des Baillargeau,Caves,476676.0,6680966.0,47.19143129519701,0.04986568330288016,49,Pays de la Loire,Pays de la Loire
+49,SAUMUR,Impasse de la Cure,Cavité souterraine,470745.0,6686659.0,47.24062506184892,-0.03129322066639112,49,Pays de la Loire,Pays de la Loire
+49,SAUMUR,Caves du Coteau Bizeau,Caves,470696.0,6686953.0,47.24325294602944,-0.03208967840493639,49,Pays de la Loire,Pays de la Loire
+17,BORDS,Poney club de Charron,Carrière souterraine,408553.266295,6539778.852059,45.89522377522713,-0.760069227683056,17,Poitou-Charentes,Nouvelle-Aquitaine
+86,LOUDUN,Carrière loudun,Carrière souterraine,479314.56,6661241.38,47.014851767310084,0.0942737196235596,86,Poitou-Charentes,Nouvelle-Aquitaine
+33,DAIGNAC,Carrière du Génie,Carrière souterraine,442997.7,6416102.1,44.79645364805277,-0.25058715702406886,33,Aquitaine,Nouvelle-Aquitaine
+24,LA TOUR-BLANCHE-CERCLES,Les Garennes (La Tour-Blanche),Carrière souterraine,499548.0,6477733.0,45.36973618763059,0.438824342255864,24,Aquitaine,Nouvelle-Aquitaine
+24,LA TOUR-BLANCHE-CERCLES,Carrière de Jovelle n°4,Carrière souterraine,498772.0,6476700.0,45.36021244321829,0.4293459154942621,24,Aquitaine,Nouvelle-Aquitaine
+24,BRANTÔME-EN-PÉRIGORD,Carrière Saint-Roch,Carrière souterraine,515711.0,6476411.0,45.362367244460195,0.645714742424148,24,Aquitaine,Nouvelle-Aquitaine
+16,SIREUIL,Les Champs Barate,Cavité souterraine,467468.0,6507988.0,45.63186189692283,0.01469197107225582,16,Poitou-Charentes,Nouvelle-Aquitaine
+16,MAGNAC-SUR-TOUVRE,Carrière de Bussac,Cavité souterraine,485272.0,6508787.0,45.64488045434664,0.24271301733030712,16,Poitou-Charentes,Nouvelle-Aquitaine
+85,MAREUIL-SUR-LAY-DISSAIS,Lavert,Cavité souterraine,374132.0,6611651.0,46.525866058218675,-1.2532456999900337,85,Pays de la Loire,Pays de la Loire
+37,LERNÉ,Caves du Haut-Midi,Caves,481789.0,6674668.0,47.136468645957585,0.12038104386716571,37,Centre,Centre-Val de Loire
+85,LE POIRÉ-SUR-VIE,La Turquoisière,Cavité souterraine,358640.0,6639404.0,46.76767317714481,-1.4755362825556728,85,Pays de la Loire,Pays de la Loire
+17,SAINT-VAIZE,Les Roches (Saint-Vaize),Carrière souterraine,418071.0,6530686.0,45.81744331400798,-0.6320613377565033,17,Poitou-Charentes,Nouvelle-Aquitaine
+16,SIREUIL,Bois de la roche,Cavité souterraine,468562.0,6507966.0,45.632035411219825,0.02873437326098764,16,Poitou-Charentes,Nouvelle-Aquitaine
+37,CANDES-SAINT-MARTIN,Panorama,Cavité souterraine,478900.0,6682718.0,47.207937493618104,0.07836208240031378,37,Centre,Centre-Val de Loire
+37,RIGNY-USSÉ,Carrière Guillemain,Carrière souterraine,495500.0,6686889.0,47.25078651477404,0.29565095187777524,37,Centre,Centre-Val de Loire
+17,MORTAGNE-SUR-GIRONDE,La Gravelle,Bati,404968.0,6492748.0,45.470661395467225,-0.7772506653521768,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,LA RONDE,Le Marais Gauthier,Marais/Ripisylve/Plan d'eau,409016.959,6585162.492,46.303631078633856,-0.7821194298169228,17,Poitou-Charentes,Nouvelle-Aquitaine
+86,CHIRÉ-EN-MONTREUIL,Château de Chiré,Bati,480310.0,6619258.0,46.63742105678505,0.12746945405627128,86,Poitou-Charentes,Nouvelle-Aquitaine
+49,LYS-HAUT-LAYON,Lys-Haut-Layon-Bourg,Bati,444763.0,6673918.0,47.11653921364566,-0.3672609987145663,49,Pays de la Loire,Pays de la Loire
+19,SAINT-GENIEZ-Ô-MERLE,Les Tours de Merle - Tour Fulcon,Bati,627150.0,6441007.0,45.06447676429244,2.074413862262844,19,Limousin,Nouvelle-Aquitaine
+33,LACANAU,Lacanau Lac,Bati,373885.0,6441903.0,44.99938890616397,-1.1403999536757403,33,Aquitaine,Nouvelle-Aquitaine
+63,AYDAT,Le Lot,Bati,700074.0,6507422.0,45.666351723080325,3.0009503971968896,63,Auvergne,Auvergne-Rhône-Alpes
+43,LANGEAC,Marsanges,Bati,738137.0,6438574.0,45.04536155394594,3.484371146645465,43,Auvergne,Auvergne-Rhône-Alpes
+86,ANGLES-SUR-L'ANGLIN,Grotte de Boisdichon,Grotte naturelle,538552.378164586,6622926.71856016,46.6869909851406,0.8872989905288855,86,Poitou-Charentes,Nouvelle-Aquitaine
+63,MONTAIGUT-LE-BLANC,Cave principale de Saint-Julien (b41),Cavité souterraine,707833.199,6498847.682,45.589096857593766,3.100463222268928,63,Auvergne,Auvergne-Rhône-Alpes
+16,LA COURONNE,Carrière de la Réserve,Carrière souterraine,477033.0,6503427.0,45.59400671362963,0.13950051351816578,16,Poitou-Charentes,Nouvelle-Aquitaine
+16,VŒUIL-ET-GIGET,Résurgence de La Roche,Cavité souterraine,478843.0,6504442.0,45.6037285711292,0.1622336153510409,16,Poitou-Charentes,Nouvelle-Aquitaine
+86,THURÉ,La Plante,Cavité souterraine,507499.0,6641289.0,46.84404158641091,0.4735034489324047,86,Poitou-Charentes,Nouvelle-Aquitaine
+16,MOUTHIERS-SUR-BOËME,Ruelle Crotte,Cavité souterraine,475571.0,6501310.0,45.57447793374225,0.1217502599678525,16,Poitou-Charentes,Nouvelle-Aquitaine
+63,CHANONAT,Cavité principale,Cavité souterraine,708758.48,6511646.63,45.70433763643655,3.1125642278193566,63,Auvergne,Auvergne-Rhône-Alpes
+49,GENNES-VAL-DE-LOIRE,Caves du Chateau de Cunault,Caves,458228.0,6697278.0,47.33170096408589,-0.2023122755942094,49,Pays de la Loire,Pays de la Loire
+63,PÉRIGNAT-LÈS-SARLIÈVE,Toutes caves,Caves,710866.0,6514802.0,45.73272095757477,3.1397218394016764,63,Auvergne,Auvergne-Rhône-Alpes
+49,DISTRÉ,Champignonnière de Pocé,Cavité souterraine,463553.0,6686033.0,47.232469952141166,-0.12596313439283086,49,Pays de la Loire,Pays de la Loire
+17,GUITINIÈRES,Carrière de la Rochette (S),Carrière souterraine,424642.0,6490210.0,45.45601983469038,-0.5242645148089695,17,Poitou-Charentes,Nouvelle-Aquitaine
+49,ROU-MARSON,Caves du Riou,Caves,462721.0,6687047.0,47.24129444834164,-0.13748347198685013,49,Pays de la Loire,Pays de la Loire
+17,SAINTES,Falaise des Arcivaux,Carrière souterraine,419355.0,6521030.0,45.7311135151413,-0.6098598343694576,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,AVY,Chantemerle (Avy),Carrière souterraine,424053.0,6501676.0,45.55892712077237,-0.5383646270329719,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,BUSSAC-SUR-CHARENTE,Carrière des Motillons,Carrière souterraine,417911.0,6527130.0,45.78538950020941,-0.6320139986090765,17,Poitou-Charentes,Nouvelle-Aquitaine
+49,GENNES-VAL-DE-LOIRE,La boussinière,Cavité souterraine,455165.0,6699332.0,47.34905096136557,-0.24395395009359158,49,Pays de la Loire,Pays de la Loire
+16,GRAVES-SAINT-AMANT,Carrière de Bois Catineau,Carrière souterraine,457959.0,6507542.0,45.62454630204392,-0.10703841970871768,16,Poitou-Charentes,Nouvelle-Aquitaine
+17,LE DOUHET,Carrière de la Foucherie (S),Carrière souterraine,422032.0,6529049.0,45.80434601221085,-0.580147086102866,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,LE DOUHET,Carrière de la Foucherie (N),Carrière souterraine,422052.0,6529176.0,45.80549662242131,-0.5799639536256876,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,SAINT-HILAIRE-DE-VILLEFRANCHE,Chez Calandre,Carrière souterraine,424758.0,6532424.0,45.835814088341294,-0.5470357565588012,17,Poitou-Charentes,Nouvelle-Aquitaine
+16,SAINT-MÊME-LES-CARRIÈRES,Les Groies,Carrière souterraine,455976.0,6509355.0,45.64015384451558,-0.13339029138947256,16,Poitou-Charentes,Nouvelle-Aquitaine
+17,SAINT-SAVINIEN,La Quine (N),Carrière souterraine,411947.0,6539379.0,45.89307335836346,-0.7161077392751208,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,SAINT-SAVINIEN,Bois des Chouches,Carrière souterraine,415465.0,6541715.0,45.9155673832528,-0.6721890811436532,17,Poitou-Charentes,Nouvelle-Aquitaine
+49,TUFFALUN,Champi La Guéréterie,Cavité souterraine,447394.0,6693265.0,47.291564178769185,-0.34339337251350377,49,Pays de la Loire,Pays de la Loire
+33,GAURIAC,Vitescale,Carrière souterraine,415409.7,6446278.4,45.05709383133269,-0.6165292854430919,33,Aquitaine,Nouvelle-Aquitaine
+79,VILLIERS-EN-PLAINE,La Dent,Cavité souterraine,426556.0,6600266.0,46.446829348464995,-0.563323062623186,79,Poitou-Charentes,Nouvelle-Aquitaine
+49,LE PUY-NOTRE-DAME,Cave du Haut Buard,Caves,455090.0,6673628.0,47.11781405389946,-0.2310189223687436,49,Pays de la Loire,Pays de la Loire
+86,CHIRÉ-EN-MONTREUIL,Grande cavité Est - Chez Michel,Cavité souterraine,480286.94,6619716.19327224,46.64153646486559,0.1269503134963911,86,Poitou-Charentes,Nouvelle-Aquitaine
+24,LA ROCHEBEAUCOURT-ET-ARGENTINE,Argentine - Carrière Nord Ouest (grande),Carrière souterraine,495202.122,6489332.17,45.47284144166336,0.37841876185766415,24,Aquitaine,Nouvelle-Aquitaine
+63,SAINT-NECTAIRE,Cavité route de Sapchat,Cavité souterraine,699425.0,6497843.276,45.580097052353096,2.9926266444379324,63,Auvergne,Auvergne-Rhône-Alpes
+16,CHÂTEAUNEUF-SUR-CHARENTE,Champs Gaillards,Cavité souterraine,459423.0,6504823.0,45.60059803510011,-0.08690072339472986,16,Poitou-Charentes,Nouvelle-Aquitaine
+16,CHÂTEAUNEUF-SUR-CHARENTE,Carrière de Chez Delaisse,Carrière souterraine,459709.0,6504923.0,45.601598420298515,-0.08328479782713533,16,Poitou-Charentes,Nouvelle-Aquitaine
+16,GRAVES-SAINT-AMANT,Grotte d'Armelle,Grotte naturelle,457838.0,6507609.0,45.625106283134706,-0.1086239137492092,16,Poitou-Charentes,Nouvelle-Aquitaine
+24,LA CHAPELLE-FAUCHER,Carrière des Pelades,Carrière souterraine,525171.227,6476239.381,45.36329681738187,0.7665646018619021,24,Aquitaine,Nouvelle-Aquitaine
+24,VILLARS,Carrière de Cirier Bossu n°3,Carrière souterraine,523048.515,6480935.355,45.40502060414397,0.7377434600906639,24,Aquitaine,Nouvelle-Aquitaine
+63,VOLVIC,Grande Carrière,Cavité souterraine,701755.076,6530370.421,45.872997352860345,3.0226252507389493,63,Auvergne,Auvergne-Rhône-Alpes
+49,CHALONNES-SUR-LOIRE,Tunnel du Roc,Cavité souterraine,419510.0,6700488.0,47.345305361139644,-0.7164340702476613,49,Pays de la Loire,Pays de la Loire
+86,BERRIE,Château de Berrie ,Cavité souterraine,467125.948834964,6667514.60522557,47.06714006757384,-0.069263341074693,86,Poitou-Charentes,Nouvelle-Aquitaine
+24,COLY-SAINT-AMAND,Ancien tunnel de la Peytivie,Tunnel/Souterrain,559663.641,6439936.288,45.044418095089284,1.217503092170894,24,Aquitaine,Nouvelle-Aquitaine
+86,ROIFFÉ,"Les Rochereaux, cave",Caves,476066.1617,6676266.86342534,47.14894993899807,0.04413982696887599,86,Poitou-Charentes,Nouvelle-Aquitaine
+16,SOYAUX,Aven des Cavernes,Cavité souterraine,484174.0,6507506.0,45.63300633369473,0.22920228688740688,16,Poitou-Charentes,Nouvelle-Aquitaine
+24,TERRASSON-LAVILLEDIEU,Grotte du Rajol,Grotte naturelle,566148.073,6448358.378,45.12151997533683,1.2975336254428114,24,Aquitaine,Nouvelle-Aquitaine
+47,FUMEL,Carrière de Pech de Treil,Carrière souterraine,541012.183,6381713.106,44.516356785227714,0.9994283985671979,47,Aquitaine,Nouvelle-Aquitaine
+72,LUCHÉ-PRINGÉ,Les Piliers,Cavité souterraine,483433.0,6736946.0,47.697255940075586,0.11201158582817773,72,Pays de la Loire,Pays de la Loire
+24,SAINT-CYPRIEN,Carrière de Malemort Sud,Carrière souterraine,544074.93,6420535.44,44.866450888449336,1.0257399609952305,24,Aquitaine,Nouvelle-Aquitaine
+24,SAINT-CYPRIEN,Carrière de Malemort Ouest,Carrière souterraine,543996.363,6420679.48,44.86772964213738,1.0246999788439637,24,Aquitaine,Nouvelle-Aquitaine
+47,SAUVETERRE-LA-LEMANCE,Carrière de la Frézière,Carrière souterraine,542151.535,6390186.435,44.59287150421947,1.0110739493840804,47,Aquitaine,Nouvelle-Aquitaine
+49,CIZAY-LA-MADELEINE,Caves d'Igné,Cavité souterraine,457606.0,6683594.0,47.2083849231618,-0.203193302484133,49,Pays de la Loire,Pays de la Loire
+24,LES EYZIES,Carrière des Combarelles,Carrière souterraine,545316.749,6429043.875,44.94331134184027,1.0387817001883708,24,Aquitaine,Nouvelle-Aquitaine
+19,FORGÈS,Mine de Grand Champ,Mine,610868.0,6450586.0,45.14880675858929,1.8658228709289644,19,Limousin,Nouvelle-Aquitaine
+49,DISTRÉ,Munet,Cavité souterraine,466086.0,6685408.0,47.227745299111525,-0.09218644559687403,49,Pays de la Loire,Pays de la Loire
+49,GENNES-VAL-DE-LOIRE,Grande cave ouest Cunault,Caves,457969.0,6697489.0,47.333504296974276,-0.20585241231902174,49,Pays de la Loire,Pays de la Loire
+33,TAURIAC,la Lustre,Carrière souterraine,423193.4,6443946.4,45.03928259373767,-0.5164289972627722,33,Aquitaine,Nouvelle-Aquitaine
+43,LUBILHAC,Pebrut 51,Cavité souterraine,717842.0,6462536.0,45.2619394916834,3.2274870249829988,43,Auvergne,Auvergne-Rhône-Alpes
+63,SAINT-JEAN-SAINT-GERVAIS,Galerie n°10,Cavité souterraine,728272.208,6479739.462,45.41649580473172,3.3614756743850367,63,Auvergne,Auvergne-Rhône-Alpes
+85,LE POIRÉ-SUR-VIE,Le Fief,Cavité souterraine,352914.0,6640966.0,46.77876898618639,-1.551623684044317,85,Pays de la Loire,Pays de la Loire
+37,LERNÉ,Maulévrier,Cavité souterraine,481845.4,6674674.8,47.136548336347644,0.12112139613081566,37,Centre,Centre-Val de Loire
+85,FONTENAY-LE-COMTE,Parc Baron,Cavité souterraine,408064.0,6603642.0,46.46942839958848,-0.8060551468202422,85,Pays de la Loire,Pays de la Loire
+40,SAINT-JUSTIN,Presbytère de Saint-Martin,Bati,438215.0,6329051.0,44.01173603513855,-0.26550297251875604,40,Aquitaine,Nouvelle-Aquitaine
+24,LIORAC-SUR-LOUYRE,Domaine de Garraube,Bati,514240.0,6421375.0,44.86664907712152,0.6478710792554309,24,Aquitaine,Nouvelle-Aquitaine
+47,BLANQUEFORT-SUR-BRIOLANCE,Maison Brousse,Bati,539000.0,6391113.0,44.600488479748996,0.9710812861887709,47,Aquitaine,Nouvelle-Aquitaine
+47,RÉAUP-LISSE,Ruisseau de Turlet (Local pompe),Bati,473979.0,6335368.0,44.080953633702826,0.17739166264065223,47,Aquitaine,Nouvelle-Aquitaine
+33,VILLANDRAUT,Château de Villandraut,Bati,431752.0,6379142.0,44.45976385794164,-0.37269854351421017,33,Aquitaine,Nouvelle-Aquitaine
+33,HOURTIN,Maison forestière de Louley,Bati,378290.0,6465217.0,45.21109086156871,-1.0999294380346687,33,Aquitaine,Nouvelle-Aquitaine
+19,MONCEAUX-SUR-DORDOGNE,Les Dames,Bati,609664.0,6441090.0,45.06315709375661,1.8522607137956342,19,Limousin,Nouvelle-Aquitaine
+19,CHASTEAUX,Le Soulier,Bati,579707.0,6445114.0,45.094811812729475,1.470743502580913,19,Limousin,Nouvelle-Aquitaine
+49,DISTRÉ,Chais du Château de Pocé,Cavité souterraine,463767.0,6686319.0,47.23511890745801,-0.12328636364300244,49,Pays de la Loire,Pays de la Loire
+49,MONTSOREAU,Cave aux bateaux,Caves,477804.0,6682953.0,47.209685769883016,0.06377732205325425,49,Pays de la Loire,Pays de la Loire
+49,SAUMUR,La Cour Pavée,Cavité souterraine,470890.0,6686832.0,47.24223145170274,-0.02946557689455799,49,Pays de la Loire,Pays de la Loire
+63,ORCINES,Puy de Cliersou,Cavité souterraine,696782.795,6521709.102,45.794997599147024,2.958584538444196,63,Auvergne,Auvergne-Rhône-Alpes
+63,MONTAIGUT-LE-BLANC,Caves sous l'église,Cavité souterraine,707238.437,6498713.693,45.58789687448777,3.092833200967798,63,Auvergne,Auvergne-Rhône-Alpes
+63,MONTAIGUT-LE-BLANC,Cave A46 (principale),Cavité souterraine,707737.68,6498850.55,45.58912377089454,3.099238208804087,63,Auvergne,Auvergne-Rhône-Alpes
+49,VAUDELNAY,La Brosse,Cavité souterraine,456405.0,6674929.0,47.13000026886169,-0.2143880663008596,49,Pays de la Loire,Pays de la Loire
+23,ÉVAUX-LES-BAINS,la Ribe - Mine Ribe Ouest,Mine,663550.0,6566156.0,46.19426296541634,2.5273555568018558,23,Limousin,Nouvelle-Aquitaine
+19,SAINT-ROBERT,Cave,Cavité souterraine,566393.2,6463239.1,45.25552497434332,1.2965680439976925,19,Limousin,Nouvelle-Aquitaine
+19,SEGONZAC,Ancienne Gare de Segonzac,Cavité souterraine,565553.7,6464977.19,45.271008026825946,1.285387004285079,19,Limousin,Nouvelle-Aquitaine
+17,ÉCURAT,Bois de Peu Volant,Carrière souterraine,414509.0,6528319.0,45.79466765082478,-0.6764655470820815,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,JONZAC,Residence Philippe,Carrière souterraine,430626.0,6489451.0,45.45156991732034,-0.4473507565274272,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,JONZAC,Bourg Nouveau,Carrière souterraine,432300.0,6488787.0,45.44625232521091,-0.42558605093564594,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,JONZAC,Bois de chez Michenot,Carrière souterraine,431961.0,6489102.0,45.44895363019268,-0.4300935545709918,17,Poitou-Charentes,Nouvelle-Aquitaine
+86,JAUNAY-MARIGNY,Meoc (Carriere principale),Cavité souterraine,498547.468000976,6630630.29552752,46.74548677089675,0.36077790020239164,86,Poitou-Charentes,Nouvelle-Aquitaine
+17,SAINT-AGNANT,Les Chaumes (NE),Carrière souterraine,394485.0,6538009.0,45.87313084210423,-0.9401367581539566,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,SAINT-VAIZE,Carrières de Pot Vert,Carrière souterraine,417736.0,6530431.0,45.815010706051346,-0.636219838126211,17,Poitou-Charentes,Nouvelle-Aquitaine
+86,SCORBÉ-CLAIRVAUX,Les Roches Carrières (principale),Carrière souterraine,503542.616733847,6639596.14043203,46.827656197005425,0.42233909708696504,86,Poitou-Charentes,Nouvelle-Aquitaine
+86,MONTS-SUR-GUESNES,Cave route de Princay,Caves,488268.1984,6650516.20992875,46.92125370484072,0.21703983804292898,86,Poitou-Charentes,Nouvelle-Aquitaine
+17,ROMEGOUX,Les Genêts (E),Carrière souterraine,404920.0,6533923.0,45.84098646078222,-0.8032353505572895,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,SAINT-GEORGES-ANTIGNAC,Carrières des Poudriers,Carrière souterraine,428352.0,6495287.0,45.50317258984354,-0.47970428078082716,17,Poitou-Charentes,Nouvelle-Aquitaine
+19,CHASTEAUX,Grotte de Murel,Grotte naturelle,579633.0,6441510.0,45.0623548124208,1.4706902416554541,19,Limousin,Nouvelle-Aquitaine
+17,LA CLISSE,Carrière des Fourneaux (W),Carrière souterraine,407504.0,6521416.0,45.72960572497335,-0.7623064632763155,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,SAINT-BONNET-SUR-GIRONDE,Goizet (E),Carrière souterraine,414623.0,6479380.0,45.3545064305719,-0.6459213177970102,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,SAINT-GEORGES-DES-COTEAUX,les Moulins de Saint Georges,Carrière souterraine,411612.0,6524651.0,45.760453886831165,-0.7114989588483388,17,Poitou-Charentes,Nouvelle-Aquitaine
+33,LA TESTE-DE-BUCH,L'Eden,Tunnel/Souterrain,371039.6,6398017.5,44.603480165817224,-1.1472223490565674,33,Aquitaine,Nouvelle-Aquitaine
+46,CANIAC-DU-CAUSSE,Grotte de la Deveze,Grotte naturelle,594413.0,6392339.0,44.622136082965966,1.6689674397813903,46,Midi-Pyrénées,Occitanie
+46,LACAVE,Grotte de Combe Cullier,Grotte naturelle,586676.0,6417302.0,44.84562337135691,1.5657400043340375,46,Midi-Pyrénées,Occitanie
+46,PINSAC,Grotte des Réfractaires,Grotte naturelle,585936.0,6419016.0,44.86093112651046,1.5559797772344328,46,Midi-Pyrénées,Occitanie
+17,SAINT-SULPICE-D'ARNOULT,Carrière de Fief de Foye (W),Carrière souterraine,404364.0,6534099.0,45.84232819776283,-0.8104998124195447,17,Poitou-Charentes,Nouvelle-Aquitaine
+46,SOUILLAC,La Forge,Grotte naturelle,576922.0,6426604.0,44.92769340894742,1.4399958967100406,46,Midi-Pyrénées,Occitanie
+46,SAULIAC-SUR-CÉLÉ,Igue de Saint-Geniez,Grotte naturelle,598287.0,6379873.0,44.510503942025615,1.7203409409358807,46,Midi-Pyrénées,Occitanie
+33,CÉNAC,La Mouleyre (cavité principale),Carrière souterraine,426727.9,6416982.2,44.79815096269941,-0.4566010159965503,33,Aquitaine,Nouvelle-Aquitaine
+16,CHARMÉ,Grotte de Charmé,Grotte naturelle,476878.0,6543301.0,45.95277916493647,0.11885664872507326,16,Poitou-Charentes,Nouvelle-Aquitaine
+49,GENNES-VAL-DE-LOIRE,Caves de la Blinière,Caves,448017.0,6696384.0,47.319854644919715,-0.33690091663593513,49,Pays de la Loire,Pays de la Loire
+33,LATRESNE,Bois du Grand Parc ENS,Carrière souterraine,424600.3,6415464.2,44.78365594695715,-0.48263181676232075,33,Aquitaine,Nouvelle-Aquitaine
+33,SAINT-GERMAIN-DU-PUCH,Jonquieyre,Carrière souterraine,434584.2,6421883.3,44.84528782836224,-0.35998511945701706,33,Aquitaine,Nouvelle-Aquitaine
+16,CHÂTEAUNEUF-SUR-CHARENTE,Les Rocs de la Pelletrie,Cavité souterraine,460436.0,6503575.0,45.58972435702311,-0.07329289123771211,16,Poitou-Charentes,Nouvelle-Aquitaine
+33,CAPIAN,German,Carrière souterraine,435549.0,6408245.0,44.722979240789364,-0.3404864091578982,33,Aquitaine,Nouvelle-Aquitaine
+15,PLEAUX,Tunnel de Salesse,Tunnel/Souterrain,642230.208,6443338.375,45.08689424836281,2.265725550382538,15,Auvergne,Auvergne-Rhône-Alpes
+79,SAINTE-OUENNE,La Brumaudière,Bati,435873.0,6599600.0,46.44455830284918,-0.44168909962414615,79,Poitou-Charentes,Nouvelle-Aquitaine
+33,SAINT-PHILIPPE-D'AIGUILLE,Colin,Carrière souterraine,461647.5,6429408.6,44.922829395898916,-0.02137821013630686,33,Aquitaine,Nouvelle-Aquitaine
+33,TABANAC,Carrière inondée,Carrière souterraine,429937.5,6408446.7,44.72263421412236,-0.4113923867132846,33,Aquitaine,Nouvelle-Aquitaine
+33,VAL-DE-VIRVÉE,Carrière de Tarreyrots,Carrière souterraine,435041.0,6439408.0,45.003104322542335,-0.36365405471497697,33,Aquitaine,Nouvelle-Aquitaine
+33,VILLEGOUGE,Saute qui peut,Carrière souterraine,439225.0,6433924.2,44.955364826743455,-0.3076863511200406,33,Aquitaine,Nouvelle-Aquitaine
+37,AZAY-LE-RIDEAU,Caves méclines,Caves,509465.0,6687488.0,47.260334386493966,0.4799442450052682,37,Centre,Centre-Val de Loire
+63,SAINT-NECTAIRE,Fontaines pétrifiantes,Cavité souterraine,699432.0,6498165.329,45.58299706714122,2.9927160260730346,63,Auvergne,Auvergne-Rhône-Alpes
+63,AUBIÈRE,Cave Savaron C1,Caves,708890.707,6516528.596,45.748297336260514,3.114354475936483,63,Auvergne,Auvergne-Rhône-Alpes
+63,CHAMPEIX,Grotte d'Aubary n°1,Cavité souterraine,710403.963,6498818.168,45.588796806007664,3.133433378362598,63,Auvergne,Auvergne-Rhône-Alpes
+49,JARZÉ-VILLAGES,Caves des Herveaux,Caves,456128.0,6723182.0,47.56391818575623,-0.2441846630224357,49,Pays de la Loire,Pays de la Loire
+49,LES BOIS-D'ANJOU,Caves des Mandottières,Caves,462146.0,6710076.0,47.44823572573733,-0.1572474907165545,49,Pays de la Loire,Pays de la Loire
+63,VOLVIC,Cavité de l'Ours,Cavité souterraine,701997.851,6530448.23,45.87369734708092,3.0257552685213054,63,Auvergne,Auvergne-Rhône-Alpes
+86,CURÇAY-SUR-DIVE,Cavité Rue des Vignes,Cavité souterraine,468026.192648124,6661277.35680854,47.01134080469194,-0.054231935952772134,86,Poitou-Charentes,Nouvelle-Aquitaine
+86,PRINÇAY,Les Roches (Princay),Cavité souterraine,488718.3537,6649870.23062722,46.915583813255246,0.22325015972571524,86,Poitou-Charentes,Nouvelle-Aquitaine
+32,MONTRÉAL,Tunnel de Pomiro,Tunnel/Souterrain,472477.0,6316960.0,43.91490579352383,0.1668948722842705,32,Midi-Pyrénées,Occitanie
+63,BROMONT-LAMOTHE,Galerie principale (Bromont),Cavité souterraine,687054.0,6529787.0,45.86762277219406,2.83312507733608,63,Auvergne,Auvergne-Rhône-Alpes
+37,BEAULIEU-LÈS-LOCHES,Grandes caves impasse du bout du monde,Caves,549664.0,6671504.0,47.126810321237016,1.0166793545320418,37,Centre,Centre-Val de Loire
+85,FAYMOREAU,la verrerie (maison bourgeoise),Cavité souterraine,421963.0,6612583.0,46.55573940916363,-0.6304666690612021,85,Pays de la Loire,Pays de la Loire
+85,SAINT-HILAIRE-DES-LOGES,Le retail,Cavité souterraine,420394.0,6607917.0,46.513118376856085,-0.6481119712952957,85,Pays de la Loire,Pays de la Loire
+23,CHÂTELUS-LE-MARCHEIX,les Côtes - Ancienne mine de Wolfram,Mine,593064.4,6549121.29,46.03341895879171,1.6173669658787606,23,Limousin,Nouvelle-Aquitaine
+86,MIGNÉ-AUXANCES,Glacière de malaguet 2,Cavité souterraine,496777.76839694,6618698.5918082,46.63757797843962,0.34286874744949203,86,Poitou-Charentes,Nouvelle-Aquitaine
+86,MIGNÉ-AUXANCES,Glacière de malaguet 1,Cavité souterraine,496770.21498066,6618678.8444111,46.63739798007744,0.34277874655039653,86,Poitou-Charentes,Nouvelle-Aquitaine
+85,LA CHÂTAIGNERAIE,Prison royal,Cavité souterraine,414025.0,6623271.0,46.64853797456053,-0.7405706436450807,85,Pays de la Loire,Pays de la Loire
+24,LANQUAIS,Carrière des Roques,Carrière souterraine,516310.931,6414286.867,44.80341240725809,0.6767183277475544,24,Aquitaine,Nouvelle-Aquitaine
+47,NÉRAC,Caves de Laubenheimer,Caves,486671.0,6340936.0,44.1350076509434,0.3334213657013798,47,Aquitaine,Nouvelle-Aquitaine
+24,COUZE-ET-SAINT-FRONT,Carrière de Trémouilh (entrée Nord),Carrière souterraine,518441.476,6416357.099,44.82260432375299,0.7028884595615448,24,Aquitaine,Nouvelle-Aquitaine
+24,LES EYZIES,Grotte de Vieil Mouly,Grotte naturelle,548069.63,6427678.199,44.93162909782485,1.0740935593321301,24,Aquitaine,Nouvelle-Aquitaine
+24,LES EYZIES,Grotte de Pechmemie,Grotte naturelle,550688.0,6426186.0,44.91876784778637,1.1077250441046638,24,Aquitaine,Nouvelle-Aquitaine
+24,MARQUAY,Grotte du Bison,Grotte naturelle,551019.0,6426236.0,44.919289227317584,1.1119031552043084,24,Aquitaine,Nouvelle-Aquitaine
+15,MOLÈDES,Fournial 1,Cavité souterraine,704218.0,6461290.0,45.25093861819236,3.053769183043405,15,Auvergne,Auvergne-Rhône-Alpes
+46,SOUSCEYRAC-EN-QUERCY,Gorges de la Cère VT9,Tunnel/Souterrain,625229.32,6431362.21,44.977437927617444,2.051485149248566,46,Midi-Pyrénées,Occitanie
+24,CAMPAGNE,Carrière du Soleillal,Carrière souterraine,540922.938,6425057.012,44.9064307188665,0.9843867989263291,24,Aquitaine,Nouvelle-Aquitaine
+24,MAUZENS-ET-MIREMONT,Carrière des Badies,Carrière souterraine,537479.829,6434906.8,44.99428444021198,0.9375208013925347,24,Aquitaine,Nouvelle-Aquitaine
+47,RÉAUP-LISSE,Grotte de Testoua,Grotte naturelle,476229.0,6339579.0,44.11955076051156,0.20360506368147416,47,Aquitaine,Nouvelle-Aquitaine
+64,AUSSURUCQ,Grotte de Xaxiziloaga,Grotte naturelle,380469.0,6234968.0,43.14244953122365,-0.9264219081375012,64,Aquitaine,Nouvelle-Aquitaine
+64,BANCA,Petexaenea (Site générique Galeries N&S),Tunnel/Souterrain,341680.0,6234364.0,43.11863445462285,-1.4017172208776851,64,Aquitaine,Nouvelle-Aquitaine
+64,LECUMBERRY,Mikelauenziloa,Grotte naturelle,363296.0,6230758.0,43.09675202878171,-1.1343629932963772,64,Aquitaine,Nouvelle-Aquitaine
+64,AINHOA,Grotte de la carrière d'Ainhoa,Grotte naturelle,335519.0,6255234.0,43.3029438576189,-1.4918078805418618,64,Aquitaine,Nouvelle-Aquitaine
+24,HAUTEFORT,Château de Hautefort,Bati,554560.0,6463972.0,45.25972229559019,1.1455333891012291,24,Aquitaine,Nouvelle-Aquitaine
+64,SARE,Grottes de Sare,Grotte naturelle,328801.0,6251753.0,43.26821539781657,-1.5719350396982883,64,Aquitaine,Nouvelle-Aquitaine
+17,SAINT-GEORGES-D'OLÉRON,Fort des Saumonards,Bati,371394.0,6551983.0,45.98802193840726,-1.2470658256368123,17,Poitou-Charentes,Nouvelle-Aquitaine
+19,SOURSAC,Barrage de l'Aigle,Tunnel/Souterrain,639164.0,6460742.0,45.24332753735348,2.224583209351108,19,Limousin,Nouvelle-Aquitaine
+46,BOUZIÈS,Défilé des Anglais,Grotte naturelle,592041.0,6377357.0,44.48691873049245,1.6423187856392352,46,Midi-Pyrénées,Occitanie
+16,MOUTHIERS-SUR-BOËME,Le Vidaud,Cavité souterraine,475095.0,6501551.0,45.57649026227054,0.11553823979377223,16,Poitou-Charentes,Nouvelle-Aquitaine
+16,VŒUIL-ET-GIGET,Bompart,Cavité souterraine,477635.0,6504139.0,45.60060999595877,0.14688708742382597,16,Poitou-Charentes,Nouvelle-Aquitaine
+23,BUDELIÈRE,Mine Est de Termont,Mine,660650.0,6568473.0,46.21496419605587,2.4895582658939994,23,Limousin,Nouvelle-Aquitaine
+19,SAINT-PAUL,Tunnel de Combe Lapeyre,Tunnel/Souterrain,610916.0,6456746.0,45.20427279549196,1.865307268015914,19,Limousin,Nouvelle-Aquitaine
+46,DURBANS,Igue de Cloupman 2,Grotte naturelle,598272.0,6396985.0,44.66453190667603,1.7166535826172655,46,Midi-Pyrénées,Occitanie
+46,ALVIGNAC,Réveillon,Grotte naturelle,594475.0,6414911.0,44.82533103051582,1.6649383936561328,46,Midi-Pyrénées,Occitanie
+46,SAINT-JEAN-DE-LAUR,Grotte de la Calotte,Grotte naturelle,607893.0,6373363.0,44.453241835358014,1.8423771700855456,46,Midi-Pyrénées,Occitanie
+46,THÉMINES,Pech de Lavayssière,Grotte naturelle,607100.0,6404480.0,44.73323658552755,1.8266008151962403,46,Midi-Pyrénées,Occitanie
+15,JALEYRAC,Tunnel des Plaines,Cavité souterraine,650478.474,6465102.287,45.283495100781366,2.3683462873522068,15,Auvergne,Auvergne-Rhône-Alpes
+16,LA COURONNE,La Carrière du Pont Neuf 1,Carrière souterraine,477003.0,6504348.0,45.602284880736825,0.13868800076175505,16,Poitou-Charentes,Nouvelle-Aquitaine
+16,ANGOULÊME,Carrière de Chez Néra,Carrière souterraine,480711.0,6507159.0,45.6287808767074,0.1849400309306841,16,Poitou-Charentes,Nouvelle-Aquitaine
+16,DIRAC,Carrière du Lyon,Carrière souterraine,481163.0,6506873.0,45.62635205799733,0.1908681106211763,16,Poitou-Charentes,Nouvelle-Aquitaine
+86,MIGNÉ-AUXANCES,Les Lourdines coteau n 3,Carrière souterraine,495599.9695,6619518.41205022,46.644597784905756,0.32711804392225097,86,Poitou-Charentes,Nouvelle-Aquitaine
+16,CHÂTEAUNEUF-SUR-CHARENTE,Aux Rocs,Cavité souterraine,459469.0,6504857.0,45.60092015113724,-0.08632813052894128,16,Poitou-Charentes,Nouvelle-Aquitaine
+16,SIREUIL,Les Amelins de la Vallade,Cavité souterraine,467128.0,6507941.0,45.63132316752499,0.010353962128835291,16,Poitou-Charentes,Nouvelle-Aquitaine
+86,THURÉ,Bois de Servollet,Cavité souterraine,507724.3648,6641571.23280989,46.84664633435868,0.47634090802049295,86,Poitou-Charentes,Nouvelle-Aquitaine
+86,MIGNÉ-AUXANCES,Les Lourdines Pierre levee n 2,Carrière souterraine,495149.1716,6619833.71716788,46.64729771063341,0.32108777297939073,86,Poitou-Charentes,Nouvelle-Aquitaine
+87,COMPREIGNAC,Mine de Margnac bas tunnel,Cavité souterraine,569922.0,6545786.0,45.99934825194299,1.3191455348628596,87,Limousin,Nouvelle-Aquitaine
+17,AVY,Bois Perou,Carrière souterraine,424023.0,6501533.0,45.55762863484202,-0.5386666724089929,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,CHAMPAGNE,les Carrières (W),Carrière souterraine,396257.0,6535517.0,45.851511768028466,-0.9157289308764354,17,Poitou-Charentes,Nouvelle-Aquitaine
+33,SAINT-GENÈS-DE-CASTILLON,Piscan,Carrière souterraine,459661.2,6426667.4,44.89748036457164,-0.04519248348458555,33,Aquitaine,Nouvelle-Aquitaine
+17,SAINT-ROMAIN-DE-BENET,Les Pierrieres (NW),Carrière souterraine,397622.0,6517085.0,45.686343236593586,-0.8864745722529883,17,Poitou-Charentes,Nouvelle-Aquitaine
+33,TABANAC,Benot (carrière Delaire),Carrière souterraine,429700.0,6408754.0,44.72530584684319,-0.4145564713177584,33,Aquitaine,Nouvelle-Aquitaine
+16,GARAT,Carrière de Sainte-Catherine,Carrière souterraine,485614.0,6506762.0,45.62676423196489,0.24800690046914295,16,Poitou-Charentes,Nouvelle-Aquitaine
+37,LANGEAIS,62 rue de Nantes,Cavité souterraine,503331.0,6694307.0,47.31989825588129,0.39589922780468706,37,Centre,Centre-Val de Loire
+49,MONTSOREAU,Cave de la Bonnardière,Caves,477785.0,6682916.0,47.20934654002651,0.06354465106762042,49,Pays de la Loire,Pays de la Loire
+16,VŒUIL-ET-GIGET,Carrière Jolival 2,Carrière souterraine,477435.0,6503749.0,45.59703534259795,0.14450404955456875,16,Poitou-Charentes,Nouvelle-Aquitaine
+86,SAINT-PIERRE-DE-MAILLÉ,Grotte de la Guittière,Cavité souterraine,534450.410557293,6619888.17437654,46.658640989079,0.834737358614446,86,Poitou-Charentes,Nouvelle-Aquitaine
+63,MONTAIGUT-LE-BLANC,Cave A41,Cavité souterraine,707737.68,6498850.55,45.58912377089454,3.099238208804087,63,Auvergne,Auvergne-Rhône-Alpes
+47,BLANQUEFORT-SUR-BRIOLANCE,Grotte des Jouanets,Grotte naturelle,535736.217,6393256.893,44.619019840229264,0.9292614721326672,47,Aquitaine,Nouvelle-Aquitaine
+47,CLAIRAC,Tunnel ferroviaire Moncaubet,Tunnel/Souterrain,489550.26,6367049.6,44.37079751970295,0.358469210612877,47,Aquitaine,Nouvelle-Aquitaine
+47,NICOLE,Pech de Berre,Cavité souterraine,488160.72,6362134.215,44.32615679348627,0.34311622458099,47,Aquitaine,Nouvelle-Aquitaine
+24,SAINT-GERMAIN-DES-PRÉS,Tunnel d'Autrevialle,Tunnel/Souterrain,545642.246,6474868.797,45.35586734547477,1.0284028003768924,24,Aquitaine,Nouvelle-Aquitaine
+85,BREUIL-BARRET,Coussaie,Cavité souterraine,418925.0,6622357.0,46.64238843809498,-0.6760155650639916,85,Pays de la Loire,Pays de la Loire
+49,GENNES-VAL-DE-LOIRE,Cave 28 route de Louerre,Caves,455071.0,6697959.0,47.336666565152846,-0.24445095988741908,49,Pays de la Loire,Pays de la Loire
+15,SAINT-MARY-LE-PLAIN,Lacoste 29,Cavité souterraine,709627.0,6451910.0,45.166424783286104,3.1225350698043237,15,Auvergne,Auvergne-Rhône-Alpes
+33,SOULAC-SUR-MER,Blockhaus,Tunnel/Souterrain,381059.0,6500259.0,45.52749403611205,-1.0878022560070413,33,Aquitaine,Nouvelle-Aquitaine
+63,AUBIÈRE,Cave Murger C28,Caves,708890.707,6516528.596,45.748297336260514,3.114354475936483,63,Auvergne,Auvergne-Rhône-Alpes
+63,AUBIÈRE,Cave Madeuf 2 C23,Caves,708890.707,6516528.596,45.748297336260514,3.114354475936483,63,Auvergne,Auvergne-Rhône-Alpes
+85,CHEFFOIS,le rocher cheffois,Cavité souterraine,359778.0,6601151.0,46.42435620044615,-1.4325241627480625,85,Pays de la Loire,Pays de la Loire
+19,DAMPNIAT,Centrale hydroélectrique de Claredent,Bati,591695.0,6453429.0,45.17165536635231,1.6212659554361863,19,Limousin,Nouvelle-Aquitaine
+47,RÉAUP-LISSE,Moulin de Sainte-Catherine,Bati,482343.0,6339859.0,44.12399123257643,0.2798280049952748,47,Aquitaine,Nouvelle-Aquitaine
+64,ARUDY,Grotte d'Espalungue,Grotte naturelle,419672.0,6227829.0,43.09475323774803,-0.441524480932065,64,Aquitaine,Nouvelle-Aquitaine
+47,TONNEINS,Centre de soins,Bati,484269.0,6370726.0,44.402261919178116,0.29064832653581857,47,Aquitaine,Nouvelle-Aquitaine
+72,SAINT-PIERRE-DU-LOROUËR,Le petit Brive,Cavité souterraine,515245.0,6746767.0,47.795307925549764,0.5318426741374619,72,Pays de la Loire,Pays de la Loire
+19,MONCEAUX-SUR-DORDOGNE,Le Chassang,Cavité souterraine,613643.0,6443479.0,45.08517465811538,1.902386258151461,19,Limousin,Nouvelle-Aquitaine
+49,SAUMUR,Caves de la Butte de la Folie,Caves,471130.0,6686724.0,47.241342714444855,-0.026240520161720363,49,Pays de la Loire,Pays de la Loire
+16,LA COURONNE,La Carrière du Pont Neuf 2,Carrière souterraine,477040.0,6504250.0,45.601415061288364,0.13920787596930626,16,Poitou-Charentes,Nouvelle-Aquitaine
+16,SIREUIL,Les Pierrières,Cavité souterraine,468008.0,6507714.0,45.62957991791373,0.021750669187519587,16,Poitou-Charentes,Nouvelle-Aquitaine
+16,SIREUIL,Le Grand Plantier,Cavité souterraine,468235.0,6507890.0,45.63124067937502,0.02457697482930421,16,Poitou-Charentes,Nouvelle-Aquitaine
+19,ROCHE-LE-PEYROUX,Val Beneyte - Souterrain sous l'observatoire,Tunnel/Souterrain,650857.0,6480090.0,45.418474295295894,2.371653020016026,19,Limousin,Nouvelle-Aquitaine
+24,LA ROCHEBEAUCOURT-ET-ARGENTINE,Carrière de Font-Babou,Carrière souterraine,497002.0,6489330.0,45.47335753809136,0.4014428893881704,24,Aquitaine,Nouvelle-Aquitaine
+24,BRANTÔME-EN-PÉRIGORD,Carrière des Petites maisons (Dubesset),Carrière souterraine,515742.445,6476238.962,45.360827259907204,0.6461817081196253,24,Aquitaine,Nouvelle-Aquitaine
+79,BRESSUIRE,Château de Bressuire,Bati,433370.0,6643810.0,46.84126074692319,-0.49977833553124884,79,Poitou-Charentes,Nouvelle-Aquitaine
+49,LE PUY-NOTRE-DAME,Champignonnière de la Butte Faloux,Cavité souterraine,454304.0,6674457.0,47.124981332104504,-0.24182549811438186,49,Pays de la Loire,Pays de la Loire
+16,PUYMOYEN,La Boîte,Cavité souterraine,478760.0,6506462.0,45.621879620580955,0.16023776776624946,16,Poitou-Charentes,Nouvelle-Aquitaine
+16,GARAT,Carrière Sodatec,Carrière souterraine,486234.0,6505394.0,45.6146473687842,0.25656906289731457,16,Poitou-Charentes,Nouvelle-Aquitaine
+49,TURQUANT,Champignonnière 10 rue de la Bâte,Cavité souterraine,474960.0,6684222.0,47.22014416214806,0.025599042833564532,49,Pays de la Loire,Pays de la Loire
+79,TOURTENAY,La Mazoire Troglodyte et Cie,Cavité souterraine,463286.0,6664298.0,47.03684826554118,-0.11814814216373273,79,Poitou-Charentes,Nouvelle-Aquitaine
+86,ORCHES,"Le bourg Joly, champignonnière",Cavité souterraine,498156.2833,6645395.127,46.87823510439362,0.34916555308503666,86,Poitou-Charentes,Nouvelle-Aquitaine
+49,SAUMUR,Caves du chemin des Vaux - Le Ménach,Caves,470990.0,6686729.0,47.24133938790841,-0.028092394696581226,49,Pays de la Loire,Pays de la Loire
+19,SAINT-ROBERT,Grotte de Saint-Robert,Grotte naturelle,566532.18,6463375.52,45.256780036390616,1.298301955851958,19,Limousin,Nouvelle-Aquitaine
+33,POMPIGNAC,Le Bosquet,Carrière souterraine,429400.5,6423159.1,44.85475881454991,-0.4262260870266126,33,Aquitaine,Nouvelle-Aquitaine
+33,RAUZAN,La Salle,Carrière souterraine,451452.0,6415634.0,44.795323667313,-0.14353574003213992,33,Aquitaine,Nouvelle-Aquitaine
+17,SAINTES,La Motte à l'Œuf,Carrière souterraine,414549.0,6521893.0,45.736881632732505,-0.6721056204580982,17,Poitou-Charentes,Nouvelle-Aquitaine
+33,SAINT-GERMAIN-DU-PUCH,Salles,Carrière souterraine,434614.5,6422206.3,44.84820487584057,-0.3597758810632642,33,Aquitaine,Nouvelle-Aquitaine
+49,TUFFALUN,Caves d'Avort,Caves,452722.0,6695388.0,47.312668751995936,-0.27412015153229496,49,Pays de la Loire,Pays de la Loire
+33,CAMARSAC,Carrière du bourg,Carrière souterraine,434352.0,6420177.0,44.82985045057632,-0.3620019263362975,33,Aquitaine,Nouvelle-Aquitaine
+33,CAMBES,Carrière de Bastarade,Carrière souterraine,426560.1,6409829.1,44.73374656904093,-0.4547646855162795,33,Aquitaine,Nouvelle-Aquitaine
+37,CANDES-SAINT-MARTIN,Petit Baillargeau à Candes,Cavité souterraine,477213.0,6681993.0,47.20085108147494,0.056447428281166154,37,Centre,Centre-Val de Loire
+33,CROIGNON,Saute jau,Carrière souterraine,435224.0,6419838.0,44.827134707076205,-0.3507973368268569,33,Aquitaine,Nouvelle-Aquitaine
+33,FRONTENAC,Milha,Carrière souterraine,450047.22,6408231.743,44.72822917575607,-0.15754223248833488,33,Aquitaine,Nouvelle-Aquitaine
+33,GRÉZILLAC,Centre technique,Carrière souterraine,445723.0,6418082.0,44.81526875309378,-0.2171753765354364,33,Aquitaine,Nouvelle-Aquitaine
+17,JONZAC,Cluzelet,Carrière souterraine,432280.0,6488427.0,45.443005908686395,-0.4256419297087784,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,PONS,Caves de la Soute,Caves,421326.0,6505428.0,45.59157291015489,-0.5754613883858266,17,Poitou-Charentes,Nouvelle-Aquitaine
+33,PORTE-DE-BENAUGE,La Boye,Cavité souterraine,440238.0,6401152.0,44.66094666109855,-0.27760780048344846,33,Aquitaine,Nouvelle-Aquitaine
+17,SAINT-GRÉGOIRE-D'ARDENNES,Carrières de la Motte à Morin,Carrière souterraine,427034.0,6495930.0,45.50843281970606,-0.4969298596049477,17,Poitou-Charentes,Nouvelle-Aquitaine
+37,LERNÉ,Maulévrier cave sous château,Caves,481882.0,6674586.0,47.135761413390334,0.12164665803870099,37,Centre,Centre-Val de Loire
+46,BLARS,Cuzoul des Brasconnies,Grotte naturelle,600342.0,6387429.0,44.578813692103964,1.744679509653701,46,Midi-Pyrénées,Occitanie
+86,TERNAY,Chateau de Ternay,Tunnel/Souterrain,469122.153687457,6664326.1721241,47.03915057693519,-0.041361850524331355,86,Poitou-Charentes,Nouvelle-Aquitaine
+24,DOMME,Grotte du Redoulet de Caudon (Mortureux),Grotte naturelle,562192.0,6415206.0,44.82232098647478,1.2565411181477395,24,Aquitaine,Nouvelle-Aquitaine
+86,ORCHES,La Roche Tardille,Cavité souterraine,498128.1191,6643125.76675997,46.85780535015928,0.3497958699030896,86,Poitou-Charentes,Nouvelle-Aquitaine
+33,SAINT-SEURIN-DE-CADOURNE,Maillet,Carrière souterraine,402006.0,6471983.0,45.28261866945424,-0.8023224577864264,33,Aquitaine,Nouvelle-Aquitaine
+33,LE VERDON-SUR-MER,Bunker PAB,Tunnel/Souterrain,383630.0,6501681.0,45.541475005299645,-1.0558437324184513,33,Aquitaine,Nouvelle-Aquitaine
+15,ALLANCHE,Mine de Conche,Mine,701874.0,6461803.0,45.255568201218395,3.0238908978710826,15,Auvergne,Auvergne-Rhône-Alpes
+19,GOULLES,Gorges de la Cère MP12,Tunnel/Souterrain,629997.0,6432185.0,44.98534480851127,2.11184361044331,19,Limousin,Nouvelle-Aquitaine
+37,NEUIL,La Milcendière,Cavité souterraine,511581.0,6677119.0,47.1676362083321,0.5122315926821711,37,Centre,Centre-Val de Loire
+19,SAINT-JULIEN-LE-PÈLERIN,Gorges de la Cère MF17,Tunnel/Souterrain,625728.0,6431572.0,44.97938043078626,2.057778873100615,19,Limousin,Nouvelle-Aquitaine
+63,AUBIÈRE,Cave zone péril C35,Caves,708890.707,6516528.596,45.748297336260514,3.114354475936483,63,Auvergne,Auvergne-Rhône-Alpes
+49,LE PUY-NOTRE-DAME,Champignonnière rue de la Providence,Cavité souterraine,454856.0,6674939.0,47.12952088247428,-0.2348107017233445,49,Pays de la Loire,Pays de la Loire
+46,MARMINIAC,Les Limoges,Cavité souterraine,554733.0,6396741.0,44.65460288588399,1.1676277384405005,46,Midi-Pyrénées,Occitanie
+46,MONTCABRIER,Grotte de Croze del Taï,Grotte naturelle,547095.0,6385563.0,44.552365038835674,1.0747577253215377,46,Midi-Pyrénées,Occitanie
+46,FLOIRAC,Igue du Caillon,Grotte naturelle,595266.0,6424911.0,44.91547225587532,1.6728176786488638,46,Midi-Pyrénées,Occitanie
+65,OMEX,Grotte du Roy,Cavité souterraine,449353.0,6226508.0,43.093897651849026,-0.07689643947344639,65,Midi-Pyrénées,Occitanie
+49,MONTREUIL-BELLAY,Fermette des Nobis,Bati,460704.0,6675050.0,47.13264999616203,-0.1577849005167007,49,Pays de la Loire,Pays de la Loire
+33,VILLEGOUGE,Meyney,Carrière souterraine,438599.0,6433862.0,44.95456898103867,-0.31558414751168024,33,Aquitaine,Nouvelle-Aquitaine
+33,GRÉZILLAC,Granet,Carrière souterraine,444142.0,6417882.0,44.81288803876726,-0.2370525662502051,33,Aquitaine,Nouvelle-Aquitaine
+33,PRIGNAC-ET-MARCAMPS,Carrière de Cantegrit/Matard,Carrière souterraine,427829.1,6440581.1,45.01085372122242,-0.45574516517735253,33,Aquitaine,Nouvelle-Aquitaine
+86,RANTON,Cave Grands Cailloux,Caves,470038.741512909,6660049.43134138,47.00099111011912,-0.027140739039317886,86,Poitou-Charentes,Nouvelle-Aquitaine
+49,FONTEVRAUD-L'ABBAYE,Cave derrière mur dans cave Mr Baillargeau,Carrière souterraine,477155.0,6682001.0,47.20090359041995,0.05567787923349248,49,Pays de la Loire,Pays de la Loire
+86,MIGNÉ-AUXANCES,Carrières de Chateau Gaillard,Carrière souterraine,494691.7989,6619549.22489591,46.64459770478863,0.31523758699214177,86,Poitou-Charentes,Nouvelle-Aquitaine
+33,TAURIAC,Le Mounat,Carrière souterraine,423298.0,6443772.0,45.037755798893606,-0.5150034024841824,33,Aquitaine,Nouvelle-Aquitaine
+49,ÉPIEDS,Grand Fond à BREZE/EPIEDS,Carrière souterraine,470260.0,6678302.0,47.165276945453414,-0.03345685880682623,49,Pays de la Loire,Pays de la Loire
+46,MIERS,Barrières,Grotte naturelle,596690.0,6420444.0,44.875473302460385,1.6917969063669493,46,Midi-Pyrénées,Occitanie
+46,SAULIAC-SUR-CÉLÉ,Igue de Geniez,Grotte naturelle,598287.0,6379873.0,44.510503942025615,1.7203409409358807,46,Midi-Pyrénées,Occitanie
+17,SAINT-VAIZE,Les Roches (Centre),Carrière souterraine,418071.0,6530686.0,45.81744331400798,-0.6320613377565033,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,SAINT-GEORGES-ANTIGNAC,Antignac,Carrière souterraine,429571.0,6494762.0,45.49893216535516,-0.46381462420275704,17,Poitou-Charentes,Nouvelle-Aquitaine
+24,LA TOUR-BLANCHE-CERCLES,Carrière de Fongrenon 1,Carrière souterraine,500086.0,6478226.0,45.374329974294184,0.4454898587407339,24,Aquitaine,Nouvelle-Aquitaine
+49,MONTSOREAU,Vallée des Bazilles - Vieille champignonnière,Carrière souterraine,477877.0,6683009.0,47.21021400238073,0.06471360040224836,49,Pays de la Loire,Pays de la Loire
+16,COURCÔME,Au Limousin,Grotte naturelle,478363.035,6546837.0,45.98508586393703,0.1363606755108544,16,Poitou-Charentes,Nouvelle-Aquitaine
+16,MAGNAC-SUR-TOUVRE,Bel-Air,Carrière souterraine,485527.0,6508295.0,45.640532899750006,0.24620501278992554,16,Poitou-Charentes,Nouvelle-Aquitaine
+86,MIREBEAU,Carrière du Bois de Rochefort,Carrière souterraine,487513.633086464,6636320.11726566,46.793275197964114,0.2137115599955383,86,Poitou-Charentes,Nouvelle-Aquitaine
+79,CHAMPDENIERS,Rivière souterraine de Champdeniers,Grotte naturelle,439051.0,6603828.0,46.48383363351831,-0.4027025281430987,79,Poitou-Charentes,Nouvelle-Aquitaine
+86,MIGNÉ-AUXANCES,Les Lourdines coteau n 1,Carrière souterraine,495365.7077,6619516.34620682,46.64450776537438,0.3240579266497595,86,Poitou-Charentes,Nouvelle-Aquitaine
+24,HAUTEFORT,Souterrain de la Tour de Bretagne,Tunnel/Souterrain,554486.0,6463964.0,45.25963462968494,1.1445925784624544,24,Aquitaine,Nouvelle-Aquitaine
+46,PINSAC,Roc Coulon,Grotte naturelle,585724.0,6419386.0,44.864226880280555,1.5532106982280525,46,Midi-Pyrénées,Occitanie
+47,SAUVETERRE-LA-LEMANCE,Carrière de la Frézière,Carrière souterraine,542151.535,6390186.435,44.59287150421947,1.0110739493840804,47,Aquitaine,Nouvelle-Aquitaine
+63,BROMONT-LAMOTHE,Galerie de Pranal,Mine,687316.693,6529328.349,45.86349761359905,2.8365234400030976,63,Auvergne,Auvergne-Rhône-Alpes
+24,FAUX,Carrière de la Barde Sud (grande),Carrière souterraine,516072.0,6413622.0,44.797365755680765,0.6739457418603624,24,Aquitaine,Nouvelle-Aquitaine
+46,MARCILHAC-SUR-CÉLÉ,Les Poteries,Grotte naturelle,602109.0,6383196.0,44.54096188775285,1.767765504527785,46,Midi-Pyrénées,Occitanie
+33,CROIGNON,L'Artigue,Carrière souterraine,434830.0,6420462.0,44.83259708338749,-0.3561129291285058,33,Aquitaine,Nouvelle-Aquitaine
+47,NÉRAC,Caves maison Laubenheimer,Caves,486701.0,6340886.0,44.13456699466565,0.3338171709212585,47,Aquitaine,Nouvelle-Aquitaine
+32,MONTREAL,Tunnel de Pomiro,Tunnel/Souterrain,472477.0,6316960.0,43.91490579352383,0.1668948722842705,32,Midi-Pyrénées,Occitanie
+24,LA TOUR-BLANCHE-CERCLES,Carrière de Garennes n°3,Carrière souterraine,499574.0,6477767.0,45.37004977126465,0.43914222759489957,24,Aquitaine,Nouvelle-Aquitaine
+47,NICOLE,Carrière de Pech de Berre,Carrière souterraine,488160.72,6362134.215,44.32615679348627,0.34311622458099,47,Aquitaine,Nouvelle-Aquitaine
+86,ROIFFÉ,Les Closures - Champignonnière,Carrière souterraine,476468.9987,6673530.82419527,47.124470255485626,0.05080044749607979,86,Poitou-Charentes,Nouvelle-Aquitaine
+86,USSEAU,Les Rabottes,Carrière souterraine,508116.2,6643528.87293526,46.864376153760254,0.4806608205624755,86,Poitou-Charentes,Nouvelle-Aquitaine
+16,LA COURONNE,Vignes à Monsieur Mallat,Carrière souterraine,477567.0,6504958.0,45.60795796843589,0.14563565913037121,16,Poitou-Charentes,Nouvelle-Aquitaine
+17,SAINT-SULPICE-D'ARNOULT,Fief de Foye (Cox),Carrière souterraine,404579.96,6533909.83,45.84072049311865,-0.8076031019598342,17,Poitou-Charentes,Nouvelle-Aquitaine
+17,SAINTES,Quai des Roches,Carrière souterraine,417114.0,6521900.0,45.73801353532544,-0.6391599483731782,17,Poitou-Charentes,Nouvelle-Aquitaine
+19,NOAILLES,Gouffre du Briant,Grotte naturelle,582574.0,6444166.0,45.08677153788468,1.5074099882778649,19,Limousin,Nouvelle-Aquitaine
+49,FONTEVRAUD-L'ABBAYE,Cave Charissou,Carrière souterraine,476836.0,6680079.0,47.18350516057112,0.05241453052002523,49,Pays de la Loire,Pays de la Loire
+16,SOYAUX,Landes du Bressour,Carrière souterraine,482178.0,6506514.0,45.623445696858454,0.20404949423576973,16,Poitou-Charentes,Nouvelle-Aquitaine
+46,CORN,Grotte de la Chèvre,Grotte naturelle,611466.0,6390854.0,44.611147370066654,1.8841711528249123,46,Midi-Pyrénées,Occitanie
+Navarra,URITZ,Cueva de Espoz,Grotte naturelle,339480.0,6209614.0,42.89528818640005,-1.4117173420471387,Navarra,Espagne,Espagne
+16,SOYAUX,Pelouses du Lion de Saint-Marc,Carrière souterraine,480825.554,6507786.197,45.63446183338525,0.18612254283038415,16,Poitou-Charentes,Nouvelle-Aquitaine
+16,MONTBRON,Montgaudier,Grotte naturelle,503054.0,6510593.0,45.66649382512371,0.470142798396916,16,Poitou-Charentes,Nouvelle-Aquitaine
+46,SOUSCEYRAC-EN-QUERCY,Gorges de la Cère LF8,Tunnel/Souterrain,620253.5,6431061.19,44.974171814359494,1.9884192351706493,46,Midi-Pyrénées,Occitanie
+33,SAINT-CHRISTOPHE-DES-BARDES,La Pelleterie,Carrière souterraine,453062.0,6426086.0,44.88992765613303,-0.12842907246643148,33,Aquitaine,Nouvelle-Aquitaine
+46,BACH,Cuzoul de Frayssinet,Grotte naturelle,596594.0,6360598.0,44.33676768120213,1.7030277386087744,46,Midi-Pyrénées,Occitanie
+19,PERPEZAC-LE-BLANC,le Cluzel - Grotte de Perpezac,Grotte naturelle,568521.0,6459618.0,45.22333694511369,1.3246677921146306,19,Limousin,Nouvelle-Aquitaine
+24,SAINT-RABIER,Grotte de Douime,Grotte naturelle,551712.0,6454893.0,45.177388183169455,1.1120004244680162,24,Aquitaine,Nouvelle-Aquitaine
+47,RÉAUP-LISSE,Grotte de la Pintenète,Grotte naturelle,476879.0,6338960.0,44.11418976901688,0.21199415654413845,47,Aquitaine,Nouvelle-Aquitaine
+33,CROIGNON,Moulin de Lamothe,Carrière souterraine,434745.0,6420395.0,44.831961886480435,-0.3571514013717456,33,Aquitaine,Nouvelle-Aquitaine
+47,CASTELJALOUX,Grotte aux fées (Casteljaloux),Grotte naturelle,476229.0,6339579.0,44.11955076051156,0.20360506368147416,47,Aquitaine,Nouvelle-Aquitaine
+33,CAMBES,Carrière de Pinte,Carrière souterraine,427202.7,6410433.6,44.739436435009914,-0.4469892982856745,33,Aquitaine,Nouvelle-Aquitaine
+47,BUZET,Château de Buzet,Bati,484016.183,6353755.215,44.24951208251955,0.29477476602795394,47,Aquitaine,Nouvelle-Aquitaine
+Aragon,VILLANUA,Cueva de las Güixas,Grotte naturelle,410375.0,6182575.0,42.68451035721543,-0.5306860538705088,Aragon,Espagne,Espagne
+63,MONTAIGUT-LE-BLANC,Caves ouest Montaigut Chemin des caves,Caves,706772.417,6498479.953,45.58579687745406,3.0868531863035282,63,Auvergne,Auvergne-Rhône-Alpes
+33,CAMBLANES-ET-MEYNAC,Château Latour,Carrière souterraine,401119.1,6466122.7,45.22952725732024,-0.8100163083642251,33,Aquitaine,Nouvelle-Aquitaine
+09,TOURTOUSE,Grotte de Tourtouse,Grotte naturelle,547574.0,6223126.0,43.0911664274615,1.1292332474879163,,,
+09,MOULIS,Grotte du Sendé,Grotte naturelle,546044.0,6208445.0,42.958840831461444,1.1147633387720037,,,
+Navarra,USUN,Arbaiungo koba,Grotte naturelle,354702.63,6182689.85,42.661022977673746,-1.2082559597552545,Navarra,Espagne,Espagne
+Bizkaia,KARRANTZA,Cueva de Santa Isabel,Cavité souterraine,182392.0,6260933.18327455,43.25935585194617,-3.3775982036863668,Bizkaia,Espagne,Espagne
+Bizkaia,ARTZENTALES,Ferme de La Cruz,Bati,194010.0,6261070.0,43.268920441409456,-3.235183367709161,Bizkaia,Espagne,Espagne
+Aragon,BOLTANA,Grotte de Seso,Grotte naturelle,456190.44,6155304.02,42.45647698822701,0.03971194506685718,Aragon,Espagne,Espagne
+Araba,MAEZTU,Portillo del Gesal,Cavité souterraine,255184.45,6197809.08,42.742133023852645,-2.4303828974599844,Araba,Espagne,Espagne
+Aragon,FISCAL,Cueva de Burgasé,Grotte naturelle,449177.9,6158036.13,42.47862099420224,-0.04662896121300092,Aragon,Espagne,Espagne
+Bizkaia,TURZIOTZ,Minas de Siete Puertas,Cavité souterraine,193662.039683832,6261700.71269631,43.27432929989436,-3.240066289767155,Bizkaia,Espagne,Espagne
+Araba,ARTZINIEGA,Artziniegako frontoia,Bati,200903.0,6244814.0,43.127998688156474,-3.135054815856205,Araba,Espagne,Espagne
+Navarra,VALCARLOS,Txirriskin,Bati,380096.776,6230292.808,43.10028465575273,-0.9281327286109622,Navarra,Espagne,Espagne
+11,BOUISSE,Mines de la Ferronière,Mine,650421.0,6208505.0,42.974195029393684,2.3927814487238996,11,Languedoc-Roussillon,Occitanie
+64,BIRON,Grotte de Brasselay,Grotte naturelle,397104.0,6268947.0,43.4550158950783,-0.7420950343321492,64,Aquitaine,Nouvelle-Aquitaine
+26,SUZE-LA-ROUSSE,Tunnel de la Borie,Tunnel/Souterrain,845493.0,6359051.0,44.31535809144472,4.824240595378212,,,
+Catalunya,MALGRAT-DE-MAR,Mines de Can Palomeres,Mine,676984.3,6060979.13,41.6496840115536,2.7244169455953116,,,
+26,FRANCILLON-SUR-ROUBION,Grotte de Baume Sourde,Grotte naturelle,862420.49,6394762.3,44.633000579388735,5.048004220207584,,,
+17,SAINT-SAVINIEN,Les Roches,Cavité souterraine,414270.7379999911,6538042.598999979,45.882032720691846,-0.6853693363701813,17,Poitou-Charentes,Nouvelle-Aquitaine
+64,AINHOA,Grotte de la carriere,Grotte naturelle,335465.0,6255159.0,43.30224265305199,-1.4924194043020282,64,Aquitaine,Nouvelle-Aquitaine
+64,BANCA,Petexaenea,Tunnel/Souterrain,341680.0,6234364.0,43.11863445462285,-1.4017172208776851,64,Aquitaine,Nouvelle-Aquitaine
+24,BEAUMONTOIS EN PÉRIGORD,Carrière de Luzier,Carrière souterraine,522384.9,6410495.699,44.77087591930792,0.754862175891317,24,Aquitaine,Nouvelle-Aquitaine
+49,BELLEVIGNE-LES-CHÂTEAUX,La Grézille Saumoussay,Caves,466859.0,6682840.0,47.20491596518126,-0.08065453977157352,49,Pays de la Loire,Pays de la Loire
+16,CHÂTEAUNEUF-SUR-CHARENTE,Chez Delaisse,Carrière souterraine,459682.925,6504779.894,45.600301598943474,-0.08354736721763223,16,Poitou-Charentes,Nouvelle-Aquitaine
+37,COTEAUX-SUR-LOIRE,Cave Bellevue 1,Carrière souterraine,495038.0,6690656.0,47.28453642871372,0.2878357984799455,37,Centre,Centre-Val de Loire
+24,EYRAUD-CREMPSE-MAURENS,Carrière de Fon Barade Ouest,Carrière souterraine,500543.0,6428829.0,44.92991841907889,0.4715300998954387,24,Aquitaine,Nouvelle-Aquitaine
+47,GAVAUDUN,Grotte de Ganos,Grotte naturelle,531994.05,6388072.61,44.57147162788512,0.8838604213428817,47,Aquitaine,Nouvelle-Aquitaine
+49,GENNES-VAL-DE-LOIRE,42 rue des Bords de Loire,Cavité souterraine,462229.0,6694132.0,47.304850401566824,-0.14771475643538395,49,Pays de la Loire,Pays de la Loire
+16,LA COURONNE,La Carrière du Pont Neuf 3,Carrière souterraine,477115.0,6503618.0,45.59575223519741,0.1404628931730667,16,Poitou-Charentes,Nouvelle-Aquitaine
+24,LA ROCHEBEAUCOURT-ET-ARGENTINE,Argentine - Carrière chez Perrauque Nord Ouest (grande),Carrière souterraine,495315.658,6489291.354,45.47250803749198,0.37988837953540155,24,Aquitaine,Nouvelle-Aquitaine
+24,LA TOUR-BLANCHE-CERCLES,Carrière de Jovelle n°6 (Jovelle Nord),Carrière souterraine,498905.0,6476932.0,45.36233934559744,0.43094737689350376,24,Aquitaine,Nouvelle-Aquitaine
+9,LE MAS-D'AZIL,Grotte du Mas d'Azil,Grotte naturelle,565912.0,6220401.0,43.07033519631599,1.3549277016584151,9,Midi-Pyrénées,Occitanie
+49,LES BOIS-D'ANJOU,Champignonnière Les Pâtis,Carrière souterraine,460181.0,6714701.0,47.48912488853116,-0.18577805979029274,49,Pays de la Loire,Pays de la Loire
+24,LES EYZIES,Grotte du Bil,Grotte naturelle,542360.0,6428852.0,44.94091687910561,1.001370705784781,24,Aquitaine,Nouvelle-Aquitaine
+87,LES SALLES-LAVAUGUYON,Chez Rambaud - Cave de maison de maître,Caves,519683.0,6517579.0,45.73396901864943,0.6809865103165282,87,Limousin,Nouvelle-Aquitaine
+49,MONTSOREAU,Troglo cave aux bateaux,Cavité souterraine,477839.0,6682975.0,47.20989540612857,0.06422860176068888,49,Pays de la Loire,Pays de la Loire
+47,NÉRAC,Caves municipales,Caves,486671.153,6340931.92,44.13497099600954,0.3334249983249841,47,Aquitaine,Nouvelle-Aquitaine
+47,NÉRAC,Tunnel de Lamothe,Tunnel/Souterrain,486495.694,6339136.089,44.118763431097335,0.331991636149962,47,Aquitaine,Nouvelle-Aquitaine
+49,NEUILLÉ,Caves de la Cybellerie,Cavité souterraine,472090.0,6696827.0,47.33255852421165,-0.01866369555167502,49,Pays de la Loire,Pays de la Loire
+16,PUYMOYEN,Carrière du Château du Diable,Carrière souterraine,478907.0,6505804.0,45.616005872929364,0.1624263633345827,16,Poitou-Charentes,Nouvelle-Aquitaine
+85,RÉAUMUR,manoir des sciences,Bati,409798.0,6631338.0,46.71927499477973,-0.8008505619516207,85,Pays de la Loire,Pays de la Loire
+47,RÉAUP-LISSE,"Ruisseau souterrain ""Sabaté"" (grotte de Pouyalats)",Cavité souterraine,477847.778,6335871.44,44.08671575461083,0.22544503371336339,47,Aquitaine,Nouvelle-Aquitaine
+17,SAINTES,Cours Bouvard,Carrière souterraine,416342.0,6522459.0,45.74272117591403,-0.6494092722529969,17,Poitou-Charentes,Nouvelle-Aquitaine
+49,SAUMUR,La Seignère,Cavité souterraine,471299.0,6696548.0,47.32977610854475,-0.028988534950406326,49,Pays de la Loire,Pays de la Loire
+86,SENILLÉ-SAINT-SAUVEUR,"Les Pieds Grimaud, CABOURUMEA",Carrière souterraine,518273.270663817,6633243.24646686,46.77464814105033,0.6180073886509977,86,Poitou-Charentes,Nouvelle-Aquitaine
+16,SERS,Grotte de Peupla,Grotte naturelle,489874.0,6502219.0,45.58720276090659,0.3046378558819024,16,Poitou-Charentes,Nouvelle-Aquitaine
+16,SIREUIL,Carrière des Courilles,Carrière souterraine,467245.737,6507879.273,45.63080784720723,0.011894018653857832,16,Poitou-Charentes,Nouvelle-Aquitaine
+19,SOURSAC,Galerie du Pont de Lamirande,Tunnel/Souterrain,640719.0,6464802.0,45.280019109967455,2.2439065435856294,19,Limousin,Nouvelle-Aquitaine
+86,TERNAY,Montjaugin,Carrière souterraine,468187.64,6664790.21,47.043000671060284,-0.053896281182230894,86,Poitou-Charentes,Nouvelle-Aquitaine
+49,VAUDELNAY,Gîte de la Pinsonnière,Caves,457084.0,6673595.0,47.11824857815716,-0.20472405793225817,49,Pays de la Loire,Pays de la Loire
+49,VAUDELNAY,Cave Reynouard,Carrière souterraine,455226.0,6675109.0,47.131186433220456,-0.23002550614358472,49,Pays de la Loire,Pays de la Loire
+16,VŒUIL-ET-GIGET,Carrière de Bompart 4,Carrière souterraine,477541.158,6504367.456,45.60263531431645,0.14557815481089614,16,Poitou-Charentes,Nouvelle-Aquitaine
+16,VŒUIL-ET-GIGET,Carrière COVICO 4,Carrière souterraine,477518.339,6503810.073,45.59761205898666,0.14554403952897585,16,Poitou-Charentes,Nouvelle-Aquitaine
+16,VŒUIL-ET-GIGET,Le Sterling,Carrière souterraine,477616.799,6502736.749,45.58798537013449,0.14730347475413558,16,Poitou-Charentes,Nouvelle-Aquitaine
+46,CANIAC-DU-CAUSSE,Grotte de la Devèze,Grotte naturelle,594413.0,6392339.0,44.622136082965966,1.6689674397813903,46,Midi-Pyrénées,Occitanie
+9,MONTESQUIEU-AVANTES,Perte du Volp,Grotte naturelle,554219.93,6216370.0,43.03180419936457,1.2126486461614046,9,Midi-Pyrénées,Occitanie
