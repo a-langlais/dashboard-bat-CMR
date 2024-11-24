@@ -7,32 +7,14 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 import matplotlib.cm as cm
 
+from functions import *
+from dashboard import *
+
 # CHARGEMENT DES DONNEES
-
-def load_data_antenna():
-    df_antenna = pd.read_csv(r'data/df_clean.csv', engine = "pyarrow", dtype_backend = "pyarrow")
-    df_antenna['DATE'] = df_antenna['DATE'].astype('datetime64[ns]')
-    df_antenna['HEURE'] = pd.to_datetime(df_antenna['HEURE'], format = '%H:%M:%S').dt.time
-    df_antenna['ANNEE'] = df_antenna['ANNEE'].astype('int')
-    df_antenna['COMMUNE'] = df_antenna['COMMUNE'].astype('str')
-    df_antenna['LIEU_DIT'] = df_antenna['LIEU_DIT'].astype('str')
-    df_antenna['PRECISION_MILIEU'] = df_antenna['PRECISION_MILIEU'].astype('str')
-    df_antenna['DEPARTEMENT'] = df_antenna['DEPARTEMENT'].astype('str')
-    df_antenna['CODE_ESP'] = df_antenna['CODE_ESP'].astype('str')
-    df_antenna['MASSE'] = df_antenna['MASSE'].astype('str')
-    df_antenna['AB'] = df_antenna['AB'].astype('str')
-    df_antenna['SEXE'] = df_antenna['SEXE'].astype('str')
-    df_antenna['ACTION'] = df_antenna['ACTION'].astype('str')
-    df_antenna['ID_PIT'] = df_antenna['ID_PIT'].astype('str')
-    df_antenna['NUM_PIT'] = df_antenna['NUM_PIT'].astype('str')
-    df_antenna['LONG_L93'] = df_antenna['LONG_L93'].astype('float')
-    df_antenna['LAT_L93'] = df_antenna['LAT_L93'].astype('float')
-    df_antenna['LONG_WGS'] = df_antenna['LONG_WGS'].astype('float')
-    df_antenna['LAT_WGS'] = df_antenna['LAT_WGS'].astype('float')
-    return df_antenna
-
-df_antenna = load_data_antenna()
-df_empty = pd.DataFrame()
+df_controls, df_individus, df_sites, df_distances, df_mapping = load_data_antenna()
+liste_sites_antennes = ["Brelouze", "Mairie d'Annepont", "Grotte de Loubeau", "Le Plessis", "Puy-Chenin", "Cézelle", "La Bourtière", "Goizet (W)", "Château de Gagemont", "Faye-L'Abbesse - Bourg", "Guibaud", "Cave Billard", "Grotte de Boisdichon", "Les Roches", "Barrage de l'Aigle", "Gouffre de la Fage",
+                  "La Brumaudière", "Château de Verteuil", "Les Dames", "Château de Hautefort", "Les Tours de Merle", "Le Petit Pin", "Maison Brousse", "Caves de Laubenheimer", "Château de Villandraut", "Tunnel ferroviaire", "Grotte de la carrière", "Centrale hydroélectrique de Claredent", "Fermette des Nobis",
+                  "Beauregard", "Grotte de la Deveze", "Petexaenea", "Gouffre de Bexanka", "Mikelauenzilo"]
 
 # Initialisation des variables d'état
 selected_dpt = []
@@ -40,9 +22,9 @@ selected_dpt_gant = []
 selected_sp = []
 selected_gender = []
 selected_sites = []
-selected_dates = [df_antenna['DATE'].min(), df_antenna['DATE'].max()]
-filtered_df = df_antenna.copy()
-dates_gant = [df_antenna['DATE'].min(), df_antenna['DATE'].max()]
+selected_dates = [df_controls['DATE'].min(), df_controls['DATE'].max()]
+dates_gant = [df_controls['DATE'].min(), df_controls['DATE'].max()]
+df_empty = pd.DataFrame()
 
 # CONTENU
 ## ROOT PAGE
@@ -59,212 +41,24 @@ with open("pages/page1.md", "r", encoding = "utf-8") as file:
     page1 = file.read()
 
 ## VISUALISATION DES DONNEES D'ANTENNES
-departements = sorted(df_antenna['DEPARTEMENT'].unique().tolist())
-species = sorted(df_antenna['CODE_ESP'].unique().tolist())
-genders = sorted(df_antenna['SEXE'].unique().tolist())
-sites = sorted(df_antenna['LIEU_DIT'].unique().tolist())
-dates = [df_antenna['DATE'].min(), df_antenna['DATE'].max()]
+departements = sorted(df_controls['DEPARTEMENT'].unique().tolist())
+species = sorted(df_controls['CODE_ESP'].unique().tolist())
+genders = sorted(df_controls['SEXE'].dropna().unique().tolist())
+sites = sorted(df_controls['LIEU_DIT'].unique().tolist())
+dates = [df_controls['DATE'].min(), df_controls['DATE'].max()]
 
-def create_trajectories_map(df, width = 1200, height = 1000):
-    if df.empty:
-        fig = go.Figure(go.Scattermapbox())
-        fig.update_layout(mapbox_style = "carto-darkmatter", mapbox_zoom = 6, mapbox_center = {"lat": 46.493889, "lon": 2.602778}, height = height, width = width)
-        return fig
-
-    center_lat, center_lon = df['LAT_WGS'].mean(), df['LONG_WGS'].mean() # Centre de la carte définie sur la moyenne des coordonnées des points
-
-    fig = go.Figure()
-
-    # Extraction des liaisons uniques entre sites
-    unique_connections = df.sort_values('DATE').drop_duplicates(subset = ['LAT_WGS', 'LONG_WGS'], keep = 'first')
-
-    # Tracer les liaisons
-    last_point = None
-    for _, row in unique_connections.iterrows():
-        if last_point is not None:
-            fig.add_trace(go.Scattermapbox(
-                lat = [last_point['LAT_WGS'], row['LAT_WGS']],
-                lon = [last_point['LONG_WGS'], row['LONG_WGS']],
-                mode = 'lines',
-                line = dict(color = 'violet', width = 2),
-                showlegend = False
-            ))
-        last_point = row
-
-    # Ajout des marqueurs pour les sites
-    sites = df.drop_duplicates(subset = ['LAT_WGS', 'LONG_WGS', 'LIEU_DIT'])
-    for _, site in sites.iterrows():
-        fig.add_trace(go.Scattermapbox(
-            lat = [site['LAT_WGS']],
-            lon = [site['LONG_WGS']],
-            mode = 'markers+text',
-            marker = go.scattermapbox.Marker(size=9, color='blue'),
-            textfont = dict(color = 'black'),  # Couleur du texte
-            text = site['LIEU_DIT'],
-            textposition = "bottom right",
-            name = site['LIEU_DIT'],           # Utiliser la bonne étiquette comme nom de site
-            showlegend = False
-        ))
-
-    fig.update_layout(
-        mapbox_style = "carto-positron",       # Utilisation d'un fond de carte en noir et blanc
-        mapbox_zoom = 6,
-        mapbox_center = {"lat": center_lat, "lon": center_lon},
-        height = height,
-        width = width
-    )
-    return fig
-
-def create_transition_matrix(df, remove_self_loops = True, reduce_self_loops = False, reduction_factor = 0.5):
-    # Tri par individu et date pour suivre les transitions
-    df = df.sort_values(by = ['NUM_PIT', 'DATE'])
-
-    # Créer une colonne pour le lieu précédent
-    df['LIEU_PRECEDENT'] = df.groupby('NUM_PIT')['LIEU_DIT'].shift()
-
-    # Filtrer pour obtenir seulement les transitions valides (non nulles)
-    df_transitions = df.dropna(subset = ['LIEU_PRECEDENT'])
-
-    # Compter les transitions de chaque lieu vers un autre
-    transition_counts = df_transitions.groupby(['LIEU_PRECEDENT', 'LIEU_DIT']).size().reset_index(name = 'count')
-
-    # Retirer les transitions où source == target si demandé
-    if remove_self_loops:
-        transition_counts = transition_counts[transition_counts['LIEU_PRECEDENT'] != transition_counts['LIEU_DIT']]
-
-    # Réduire le poids des transitions de recontrôle (si demandé)
-    if reduce_self_loops:
-        transition_counts.loc[transition_counts['LIEU_PRECEDENT'] == transition_counts['LIEU_DIT'], 'count'] *= reduction_factor
-
-    # Construire une matrice de transition
-    lieux = sorted(set(df['LIEU_DIT'].unique()) | set(df['LIEU_PRECEDENT'].dropna().unique()))
-    transition_matrix = transition_counts.pivot(index='LIEU_PRECEDENT', columns='LIEU_DIT', values='count').fillna(0)
-
-    return transition_matrix, lieux
-
-def process_transition_matrix(transition_matrix, df, threshold = 9):
-    # Transformer la matrice en table de connexions
-    transition_table = transition_matrix.stack().reset_index()
-    transition_table.columns = ['source', 'target', 'count']
-
-    # Assurer l'ordre alphabétique des paires (source, target) pour un regroupement correct
-    transition_table['site_pair'] = transition_table.apply(lambda row: tuple(sorted([row['source'], row['target']])), axis = 1)
-
-    # Grouper par paire de sites et sommer les counts
-    transition_table = transition_table.groupby('site_pair', as_index = False).agg(count = ('count', 'sum'))
-
-    # Séparer les paires de sites dans des colonnes distinctes
-    transition_table[['source', 'target']] = pd.DataFrame(transition_table['site_pair'].tolist(), index=transition_table.index)
-
-    # Filtrer pour ne garder que les connexions avec au moins un certain nombre d'occurrences
-    transition_table = transition_table[transition_table['count'] > threshold]
-
-    # Obtenir les limites pour normaliser les valeurs de count
-    mean_count = transition_table['count'].mean()
-    std_count = transition_table['count'].std()
-
-    # Normaliser les valeurs de count entre 0 et 1
-    transition_table['normalized_count'] = (transition_table['count'] - mean_count) / std_count
-
-    # Calcul des quantiles pour déterminer les couleurs
-    quantiles = np.quantile(transition_table['count'], [0, 0.25, 0.5, 0.75, 1])
-
-    # Création de la liste des couleurs
-    cmap = mcolors.LinearSegmentedColormap.from_list(
-        "CustomBlackRed",
-        ["#ffffff", "#606060", "#FFA500", "#FF7F50", "#FF0000"]
-    )
-
-    # Fonction pour appliquer la bonne couleur en fonction des quantiles
-    def calculate_color(count):
-        if count <= quantiles[0]:
-            return mcolors.to_hex(cmap(0))
-        elif count <= quantiles[1]:
-            return mcolors.to_hex(cmap(0.25))
-        elif count <= quantiles[2]:
-            return mcolors.to_hex(cmap(0.5))
-        elif count <= quantiles[3]:
-            return mcolors.to_hex(cmap(0.75))
-        else:
-            return mcolors.to_hex(cmap(1))
-
-    transition_table['color'] = transition_table['count'].apply(calculate_color)
-
-    # Fusionner les coordonnées du df dans transition_table pour source et target
-    coords = df[['LIEU_DIT', 'LAT_WGS', 'LONG_WGS']].drop_duplicates()
-    coords = coords.set_index('LIEU_DIT')
-
-    transition_table = transition_table.merge(coords, left_on = 'source', right_index = True)
-    transition_table = transition_table.merge(coords, left_on = 'target', right_index = True, suffixes = ('_source', '_target'))
-
-    return transition_table
-
-def create_trajectories_map_from_matrix(df, transition_table, width = 1200, height = 1000):
-    fig = go.Figure()
-
-    # Créer une trace distincte pour chaque segment de ligne avec la couleur appropriée
-    for index, row in transition_table.iterrows():
-        fig.add_trace(go.Scattermapbox(
-            lat = [row['LAT_WGS_source'], row['LAT_WGS_target']],
-            lon = [row['LONG_WGS_source'], row['LONG_WGS_target']],
-            mode = 'lines',
-            line = dict(
-                color = row['color'],  # Utiliser la couleur calculée pour cette trajectoire
-                width = 1  # Ajuster la largeur selon votre besoin
-            ),
-            showlegend = False
-        ))
-
-    # Ajouter tous les marqueurs pour les lieux d'un seul coup
-    coords = df[['LIEU_DIT', 'LAT_WGS', 'LONG_WGS']].drop_duplicates()
-    fig.add_trace(go.Scattermapbox(
-        lat = coords['LAT_WGS'],
-        lon = coords['LONG_WGS'],
-        mode = 'markers+text',
-        marker = go.scattermapbox.Marker(
-            size = 6,
-            color = '#8467D7',  # Light violet
-        ),
-        text = coords['LIEU_DIT'],
-        textposition = "top right",
-        textfont = dict(
-            size = 12,
-            color = 'white'
-        ),
-        hoverinfo = 'text',
-        showlegend = False
-    ))
-
-    # Définir le centre de la carte
-    center_lat, center_lon = df['LAT_WGS'].mean(), df['LONG_WGS'].mean()
-
-    fig.update_layout(
-        mapbox_style = "carto-darkmatter",  # Utiliser le style de carte noir et blanc
-        mapbox_zoom = 6,
-        mapbox_center = {"lat": center_lat, "lon": center_lon},
-        font = dict(color = 'black'),
-        height = height,
-        width = width
-    )
-
-    return fig
-
-transition_matrix, labels = create_transition_matrix(df_antenna)
-transition_table = process_transition_matrix(transition_matrix, df_antenna)
-create_trajectories_map_from_matrix(df_antenna, transition_table)
-
-map_section = create_trajectories_map(df_empty)
+m = generate_map(df_empty, df_sites)
 
 with open("pages/page2.md", "r", encoding = "utf-8") as file:
     page2 = file.read()
 
-def refresh_button(state):
-    df_filtered = df_antenna.copy()
+# Callback de la carte
+def refresh_map_button(state):
+    df_filtered = df_distances.copy()
     
     # Filtrer par département d'origine
     if state.selected_dpt:
-        equipped_pit = df_filtered[(df_filtered['ACTION'] == 'T') & 
-                                   (df_filtered['DEPARTEMENT'].isin(state.selected_dpt))]['NUM_PIT'].unique()
+        equipped_pit = df_filtered[(df_filtered['DPT_DEPART'].isin(state.selected_dpt)) | (df_filtered['DPT_ARRIVEE'].isin(state.selected_dpt))]['NUM_PIT'].unique()
         df_filtered = df_filtered[df_filtered['NUM_PIT'].isin(equipped_pit)]
     
     # Filtrer par espèce
@@ -277,8 +71,7 @@ def refresh_button(state):
 
     # Filtrer par site d'origine
     if state.selected_sites:
-        site_pit = df_filtered[(df_filtered['ACTION'] == 'T') & 
-                               (df_filtered['LIEU_DIT'].isin(state.selected_sites))]['NUM_PIT'].unique()        
+        site_pit = df_filtered[(df_filtered['SITE_DEPART'].isin(state.selected_sites)) | (df_filtered['SITE_ARRIVEE'].isin(state.selected_sites))]['NUM_PIT'].unique()        
         df_filtered = df_filtered[df_filtered['NUM_PIT'].isin(site_pit)]
     
     # Filtrer par intervalle de dates
@@ -288,100 +81,17 @@ def refresh_button(state):
         df_filtered = df_filtered[(df_filtered['DATE'] >= start_date) & (df_filtered['DATE'] <= end_date)]
     
     # Rafraichir la carte
-    transition_matrix_filtered, labels_filtered = create_transition_matrix(df_filtered)
-    transition_table_filtered = process_transition_matrix(transition_matrix_filtered, df_filtered)
-    state.map_section = create_trajectories_map_from_matrix(df_filtered, transition_table_filtered)
+    state.m = generate_map(df_filtered, df_sites)
 
 ## PHENOLOGIES DES SITES
-
-def gant_diagram(df_original):
-    # Créer une copie du DataFrame original par sécurité
-    df_filtered = df_original[df_original['ACTION'] == "C"].copy()
-    
-    # Convertir la colonne DATE en datetime et localiser en UTC
-    df_filtered['DATE'] = pd.to_datetime(df_filtered['DATE'])
-    df_filtered['DATE'] = df_filtered['DATE'].dt.tz_localize('UTC')
-    
-    # Trier les valeurs par DATE
-    df_filtered = df_filtered.sort_values(by = 'DATE', ascending = True)
-    
-    # Ajouter des colonnes pour les visites précédentes et les nouvelles visites
-    df_filtered['Prev_DATE'] = df_filtered.groupby(['LIEU_DIT'])['DATE'].shift(1)
-    df_filtered['New_Visit'] = (df_filtered['DATE'] - df_filtered['Prev_DATE']).dt.days > 1
-    df_filtered['New_Visit'].fillna(True, inplace = True)
-    df_filtered['Visit_ID'] = df_filtered.groupby(['LIEU_DIT'])['New_Visit'].cumsum()
-    
-    # Supprimer les LIEU_DIT qui n'ont aucune visite détectée
-    df_filtered = df_filtered.dropna(subset = ['Visit_ID'])
-    
-    # Calculer min/max dates pour chaque visite
-    result = df_filtered.groupby(['LIEU_DIT', 'Visit_ID']).agg(
-        Start = pd.NamedAgg(column = 'DATE', aggfunc = 'min'),
-        Finish = pd.NamedAgg(column = 'DATE', aggfunc = 'max'),
-        Departement = pd.NamedAgg(column = 'DEPARTEMENT', aggfunc = 'first')
-    ).reset_index()
-    
-    # Supprimer les LIEU_DIT qui n'ont pas de dates valides
-    result = result.dropna(subset = ['Start', 'Finish'])
-
-    # Filtrer les LIEU_DIT qui ont des résultats
-    result = result[result['Finish'] > result['Start']]
-
-    # Trier les sites par ordre alphabétique et les départements pour la légende
-    result = result.sort_values(by = ['Departement', 'LIEU_DIT'])
-    result['Start'] = pd.to_datetime(result['Start'])
-    result['Finish'] = pd.to_datetime(result['Finish'])
-
-    # Déterminer la hauteur de la figure en fonction du nombre de sites
-    num_sites = result['LIEU_DIT'].nunique()
-    height_per_site = 50        # Hauteur allouée par site en pixels
-    base_height = 100           # Hauteur de base pour la figure
-    max_height = 20000          # Hauteur maximale de la figure
-    fig_height = min(base_height + num_sites * height_per_site, max_height)
-
-    # Créer le diagramme de Gantt
-    fig = px.timeline(
-        result,
-        x_start = 'Start',
-        x_end = 'Finish',
-        y = 'LIEU_DIT',
-        color = 'Departement',  # Changer la couleur en fonction du département
-        color_discrete_sequence = px.colors.qualitative.Plotly,
-        labels = {'LIEU_DIT': 'Site'},
-        title = 'Présence sur chaque site'
-    )
-
-    # Ajout de lignes verticales pour chaque 1er janvier
-    start_year = result['Start'].dt.year.min()
-    end_year = result['Finish'].dt.year.max()
-    for year in range(start_year, end_year + 1):
-        fig.add_vline(
-            x = pd.Timestamp(f'{year}-01-01'),
-            line = dict(color = 'grey', dash = 'dash', width = 1)
-        )
-
-    fig.update_layout(legend = dict(traceorder = "normal"), margin = dict(l = 300))
-
-    # Mise à jour des étiquettes et de l'orientation de l'axe des ordonnées
-    fig.update_yaxes(categoryorder = 'total ascending')  # Tri les sites par date de début (si nécessaire)
-    fig.update_layout(
-        xaxis_title = 'Date',
-        yaxis_title = 'Site',
-        xaxis = dict(tickformat = '%Y-%m-%d'),           # Format des dates sur l'axe X pour plus de clarté
-        height = fig_height,
-        legend = dict(bgcolor = 'rgba(0, 0, 0, 0)')
-    )
-
-    return fig
-
-gant_global = gant_diagram(df_antenna)
+gant_global = gant_diagram(df_controls)
 
 with open("pages/page3.md", "r", encoding = "utf-8") as file:
     page3 = file.read()
 
+# Callbacks du diagramme de Gant
 def update_gant(state):
-    df_filtered_gant = df_antenna.copy()
-    df_filtered_gant = df_filtered_gant[df_filtered_gant['ACTION'] == "C"]
+    df_filtered_gant = df_controls.copy()
 
     # Convertir les dates sélectionnées en objets Timestamp
     if state.selected_dpt_gant:
@@ -397,216 +107,72 @@ def update_gant(state):
     state.gant_global = gant_diagram(df_filtered_gant)
 
 ## STATISTIQUES ANALYTIQUES
-
-def detection_by_year(df_antenna):
-    df_antenna['YEAR'] = df_antenna['DATE'].dt.year
-    grouped_data = df_antenna.groupby(['YEAR', 'CODE_ESP']).size().reset_index(name = 'Detections')
-    
-    fig = px.bar(grouped_data, x = 'YEAR', y = 'Detections', color = 'CODE_ESP',
-                 labels = {'Detections': 'Nombre de détections', 'CODE_ESP': 'Espèce'},
-                 )
-
-    fig.update_layout(
-        height = 400,
-        width = 400,
-        yaxis_title = 'Nombre de détections',
-        xaxis_title = None,
-        xaxis = {'type': 'category', 'tickmode': 'linear'},  # Afficher toutes les années
-        barmode = 'stack',
-        legend = dict(
-            bgcolor = 'rgba(0, 0, 0, 0)',
-            orientation = 'h',  # Légende horizontale
-            x = 0.5,            # Centrer la légende horizontalement
-            y = -0.2,           # Placer la légende en dessous de la figure
-            xanchor = 'center', # Ancrer la légende au centre
-            yanchor = 'top'     # Ancrer la légende au-dessus de l'axe x
-        ),
-        margin = dict(b = 100)
-    )
-
-    return fig
-
-def capture_by_year(df_antenna):
-    df_filtre = df_antenna[df_antenna['ACTION'] == 'T']
-    df_filtre['YEAR'] = df_filtre['DATE'].dt.year
-    df_grouped = df_filtre.groupby(['YEAR', 'CODE_ESP'])['NUM_PIT'].nunique().reset_index()
-    df_grouped.rename(columns = {'NUM_PIT': 'Nombre d\'individus uniques'}, inplace = True)
-    
-    fig = px.bar(df_grouped, x = 'YEAR', y = 'Nombre d\'individus uniques', color = 'CODE_ESP',
-                 labels = {'Nombre d\'individus uniques': 'Nombre d\'individus uniques', 'CODE_ESP': 'Espèce'}
-                 )
-
-    fig.update_layout(
-        height = 400,
-        width = 400,
-        yaxis_title = 'Nombre d\'individus uniques',
-        xaxis_title = None,
-        xaxis = {'type': 'category', 'tickmode': 'linear'},  # Afficher toutes les années
-        legend = dict(
-            bgcolor ='rgba(0, 0, 0, 0)',
-            orientation = 'h',  # Légende horizontale
-            x = 0.5,            # Centrer la légende horizontalement
-            y = -0.2,           # Placer la légende en dessous de la figure
-            xanchor = 'center', # Ancrer la légende au centre
-            yanchor = 'top'     # Ancrer la légende au-dessus de l'axe x
-        ),
-        margin = dict(b = 100)
-    )  
-
-    return fig
-
-def control_by_year(df_antenna):
-    df_filtre = df_antenna[df_antenna['ACTION'] == 'C']
-    df_filtre['YEAR'] = df_filtre['DATE'].dt.year
-    df_grouped = df_filtre.groupby(['YEAR', 'CODE_ESP'])['NUM_PIT'].nunique().reset_index()
-    df_grouped.rename(columns = {'NUM_PIT': 'Nombre d\'individus'}, inplace = True)
-    
-    fig = px.bar(df_grouped, x = 'YEAR', y = 'Nombre d\'individus', color = 'CODE_ESP',
-                 labels = {'Nombre d\'individus': 'Nombre d\'individus', 'CODE_ESP': 'Espèce'},
-                 )
-
-    fig.update_layout(
-        height = 400,
-        width = 400,
-        yaxis_title = 'Nombre d\'individus',
-        xaxis_title = None,
-        xaxis = {'type': 'category', 'tickmode': 'linear'},  # Afficher toutes les années
-        legend = dict(
-            bgcolor = 'rgba(0, 0, 0, 0)',
-            orientation = 'h',  # Légende horizontale
-            x = 0.5,            # Centrer la légende horizontalement
-            y = -0.2,           # Placer la légende en dessous de la figure
-            xanchor = 'center', # Ancrer la légende au centre
-            yanchor = 'top'     # Ancrer la légende au-dessus de l'axe x
-        ),
-        margin = dict(b = 100)
-    )  
-
-    return fig
-
-def detection_frequencies(df_antenna):
-    df_antenna['MONTH_DAY'] = df_antenna['DATE'].dt.strftime('%m-%d')
-    global_freq = df_antenna.groupby('MONTH_DAY').size().reset_index(name = 'Global Detections')
-
-    # Calculer les fréquences par site
-    site_freq = df_antenna.groupby(['MONTH_DAY', 'LIEU_DIT']).size().reset_index(name = 'Detections')
-    sites = site_freq['LIEU_DIT'].unique()
-
-    # Préparer l'ordre chronologique
-    months_days = pd.date_range('2021-01-01', '2021-12-31').strftime('%m-%d')
-    global_freq['MONTH_DAY'] = pd.Categorical(global_freq['MONTH_DAY'], categories = months_days, ordered = True)
-    global_freq = global_freq.sort_values('MONTH_DAY')
-
-    # Création du graphique
-    fig = go.Figure()
-
-    # Ajouter la courbe globale
-    fig.add_trace(go.Scatter(x = global_freq['MONTH_DAY'], y = global_freq['Global Detections'],
-                            mode = 'lines', name = 'Global'))
-
-    # Ajouter une courbe pour chaque site
-    for site in sites:
-        site_data = site_freq[site_freq['LIEU_DIT'] == site]
-        site_data['MONTH_DAY'] = pd.Categorical(site_data['MONTH_DAY'], categories = months_days, ordered = True)
-        site_data = site_data.sort_values('MONTH_DAY')
-        fig.add_trace(go.Scatter(x = site_data['MONTH_DAY'], y = site_data['Detections'],
-                                mode = 'lines', name = site))
-
-    # Mise à jour du layout
-    fig.update_layout(
-        xaxis_title = 'Jour de l\'année',
-        yaxis_title = 'Nombre de détections',
-        xaxis = dict(type = 'category', categoryorder = 'array', categoryarray = [md for md in months_days]),
-        legend = dict(bgcolor = 'rgba(0, 0, 0, 0)'),
-        #yaxis = dict(range = [0, global_freq['Global Detections'].max() + 10])
-    )
-    return fig
-
-def pie_controled(df_antenna):
-    species_counts = df_antenna[df_antenna['ACTION'] == 'C']['CODE_ESP'].value_counts().reset_index()
-    species_counts.columns = ['Species', 'Count']
-
-    # Créer un diagramme circulaire
-    fig = px.pie(species_counts, 
-                values = 'Count', names = 'Species', 
-                color_discrete_sequence = px.colors.qualitative.Pastel,
-                hole = 0.5,)
-
-    # Personnalisation supplémentaire
-    fig.update_layout(legend_title_text = 'Espèce',
-                    showlegend = True,
-                    legend = dict(bgcolor = 'rgba(0, 0, 0, 0)')
-                        )
-    return fig
-
-def pie_marked(df_antenna):
-    marked_species = df_antenna[df_antenna['ACTION'] == 'T']
-    species_counts = marked_species['CODE_ESP'].value_counts().reset_index()
-    species_counts.columns = ['Species', 'Count']
-
-    # Créer un diagramme circulaire
-    fig = px.pie(species_counts, 
-                values = 'Count', names = 'Species', 
-                color_discrete_sequence = px.colors.qualitative.Pastel,
-                hole = 0.5)
-
-    # Personnalisation supplémentaire
-    fig.update_layout(legend_title_text = 'Espèce',
-                    showlegend = True,
-                    legend = dict(bgcolor = 'rgba(0, 0, 0, 0)')
-                        )
-    return fig
-
-def top_detection(df_antenna):
-    df_antenna['NUM_PIT'] = "n° " + df_antenna['NUM_PIT'].astype(str)
-
-    # Obtenir les dix catégories les plus fréquentes avec leurs occurrences
-    top_categories = df_antenna['NUM_PIT'].value_counts().head(10)
-
-    # Créer un DataFrame à partir des dix premières catégories
-    df_top_categories = pd.DataFrame({'NUM_PIT': top_categories.index, 'Occurrences': top_categories.values})
-    df_top_categories = df_top_categories.sort_values(by = 'Occurrences', ascending = False)
-
-    # Créer le diagramme en barres horizontales
-    fig = px.bar(df_top_categories, x = 'Occurrences', y = 'NUM_PIT', orientation = 'h',
-                 labels = {'Occurrences': "Nombre d'occurrences", 'NUM_PIT': ''},
-                 color = 'NUM_PIT', color_discrete_sequence = px.colors.qualitative.Set3)
-
-    # Ajuster la hauteur en fonction du nombre de catégories (avec une hauteur minimale de 400 pixels)
-    bar_height = 50  # Hauteur de chaque barre
-    min_height = 400  # Hauteur minimale du graphique
-    calculated_height = max(min_height, len(df_top_categories) * bar_height)
-
-    # Mettre à jour la mise en page avec des marges ajustées
-    fig.update_layout(
-        height = calculated_height,     # Hauteur dynamique
-        showlegend = False,
-        margin = dict(l = 200),         # Augmenter la marge gauche pour mieux lire les annotations
-        legend = dict(bgcolor = 'rgba(0, 0, 0, 0)')
-    )
-
-    return fig
-
 # Initialisation de tous les plots
-plot_detection_year = detection_by_year(df_antenna)      # Barplot du nombre de détections par an et par espèce
-plot_capture_year = capture_by_year(df_antenna)          # Barplot du nombre de captures par an et par espèces
-plot_control_year = control_by_year(df_antenna)          # Barplot du nombre de contrôles par an et par espèces
-plot_frequencies = detection_frequencies(df_antenna)     # Courbes de fréquences de détections par jour de l'année et par site
-plot_pie_controled = pie_controled(df_antenna)           # Pieplot des individus contrôlés
-plot_pie_marked = pie_marked(df_antenna)                 # Pieplot des individus marqués
-plot_top_detection = top_detection(df_antenna)           # Barplot horizontal des 10 individus les plus détectés
-table_plot_raw = process_transition_matrix(transition_matrix, df_antenna, threshold = 0)    
-transition_table_plot = table_plot_raw[['source', 'target', 'count']].sort_values(by = 'count', ascending = False)  # Table des trajectoires 
+plot_detection_year = detection_by_year(df_controls)      # Barplot du nombre de détections par an et par espèce
+plot_capture_year = capture_by_year(df_individus)         # Barplot du nombre de captures par an et par espèces
+plot_control_year = control_by_year(df_controls)          # Barplot du nombre de contrôles par an et par espèces
+plot_frequencies = detection_frequencies(df_controls)     # Courbes de fréquences de détections par jour de l'année et par site
+plot_pie_controled = pie_controled(df_controls)           # Pieplot des individus contrôlés
+plot_pie_marked = pie_marked(df_individus)                # Pieplot des individus marqués
+plot_top_detection = top_detection(df_controls)           # Barplot horizontal des 10 individus les plus détectés
 
 # Initialisation des variables à plot
-total_captured = len(df_antenna[(df_antenna['ACTION'] == 'T') | (df_antenna['ACTION'] == 'M')]) # Individus capturés
-total_recaptured = df_antenna[df_antenna['ACTION'] == 'C']['NUM_PIT'].nunique()                 # Individus contrôlés
-total_marked = df_antenna[df_antenna['ACTION'] == 'T']['NUM_PIT'].nunique()                     # Individus marqués
-sites_capture = df_antenna[df_antenna['ACTION'] == 'T']['LIEU_DIT'].nunique()                   # Sites capturés au moins une fois
-sites_antennes = df_antenna['LIEU_DIT'].nunique()                                               # Sites contrôlés au moins une fois
+total_recaptured = df_controls['NUM_PIT'].nunique()       # Individus contrôlés
+total_marked = df_individus['NUM_PIT'].nunique()          # Individus marqués
+sites_capture = df_individus['LIEU_DIT'].nunique()        # Sites capturés au moins une fois
+sites_antennes = df_sites['LIEU_DIT'].nunique()           # Sites contrôlés au moins une fois
+transition_table_plot = df_distances[['CODE_ESP', 'DATE', 'SITE_DEPART', 'DATE_ARRIVEE', 'SITE_ARRIVEE', 'DISTANCE']].sort_values(by='DISTANCE', ascending = False)
+transition_table_plot['DISTANCE'] = transition_table_plot['DISTANCE'].round(2)
+transition_table_plot = transition_table_plot.rename(columns = {'DATE':'DATE_DEPART'})
 
 with open("pages/page4.md", "r", encoding = "utf-8") as file:
     page4 = file.read()
+
+## FICHE SITE
+# Initialisation du sélecteur et des plots
+selection_fiche = ['Brelouze']
+df_controls_fiche = df_controls[df_controls['LIEU_DIT'].isin(selection_fiche)]
+df_individus_fiche = df_individus[df_individus['LIEU_DIT'].isin(selection_fiche)]
+df_distances_fiche = df_distances[(df_distances['SITE_DEPART'].isin(selection_fiche)) | (df_distances['SITE_ARRIVEE'].isin(selection_fiche))]
+
+plot_detection_year_fiche = detection_by_year(df_controls_fiche)      # Barplot du nombre de détections par an et par espèce
+plot_capture_year_fiche = capture_by_year(df_individus_fiche)         # Barplot du nombre de captures par an et par espèces
+plot_control_year_fiche = control_by_year(df_controls_fiche)          # Barplot du nombre de contrôles par an et par espèces
+plot_frequencies_fiche = detection_frequencies(df_controls_fiche)     # Courbes de fréquences de détections par jour de l'année et par site
+plot_pie_controled_fiche = pie_controled(df_controls_fiche)           # Pieplot des individus contrôlés
+plot_pie_marked_fiche = pie_marked(df_individus_fiche)                # Pieplot des individus marqués
+
+# Initialisation des variables à plot
+total_recaptured_fiche = df_controls_fiche['NUM_PIT'].nunique()       # Individus contrôlés
+total_marked_fiche = df_individus_fiche['NUM_PIT'].nunique()          # Individus marqués
+sites_antennes_fiche = df_sites['LIEU_DIT'].nunique()                 # Sites contrôlés au moins une fois
+map_fiche = generate_map(df_distances_fiche, df_sites)                # Map du site et des connexions
+gant_diagram_fiche = gant_diagram_concat(df_controls_fiche)
+
+def update_fiche(state):
+    # Filtrage en fonction de la sélection
+    selected_sites = [state.selection_fiche]
+    df_controls_fiche = df_controls[df_controls['LIEU_DIT'].isin(selected_sites)]
+    df_individus_fiche = df_individus[df_individus['LIEU_DIT'].isin(selected_sites)]
+    df_distances_fiche = df_distances[(df_distances['SITE_DEPART'].isin(selected_sites)) | (df_distances['SITE_ARRIVEE'].isin(selected_sites))]
+    
+    # Mise à jour des visualisations
+    state.plot_detection_year_fiche = detection_by_year(df_controls_fiche)
+    state.plot_capture_year_fiche = capture_by_year(df_individus_fiche)
+    state.plot_control_year_fiche = control_by_year(df_controls_fiche)
+    state.plot_frequencies_fiche = detection_frequencies(df_controls_fiche)
+    state.plot_pie_controled_fiche = pie_controled(df_controls_fiche)
+    state.plot_pie_marked_fiche = pie_marked(df_individus_fiche)
+    state.map_fiche = generate_map(df_distances_fiche, df_sites)
+    state.gant_diagram_fiche = gant_diagram_concat(df_controls_fiche)
+    
+    # Mise à jour des variables globales
+    state.total_recaptured_fiche = df_controls_fiche['NUM_PIT'].nunique()
+    state.total_marked_fiche = df_individus_fiche['NUM_PIT'].nunique()
+    state.sites_antennes_fiche = df_sites['LIEU_DIT'].nunique()
+
+with open("pages/page5.md", "r", encoding = "utf-8") as file:
+    page5 = file.read()
 
 # DEMARRAGE DE L'APPLICATION
 pages = {
@@ -614,8 +180,10 @@ pages = {
     "presentation": page1,
     "antennes": page2,
     "phenologie": page3,
-    "statistiques": page4
+    "statistiques": page4,
+    "fiche_site": page5
 }
 
+Gui.register_content_provider(Map, expose_folium)
 gui = Gui(pages = pages, css_file = "assets/styles.css")
-gui.run(host = '0.0.0.0', port = 5000, use_session = True) # use_session = True pour permettre l'usage de plusieurs users en même temps
+gui.run(host = '0.0.0.0', port = 5000, use_session = True)
