@@ -5,4 +5,4 @@
 <|navbar|>
 
 <|content|>
-Application conçue par Alexandre LANGLAIS (2024 - build: 0.1)
+Application conçue par Alexandre LANGLAIS (2024 - build: 0.2)
