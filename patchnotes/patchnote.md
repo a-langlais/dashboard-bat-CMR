@@ -11,7 +11,7 @@
 - Nettoyage des données terminée
 - Split des données en plusieurs tables pour faciliter les importation en attendant l'intégration d'une BDD dédiée
 - Gain de performance significative par vectorisation des calculs
-- Refonte du backend pour éviter la sur-solicitation du cache
+- Refonte du backend pour éviter la sur-sollicitation du cache
 - Refonte de la visualisation des cartes pour plus de clarté et facilité l'interprétabilité
 - Retrait des "seuils de trajectoires" pour ne perdre aucune information
 
@@ -19,10 +19,11 @@
 
 - Quelques soucis d'affichage sur les petits écrans
 - Exportation des cartes plus disponible pour le moment (mais possible via une simple capture d'écran)
+- Retrait des étiquettes sur les marqueurs des cartes pour la visibilité en attendant une meilleure solution, bien sûr les noms restent disponible via l'interactivité
 
 > **Lien vers l'application en développement (build 0.2)** : https://huggingface.co/spaces/a-langlais/ccpna-taipy-dashboard
 
-La version MVP via Streamlit (build 0.0) n'est plus hebergée.
+La version MVP via Streamlit (build 0.0) ne sera bientôt plus hebergée.
 _________________________________________________________________________________
 _________________________________________________________________________________
 
