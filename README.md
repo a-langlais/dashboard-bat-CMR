@@ -15,7 +15,7 @@ Schreibers. Les contrôles d’individus marqués permettent de retracer leurs d
 
 ## Organisation du répértoire
 
-Ce répertoire suit une hiérarchie classique et facile à explorer. Les données étant volumineuses, elles ne sont pas disponibles sur ce repo.
+Ce répertoire suit une hiérarchie classique et facile à explorer. Les données étant volumineuses, elles ne sont pas disponibles sur ce repo mais sur [le repo du Hugging-Face](https://huggingface.co/spaces/a-langlais/ccpna-taipy-dashboard/tree/main/data).
 
 ```shell
 dashboard-bat-CMR/
@@ -26,10 +26,11 @@ dashboard-bat-CMR/
 ├── images/                 # Images utilisées sur l'application
 ├── notebooks/              # Notebooks de test et d'expérimentation
 ├── pages/                  # Pages de l'application Taipy
+├── patchnotes/             # Listes des modifications suite aux MàJ
 ├── plots/                  # Figures fixes
-├── streamlit_old/          # Ancien prototype Streamlit (old)
 |
-├── custom_functions.py     # Fonctions additionnelles
+├── functions.py            # Fonctions du backend
+├── dashboard.py            # Fonctions du dashboard
 ├── main.py                 # Script de l'application Taipy
 |
 ├── dockerfile              # Fichier docker pour containeurisation
