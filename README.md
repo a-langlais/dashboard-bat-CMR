@@ -1,4 +1,4 @@
-# Tableau de bords d'analyse des données de CMR des chauves-souris
+# Tableau de bords d'analyse des données de CMR des chauves-souris (v0.2 - 2024)
 
 ## Présentation
 
@@ -19,8 +19,6 @@ Ce répertoire suit une hiérarchie classique et facile à explorer. Les donnée
 
 ```shell
 dashboard-bat-CMR/
-├── .vscode/            
-|
 ├── assets/                 # Scripts de customisation visuelle
 ├── data/                   # Données brutes et traitées
 ├── images/                 # Images utilisées sur l'application
