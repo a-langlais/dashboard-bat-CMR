@@ -1,3 +1,31 @@
+**Patch Note - Version 0.2**
+**Date de publication** : 24/11/2024
+
+**Fonctionnalités ajoutées :**
+
+- Ajout d'un onglet "Fiche_site" permettant d'afficher quelques informations pour le moment sur un site particulier, dont une carte des sites connectés, d'un graph de présence annuelle et de quelques autres informations.
+- Mise à jour de la base de données jusqu'au 18-11-2024
+
+**Améliorations et modifications :**
+
+- Nettoyage des données terminée
+- Split des données en plusieurs tables pour faciliter les importation en attendant l'intégration d'une BDD dédiée
+- Gain de performance significative par vectorisation des calculs
+- Refonte du backend pour éviter la sur-solicitation du cache
+- Refonte de la visualisation des cartes pour plus de clarté et facilité l'interprétabilité
+- Retrait des "seuils de trajectoires" pour ne perdre aucune information
+
+**Problèmes connus :**
+
+- Quelques soucis d'affichage sur les petits écrans
+- Exportation des cartes plus disponible pour le moment (mais possible via une simple capture d'écran)
+
+> **Lien vers l'application en développement (build 0.2)** : https://huggingface.co/spaces/a-langlais/ccpna-taipy-dashboard
+
+La version MVP via Streamlit (build 0.0) n'est plus hebergée.
+_________________________________________________________________________________
+_________________________________________________________________________________
+
 **Patch Note - Version 0.1**
 **Date de publication** : 05/08/2024
 
