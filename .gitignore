@@ -162,6 +162,9 @@ data/data_antenna_2016_2023.csv
 data/df_clean.csv
 data/df_cmr.csv
 data/df_cmr_clean.csv
+data/df_antenna_clean.csv
+data/df_capture_clean.csv
+data/df_controls.csv
 data/df_error_HEURE.csv
 streamlit_old/df_cmr.csv
 streamlit_old/df_cmr_clean.csv
