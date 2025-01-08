@@ -40,6 +40,7 @@ dashboard-bat-CMR/
 ```
 
 ## Installation
+### Environnement virtuel
 
 Dans un premier temps, clonez le dépôt sur votre machine locale via votre méthode préférée ou en utilisant la commande suivante :
 
@@ -60,6 +61,22 @@ Si vous utilisez Conda, vous pouvez tout simplement recréer un environnement en
 ```shell
 conda env create -f environment.yml
 conda activate environment
+```
+
+### Docker
+
+Si vous préférez utiliser Docker pour exécuter le projet dans un environnement isolé, vous pouvez construire l'image Docker à partir du fichier `Dockerfile` situé à la racine du projet.
+
+Construisez l'image Docker :
+
+```shell
+docker build -t dashboard-bat-cmr .
+```
+
+Puis lancez l'image :
+
+```shell
+docker run -d -p 5000:5000 dashboard-bat-cmr
 ```
 
 ## Taipy app
