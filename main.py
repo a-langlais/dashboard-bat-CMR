@@ -22,6 +22,7 @@ selected_dpt_gant = []
 selected_sp = []
 selected_gender = []
 selected_sites = []
+selected_communes = []
 selected_dates = [df_controls['DATE'].min(), df_controls['DATE'].max()]
 dates_gant = [df_controls['DATE'].min(), df_controls['DATE'].max()]
 df_empty = pd.DataFrame()
@@ -41,11 +42,23 @@ with open("pages/page1.md", "r", encoding = "utf-8") as file:
     page1 = file.read()
 
 ## VISUALISATION DES DONNEES D'ANTENNES
+communes = sorted(df_controls['COMMUNE'].unique().tolist())
 departements = sorted(df_controls['DEPARTEMENT'].unique().tolist())
 species = sorted(df_controls['CODE_ESP'].unique().tolist())
 genders = sorted(df_controls['SEXE'].dropna().unique().tolist())
-sites = sorted(df_controls['LIEU_DIT'].unique().tolist())
+sites = sorted(df_controls['LIEU_DIT'].dropna().unique().tolist())
 dates = [df_controls['DATE'].min(), df_controls['DATE'].max()]
+
+# Callback du sélécteur de sites
+def refresh_sites(state):
+    selected_communes = state.selected_communes or []
+    
+    if selected_communes:
+        filtered_df = df_controls[df_controls['COMMUNE'].isin(selected_communes)]
+    else:
+        filtered_df = df_controls
+
+    state.sites = sorted(filtered_df['LIEU_DIT'].unique().tolist())
 
 m = generate_map(df_empty, df_sites)
 
