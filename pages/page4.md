@@ -53,11 +53,11 @@
 
 <|layout|columns=2 4|
 <|part|class_name=card|
-<|text|value=Table des trajectoires|class_name=title|>
-<|table|data={transition_table_plot}|>
+
+
 |>
 <|part|class_name=card|
-<|text|value=Individus les plus détectés|class_name=title|>
-<|chart|figure={plot_top_detection}|>
+<|text|value=Table des trajectoires|class_name=title|>
+<|table|data={transition_table_plot}|>
 |>
 |>
