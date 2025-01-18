@@ -105,6 +105,9 @@ with open("pages/page3.md", "r", encoding = "utf-8") as file:
 # Callbacks du diagramme de Gant
 def update_gant(state):
     df_filtered_gant = df_controls.copy()
+    df_filtered_gant = df_filtered_gant[df_filtered_gant['LIEU_DIT'].isin(["Brelouze", "Mairie d'Annepont", "Grotte de Loubeau", "Le Plessis", "Puy-Chenin", "Cézelle", "La Bourtière", "Goizet (W)", "Château de Gagemont", "Faye-L'Abbesse - Bourg", "Guibaud", "Cave Billard", "Grotte de Boisdichon", "Les Roches", "Barrage de l'Aigle", "Gouffre de la Fage",
+                  "La Brumaudière", "Château de Verteuil", "Les Dames", "Château de Hautefort", "Les Tours de Merle", "Le Petit Pin", "Maison Brousse", "Caves de Laubenheimer", "Château de Villandraut", "Tunnel ferroviaire", "Grotte de la carrière", "Centrale hydroélectrique de Claredent", "Fermette des Nobis",
+                  "Beauregard", "Grotte de la Deveze", "Petexaenea", "Gouffre de Bexanka", "Mikelauenzilo"])]
 
     # Convertir les dates sélectionnées en objets Timestamp
     if state.selected_dpt_gant:
