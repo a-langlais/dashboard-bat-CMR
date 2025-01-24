@@ -12,9 +12,9 @@ from dashboard import *
 
 # CHARGEMENT DES DONNEES
 df_controls, df_individus, df_sites, df_distances, df_mapping = load_data_antenna()
-liste_sites_antennes = ["Brelouze", "Mairie d'Annepont", "Grotte de Loubeau", "Le Plessis", "Puy-Chenin", "Cézelle", "La Bourtière", "Goizet (W)", "Château de Gagemont", "Faye-L'Abbesse - Bourg", "Guibaud", "Cave Billard", "Grotte de Boisdichon", "Les Roches", "Barrage de l'Aigle", "Gouffre de la Fage",
-                  "La Brumaudière", "Château de Verteuil", "Les Dames", "Château de Hautefort", "Les Tours de Merle", "Le Petit Pin", "Maison Brousse", "Caves de Laubenheimer", "Château de Villandraut", "Tunnel ferroviaire", "Grotte de la carrière", "Centrale hydroélectrique de Claredent", "Fermette des Nobis",
-                  "Beauregard", "Grotte de la Deveze", "Petexaenea", "Gouffre de Bexanka", "Mikelauenzilo"]
+liste_sites_antennes = ["Brelouze", "Mairie d'Annepont", "Grottes de Loubeau", "Le Plessis", "Puy-Chenin", "Cézelle", "La Bourtière", "Goizet (W)", "Château de Gagemont", "Faye-L'Abbesse - Bourg", "Guibaud", "Cave Billard", "Grotte de Boisdichon", "Les Roches", "Barrage de l'Aigle", "Gouffre de la Fage",
+                  "La Brumaudière", "Château de Verteuil", "Les Dames", "Château de Hautefort", "Les Tours de Merle - Tour Fulcon", "Le Petit Pin", "Maison Brousse", "Caves de Laubenheimer", "Château de Villandraut", "Tunnel ferroviaire", "Grotte de la carrière", "Centrale hydroélectrique de Claredent", "Fermette des Nobis",
+                  "Beauregard", "Grotte de la Deveze", "Petexaenea (Site générique Galeries N&S)", "Gouffre de Bexanka", "Mikelauenziloa"]
 
 # Initialisation des variables d'état
 selected_dpt = []

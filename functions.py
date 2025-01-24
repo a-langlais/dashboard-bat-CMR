@@ -116,9 +116,9 @@ def generate_map(df_distances, df_sites):
 def gant_diagram(df_controls):
     # Créer une copie du DataFrame original par sécurité
     df_filtered = df_controls.copy()
-    df_filtered = df_filtered[df_filtered['LIEU_DIT'].isin(["Brelouze", "Mairie d'Annepont", "Grotte de Loubeau", "Le Plessis", "Puy-Chenin", "Cézelle", "La Bourtière", "Goizet (W)", "Château de Gagemont", "Faye-L'Abbesse - Bourg", "Guibaud", "Cave Billard", "Grotte de Boisdichon", "Les Roches", "Barrage de l'Aigle", "Gouffre de la Fage",
-                  "La Brumaudière", "Château de Verteuil", "Les Dames", "Château de Hautefort", "Les Tours de Merle", "Le Petit Pin", "Maison Brousse", "Caves de Laubenheimer", "Château de Villandraut", "Tunnel ferroviaire", "Grotte de la carrière", "Centrale hydroélectrique de Claredent", "Fermette des Nobis",
-                  "Beauregard", "Grotte de la Deveze", "Petexaenea", "Gouffre de Bexanka", "Mikelauenzilo"])]
+    df_filtered = df_filtered[df_filtered['LIEU_DIT'].isin(["Brelouze", "Mairie d'Annepont", "Grottes de Loubeau", "Le Plessis", "Puy-Chenin", "Cézelle", "La Bourtière", "Goizet (W)", "Château de Gagemont", "Faye-L'Abbesse - Bourg", "Guibaud", "Cave Billard", "Grotte de Boisdichon", "Les Roches", "Barrage de l'Aigle", "Gouffre de la Fage",
+                  "La Brumaudière", "Château de Verteuil", "Les Dames", "Château de Hautefort", "Les Tours de Merle - Tour Fulcon", "Le Petit Pin", "Maison Brousse", "Caves de Laubenheimer", "Château de Villandraut", "Tunnel ferroviaire", "Grotte de la carrière", "Centrale hydroélectrique de Claredent", "Fermette des Nobis",
+                  "Beauregard", "Grotte de la Deveze", "Petexaenea (Site générique Galeries N&S)", "Gouffre de Bexanka", "Mikelauenziloa"])]
     
     # Convertir la colonne DATE en datetime et localiser en UTC
     df_filtered['DATE'] = pd.to_datetime(df_filtered['DATE'])
