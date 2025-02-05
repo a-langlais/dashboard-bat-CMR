@@ -1,10 +1,40 @@
+**Patch Note - Version 0.3**
+**Date de publication** : 05/02/2025
+
+**Fonctionnalités ajoutées :**
+
+- Ajout d'un pré-filtre COMMUNE avant de sélectionner un site sur l'onglet ANTENNES
+- Mise-à-jour de la base de données avec les données disponibles jusqu'au 03-02-2025
+
+**Améliorations et modifications :**
+
+- L'onglet PHENOLOGIE ne concerne maintenant que les sites antennes
+- Affichage du nom des sites par ordre alphabétique sur l'onglet FICHE_SITE
+- L'onglet STATISTIQUES ne concerne maintenant que les données produites lors des études suivantes : ["Diag CEN", "Diag NATURA 2000", "Diag FDS_Oléron", "ECOFECT (GR/CCPNA)", "ECOFECT (Hors GR)", "TRANSPY ESPAGNE", "TRANSPY FRANCE"], ajout d'un sélecteur de programme pour afficher les statistiques prochainement
+- Suppression du graphique "Individus les plus détectés" dans l'onglet STATISTIQUES
+- Ajout du graphique intéractif "Répartition des distances par espèce" dans l'onglet STATISTIQUES
+- Modification de la largeur de la table des distances pour une meilleure lecture
+- Correction d'un bug qui empêchait certaines trajectoires de s'afficher pour certaines espèces (ex : MINSCH)
+- Correction d'un bug qui affichait "0" à toutes les statistiques sur la Fiche_site de certains sites (ex : Grottes de Loubeau)
+
+**Problèmes connus :**
+
+- En raison d'une BASE_SITES non définitive, il peut y avoir quelques erreurs concernant l'intitulé de certains sites, leur localisation ou le nombre de sites de captures et de sites contrôlés affichés dans l'onglet STATISTIQUES, merci de me le faire remonter si vous constatez quelque chose qui empêche l'utilisation de l'appli (ex : "La Brumaudière" <-> "Ancienne citerne à eau" <-> "Citerne de Sainte-Ouenne")
+- La prochaine mise-à-jour portera probablement sur l'interface : améliorer l'esthétique et le rendu dynamique de l'application
+
+> **Lien vers l'application en développement (build 0.3)** : https://huggingface.co/spaces/a-langlais/ccpna-taipy-dashboard
+
+La version MVP via Streamlit (build 0.0) n'est définitivement plus déployée mais le code source reste disponible.
+_________________________________________________________________________________
+_________________________________________________________________________________
+
 **Patch Note - Version 0.2**
 **Date de publication** : 24/11/2024
 
 **Fonctionnalités ajoutées :**
 
 - Ajout d'un onglet "Fiche_site" permettant d'afficher quelques informations pour le moment sur un site particulier, dont une carte des sites connectés, d'un graph de présence annuelle et de quelques autres informations.
-- Mise à jour de la base de données jusqu'au 18-11-2024
+- Mise-à-jour de la base de données jusqu'au 18-11-2024
 
 **Améliorations et modifications :**
 

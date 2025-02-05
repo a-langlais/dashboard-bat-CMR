@@ -19,13 +19,13 @@ def load_data_antenna():
     # Ajout du SEXE sur df_distances
     df_distances = df_distances.merge(df_individus[['NUM_PIT', 'SEXE']], left_on='NUM_PIT', right_on='NUM_PIT', how='left')
 
-    # Ajout des coordonnées sur df_distances + renommer les colonnes
-    df_distances = df_distances.merge(df_sites[['LIEU_DIT', 'LAT_WGS', 'LONG_WGS']], left_on='SITE_DEPART', right_on='LIEU_DIT', how='left')
-    df_distances.rename(columns={'LAT_WGS': 'LAT_DEPART', 'LONG_WGS': 'LONG_DEPART'}, inplace=True)
-    df_distances = df_distances.merge(df_sites[['LIEU_DIT', 'LAT_WGS', 'LONG_WGS']], left_on='SITE_ARRIVEE', right_on='LIEU_DIT', how='left')
-    df_distances.rename(columns={'LAT_WGS': 'LAT_ARRIVEE', 'LONG_WGS': 'LONG_ARRIVEE'}, inplace=True)
-    df_distances = df_distances.drop_duplicates(subset=(['CODE_ESP', 'SITE_DEPART', 'SITE_ARRIVEE']))
-
+    # Nettoyer df_distances
+    df_distances = (
+    df_distances
+    .dropna(subset=['LAT_DEPART', 'LONG_DEPART', 'LAT_ARRIVEE', 'LONG_ARRIVEE'])
+    .drop_duplicates(subset=['NUM_PIT', 'CODE_ESP', 'SITE_DEPART', 'SITE_ARRIVEE'], keep='last')
+    .query('DIST_KM > 0')
+)
     return df_controls, df_individus, df_sites, df_distances, df_mapping
 
 def expose_folium(fol_map: Map):
@@ -63,7 +63,7 @@ def generate_map(df_distances, df_sites):
             locations=[(row['LAT_DEPART'], row['LONG_DEPART']), (row['LAT_ARRIVEE'], row['LONG_ARRIVEE'])],
             color=color_map.get(row['CODE_ESP'], 'gray'),
             weight=1,
-            opacity=0.6
+            opacity=0.4
         ).add_to(m)
 
     # Ajouter les marqueurs pour chaque site
@@ -116,6 +116,9 @@ def generate_map(df_distances, df_sites):
 def gant_diagram(df_controls):
     # Créer une copie du DataFrame original par sécurité
     df_filtered = df_controls.copy()
+    df_filtered = df_filtered[df_filtered['LIEU_DIT'].isin(["Brelouze", "Mairie d'Annepont", "Grottes de Loubeau", "Le Plessis", "Puy-Chenin", "Cézelle", "La Bourtière", "Goizet (W)", "Château de Gagemont", "Faye-L'Abbesse - Bourg", "Guibaud", "Cave Billard", "Grotte de Boisdichon", "Les Roches", "Barrage de l'Aigle", "Gouffre de la Fage",
+                  "Ancienne citerne à eau", "Château de Verteuil", "Les Dames", "Château de Hautefort", "Les Tours de Merle - Tour Fulcon", "Le Petit Pin", "Maison Brousse", "Caves de Laubenheimer", "Château de Villandraut", "Tunnel ferroviaire", "Grotte de la carrière", "Centrale hydroélectrique de Claredent", "Fermette des Nobis",
+                  "Beauregard", "Grotte de la Deveze", "Petexaenea (Site générique Galeries N&S)", "Gouffre de Bexanka", "Mikelauenziloa"])]
     
     # Convertir la colonne DATE en datetime et localiser en UTC
     df_filtered['DATE'] = pd.to_datetime(df_filtered['DATE'])
@@ -269,6 +272,34 @@ def gant_diagram_concat(df_original, concat_year = True, year_reference=2023):
         xaxis = dict(tickformat = '%m'),
         yaxis = dict(showgrid = True, zeroline = False, title = "Phase de présence"),
         height = 300
+    )
+
+    return fig
+
+def distance_boxplot(df_distances):
+    # Couleurs pour chaque espèce
+    color_map = {
+        'RHIFER' : 'blue',
+        'MYOEMA' : 'green',
+        'RHIEUR' : 'red',
+        'MINSCH' : 'purple',
+        'MYOMYO' : 'pink',
+        'MYODAU' : 'black'
+    }
+
+    fig = px.box(
+        df_distances,
+        x = 'CODE_ESP',
+        y = 'DIST_KM',
+        color = 'CODE_ESP',  # Utilisation des couleurs basées sur les espèces
+        color_discrete_map = color_map,
+        title = ''
+    )
+
+    fig.update_layout(
+        xaxis_title = '',
+        yaxis_title = 'Distance entre deux sites (km)',
+        showlegend = False
     )
 
     return fig

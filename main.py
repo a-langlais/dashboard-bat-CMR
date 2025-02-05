@@ -12,9 +12,10 @@ from dashboard import *
 
 # CHARGEMENT DES DONNEES
 df_controls, df_individus, df_sites, df_distances, df_mapping = load_data_antenna()
-liste_sites_antennes = ["Brelouze", "Mairie d'Annepont", "Grotte de Loubeau", "Le Plessis", "Puy-Chenin", "Cézelle", "La Bourtière", "Goizet (W)", "Château de Gagemont", "Faye-L'Abbesse - Bourg", "Guibaud", "Cave Billard", "Grotte de Boisdichon", "Les Roches", "Barrage de l'Aigle", "Gouffre de la Fage",
-                  "La Brumaudière", "Château de Verteuil", "Les Dames", "Château de Hautefort", "Les Tours de Merle", "Le Petit Pin", "Maison Brousse", "Caves de Laubenheimer", "Château de Villandraut", "Tunnel ferroviaire", "Grotte de la carrière", "Centrale hydroélectrique de Claredent", "Fermette des Nobis",
-                  "Beauregard", "Grotte de la Deveze", "Petexaenea", "Gouffre de Bexanka", "Mikelauenzilo"]
+liste_sites_antennes = sorted(["Brelouze", "Mairie d'Annepont", "Grottes de Loubeau", "Le Plessis", "Puy-Chenin", "Cézelle", "La Bourtière", "Goizet (W)", "Château de Gagemont", "Faye-L'Abbesse - Bourg", "Guibaud", "Cave Billard", "Grotte de Boisdichon", "Les Roches", "Barrage de l'Aigle", "Gouffre de la Fage",
+                  "Ancienne citerne à eau", "Château de Verteuil", "Les Dames", "Château de Hautefort", "Les Tours de Merle - Tour Fulcon", "Le Petit Pin", "Maison Brousse", "Caves de Laubenheimer", "Château de Villandraut", "Tunnel ferroviaire", "Grotte de la carrière", "Centrale hydroélectrique de Claredent", "Fermette des Nobis",
+                  "Beauregard", "Grotte de la Deveze", "Petexaenea (Site générique Galeries N&S)", "Gouffre de Bexanka", "Mikelauenziloa"])
+ETUDE_valides = ["Diag CEN", "Diag NATURA 2000", "Diag FDS_Oléron", "ECOFECT (GR/CCPNA)", "ECOFECT (Hors GR)", "TRANSPY ESPAGNE", "TRANSPY FRANCE"]
 
 # Initialisation des variables d'état
 selected_dpt = []
@@ -22,13 +23,13 @@ selected_dpt_gant = []
 selected_sp = []
 selected_gender = []
 selected_sites = []
+selected_communes = []
 selected_dates = [df_controls['DATE'].min(), df_controls['DATE'].max()]
 dates_gant = [df_controls['DATE'].min(), df_controls['DATE'].max()]
 df_empty = pd.DataFrame()
 
 # CONTENU
 ## ROOT PAGE
-
 FEDER = "images/FEDER-NA.png"
 PREFET = "images/Prefet_NA.jpg"
 VERT = "images/FranceNationVerte.jpg"
@@ -41,11 +42,23 @@ with open("pages/page1.md", "r", encoding = "utf-8") as file:
     page1 = file.read()
 
 ## VISUALISATION DES DONNEES D'ANTENNES
+communes = sorted(df_controls['COMMUNE'].unique().tolist())
 departements = sorted(df_controls['DEPARTEMENT'].unique().tolist())
-species = sorted(df_controls['CODE_ESP'].unique().tolist())
-genders = sorted(df_controls['SEXE'].dropna().unique().tolist())
-sites = sorted(df_controls['LIEU_DIT'].unique().tolist())
+species = sorted(df_distances['CODE_ESP'].unique().tolist())
+genders = sorted(df_individus['SEXE'].dropna().unique().tolist())
+sites = sorted(df_controls['LIEU_DIT'].dropna().unique().tolist())
 dates = [df_controls['DATE'].min(), df_controls['DATE'].max()]
+
+# Callback du sélécteur de sites
+def refresh_sites(state):
+    selected_communes = state.selected_communes or []
+    
+    if selected_communes:
+        filtered_df = df_controls[df_controls['COMMUNE'].isin(selected_communes)]
+    else:
+        filtered_df = df_controls
+
+    state.sites = sorted(filtered_df['LIEU_DIT'].unique().tolist())
 
 m = generate_map(df_empty, df_sites)
 
@@ -78,7 +91,7 @@ def refresh_map_button(state):
     if state.selected_dates and len(state.selected_dates) == 2:
         start_date = pd.Timestamp(state.selected_dates[0])
         end_date = pd.Timestamp(state.selected_dates[1])
-        df_filtered = df_filtered[(df_filtered['DATE'] >= start_date) & (df_filtered['DATE'] <= end_date)]
+        df_filtered = df_filtered[(df_filtered['DATE_DEPART'] >= start_date) & (df_filtered['DATE_DEPART'] <= end_date)]
     
     # Rafraichir la carte
     state.m = generate_map(df_filtered, df_sites)
@@ -92,6 +105,7 @@ with open("pages/page3.md", "r", encoding = "utf-8") as file:
 # Callbacks du diagramme de Gant
 def update_gant(state):
     df_filtered_gant = df_controls.copy()
+    df_filtered_gant = df_filtered_gant[df_filtered_gant['LIEU_DIT'].isin(liste_sites_antennes)]
 
     # Convertir les dates sélectionnées en objets Timestamp
     if state.selected_dpt_gant:
@@ -108,29 +122,32 @@ def update_gant(state):
 
 ## STATISTIQUES ANALYTIQUES
 # Initialisation de tous les plots
-plot_detection_year = detection_by_year(df_controls)      # Barplot du nombre de détections par an et par espèce
-plot_capture_year = capture_by_year(df_individus)         # Barplot du nombre de captures par an et par espèces
-plot_control_year = control_by_year(df_controls)          # Barplot du nombre de contrôles par an et par espèces
-plot_frequencies = detection_frequencies(df_controls)     # Courbes de fréquences de détections par jour de l'année et par site
-plot_pie_controled = pie_controled(df_controls)           # Pieplot des individus contrôlés
-plot_pie_marked = pie_marked(df_individus)                # Pieplot des individus marqués
-plot_top_detection = top_detection(df_controls)           # Barplot horizontal des 10 individus les plus détectés
+df_controls_valide = df_controls[df_controls['ETUDE'].isin(ETUDE_valides)]
+df_individus_valide = df_individus[df_individus['ETUDE'].isin(ETUDE_valides)]
+
+plot_detection_year = detection_by_year(df_controls_valide)      # Barplot du nombre de détections par an et par espèce
+plot_capture_year = capture_by_year(df_individus_valide)         # Barplot du nombre de captures par an et par espèces
+plot_control_year = control_by_year(df_controls_valide)          # Barplot du nombre de contrôles par an et par espèces
+plot_frequencies = detection_frequencies(df_controls_valide)     # Courbes de fréquences de détections par jour de l'année et par site
+plot_pie_controled = pie_controled(df_controls_valide)           # Pieplot des individus contrôlés
+plot_pie_marked = pie_marked(df_individus_valide)                # Pieplot des individus marqués
+plot_top_detection = top_detection(df_controls_valide)           # Barplot horizontal des 10 individus les plus détectés
+plot_box_distances = distance_boxplot(df_distances)              # Boxplot des distances par espèce
 
 # Initialisation des variables à plot
 total_recaptured = df_controls['NUM_PIT'].nunique()       # Individus contrôlés
 total_marked = df_individus['NUM_PIT'].nunique()          # Individus marqués
 sites_capture = df_individus['LIEU_DIT'].nunique()        # Sites capturés au moins une fois
 sites_antennes = df_sites['LIEU_DIT'].nunique()           # Sites contrôlés au moins une fois
-transition_table_plot = df_distances[['CODE_ESP', 'DATE', 'SITE_DEPART', 'DATE_ARRIVEE', 'SITE_ARRIVEE', 'DISTANCE']].sort_values(by='DISTANCE', ascending = False)
-transition_table_plot['DISTANCE'] = transition_table_plot['DISTANCE'].round(2)
-transition_table_plot = transition_table_plot.rename(columns = {'DATE':'DATE_DEPART'})
+transition_table_plot = df_distances[['NUM_PIT', 'CODE_ESP', 'DATE_DEPART', 'SITE_DEPART', 'DATE_ARRIVEE', 'SITE_ARRIVEE', 'DIST_KM']].sort_values(by='DIST_KM', ascending = False)
+transition_table_plot['DIST_KM'] = transition_table_plot['DIST_KM'].round(2)
 
 with open("pages/page4.md", "r", encoding = "utf-8") as file:
     page4 = file.read()
 
 ## FICHE SITE
 # Initialisation du sélecteur et des plots
-selection_fiche = ['Brelouze']
+selection_fiche = ['Ancienne citerne à eau']
 df_controls_fiche = df_controls[df_controls['LIEU_DIT'].isin(selection_fiche)]
 df_individus_fiche = df_individus[df_individus['LIEU_DIT'].isin(selection_fiche)]
 df_distances_fiche = df_distances[(df_distances['SITE_DEPART'].isin(selection_fiche)) | (df_distances['SITE_ARRIVEE'].isin(selection_fiche))]
