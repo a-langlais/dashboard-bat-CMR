@@ -12,7 +12,7 @@
 <|text|value=Nombre de sites de capture|class_name=title|>
 <|text|value={sites_capture}|class_name=values|>
 
-<|text|value=Nombre de sites contrôlés|class_name=title|>
+<|text|value=Nombre de sites contrôlés positifs|class_name=title|>
 <|text|value={sites_antennes}|class_name=values|>
 |>
 
@@ -53,11 +53,12 @@
 
 <|layout|columns=2 4|
 <|part|class_name=card|
-
+<|text|value=Répartition des distances par espèce|class_name=title|>
+<|chart|figure={plot_box_distances}|>
 
 |>
 <|part|class_name=card|
 <|text|value=Table des trajectoires|class_name=title|>
-<|table|data={transition_table_plot}|>
+<|table|data={transition_table_plot}|height=400px|>
 |>
 |>
