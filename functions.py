@@ -40,6 +40,11 @@ def generate_map(df_distances, df_sites):
         m = folium.Map(location=[46.493889, 2.602778], zoom_start=6, tiles='CartoDB positron')
         return m
 
+    df_distances = (
+        df_distances
+        .drop_duplicates(subset=['CODE_ESP', 'SITE_DEPART', 'SITE_ARRIVEE'], keep='last')
+    )
+
     # Calcul du centre de la carte
     lat_mean = df_distances[['LAT_DEPART', 'LAT_ARRIVEE']].mean().mean()
     lon_mean = df_distances[['LONG_DEPART', 'LONG_ARRIVEE']].mean().mean()
