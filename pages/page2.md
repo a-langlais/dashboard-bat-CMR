@@ -1,6 +1,6 @@
 ## Visualisation des données d'antennes
 
-<|layout|columns=1 2|
+<|layout|columns=1 2|gap=50px|
 <|
 <|raw|
 <div class="titre-container">
@@ -43,5 +43,5 @@
 <|Mettre à jour la carte|button|class_name=plain|on_action=refresh_map_button|>
 |>
 
-<|part|content={m}|height=800px|>
+<|part|content={m}|height=1000px|>
 |>
