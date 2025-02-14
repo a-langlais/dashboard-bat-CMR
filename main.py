@@ -91,7 +91,7 @@ def refresh_map_button(state):
     if state.selected_dates and len(state.selected_dates) == 2:
         start_date = pd.Timestamp(state.selected_dates[0])
         end_date = pd.Timestamp(state.selected_dates[1])
-        df_filtered = df_filtered[(df_filtered['DATE_DEPART'] >= start_date) & (df_filtered['DATE_DEPART'] <= end_date)]
+        df_filtered = df_filtered[(df_filtered['DATE_DEPART'] >= start_date) & (df_filtered['DATE_ARRIVEE'] <= end_date)]
     
     # Rafraichir la carte
     state.m = generate_map(df_filtered, df_sites)
