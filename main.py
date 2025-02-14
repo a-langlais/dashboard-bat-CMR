@@ -135,10 +135,10 @@ plot_top_detection = top_detection(df_controls_valide)           # Barplot horiz
 plot_box_distances = distance_boxplot(df_distances)              # Boxplot des distances par espèce
 
 # Initialisation des variables à plot
-total_recaptured = df_controls['NUM_PIT'].nunique()       # Individus contrôlés
-total_marked = df_individus['NUM_PIT'].nunique()          # Individus marqués
-sites_capture = df_individus['LIEU_DIT'].nunique()        # Sites capturés au moins une fois
-sites_antennes = df_sites['LIEU_DIT'].nunique()           # Sites contrôlés au moins une fois
+total_recaptured = df_controls.query('ACTION == "C"')['NUM_PIT'].nunique()       # Individus contrôlés
+total_marked = df_individus['NUM_PIT'].nunique()                                 # Individus marqués
+sites_capture = df_individus['LIEU_DIT'].nunique()                               # Sites capturés au moins une fois
+sites_antennes = df_sites['LIEU_DIT'].nunique()                                  # Sites contrôlés au moins une fois
 transition_table_plot = df_distances[['NUM_PIT', 'CODE_ESP', 'DATE_DEPART', 'SITE_DEPART', 'DATE_ARRIVEE', 'SITE_ARRIVEE', 'DIST_KM']].sort_values(by='DIST_KM', ascending = False)
 transition_table_plot['DIST_KM'] = transition_table_plot['DIST_KM'].round(2)
 
@@ -194,7 +194,7 @@ with open("pages/page5.md", "r", encoding = "utf-8") as file:
 # DEMARRAGE DE L'APPLICATION
 pages = {
     "/": root_md,
-    "presentation": page1,
+    # "presentation": page1,
     "antennes": page2,
     "phenologie": page3,
     "statistiques": page4,
@@ -203,4 +203,4 @@ pages = {
 
 Gui.register_content_provider(Map, expose_folium)
 gui = Gui(pages = pages, css_file = "assets/styles.css")
-gui.run(host = '0.0.0.0', port = 5000, use_session = True)
+gui.run(host = '0.0.0.0', port = 5000, use_session = True, dark_mode = False, stylekit = False)
