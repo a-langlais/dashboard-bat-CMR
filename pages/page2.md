@@ -20,6 +20,7 @@
 <|text|value=Ces paramètres permettent de filtrer les caractéristiques liés à l'espèce, l'âge à la capture ou le sexe des individus.|class_name=citation|>
 <|selector|label=Espèce|value={selected_sp}|lov={species}|dropdown|multiple|>
 <|selector|label=Sexe|value={selected_gender}|lov={genders}|dropdown|multiple|>
+<|selector|label=Age|value={selected_age}|lov={age}|dropdown|multiple|>
 
 <|raw|
 <div class="titre-container">
@@ -39,9 +40,10 @@
 |>
 <|text|value=Ces paramètres permettent de saisir l'échelle de temps globale sur laquelle concentrer l'affichage des trajectoires (par défaut, toute la temporalité est conservée). Il est aussi possible de ne choisir l'affichage de seulement une ou plusieurs période (transit, parturition et hivernale).|class_name=citation|>
 <|date_range|dates={selected_dates}|>
-
-<|Mettre à jour la carte|button|class_name=plain|on_action=refresh_map_button|>
+<|selector|label=Période|value={selected_period}|lov={periods}|multiple|>
 |>
 
 <|part|content={m}|height=1000px|>
+<|Mettre à jour la carte|button|class_name=plain|on_action=refresh_map_button|>
+
 |>

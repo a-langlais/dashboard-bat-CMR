@@ -22,9 +22,11 @@ selected_dpt = []
 selected_dpt_gant = []
 selected_sp = []
 selected_gender = []
+selected_age = []
 selected_sites = []
 selected_communes = []
 selected_dates = [df_controls['DATE'].min(), df_controls['DATE'].max()]
+selected_period = ['Transit', 'Parturition', 'Hivernale']
 dates_gant = [df_controls['DATE'].min(), df_controls['DATE'].max()]
 df_empty = pd.DataFrame()
 
@@ -46,8 +48,13 @@ communes = sorted(df_controls['COMMUNE'].unique().tolist())
 departements = sorted(df_controls['DEPARTEMENT'].unique().tolist())
 species = sorted(df_distances['CODE_ESP'].unique().tolist())
 genders = sorted(df_individus['SEXE'].dropna().unique().tolist())
+age = sorted(df_individus['AGE'].dropna().unique().tolist())
 sites = sorted(df_controls['LIEU_DIT'].dropna().unique().tolist())
 dates = [df_controls['DATE'].min(), df_controls['DATE'].max()]
+periods = ['Transit', 'Parturition', 'Hivernale']
+transit_months = [3, 4, 5, 9, 10, 11]   # Printemps et Automne
+parturition_months = [6, 7, 8]          # Été
+hivernale_months = [12, 1, 2]           # Hiver
 
 # Callback du sélécteur de sites
 def refresh_sites(state):
@@ -68,6 +75,7 @@ with open("pages/page2.md", "r", encoding = "utf-8") as file:
 # Callback de la carte
 def refresh_map_button(state):
     df_filtered = df_distances.copy()
+    df_filtered['DATE_ARRIVEE'] = pd.to_datetime(df_filtered['DATE_ARRIVEE'])
     
     # Filtrer par département d'origine
     if state.selected_dpt:
@@ -82,6 +90,10 @@ def refresh_map_button(state):
     if state.selected_gender:
         df_filtered = df_filtered[df_filtered['SEXE'].isin(state.selected_gender)]
 
+    # Filtrer par âge
+    if state.selected_age:
+        df_filtered = df_filtered[df_filtered['AGE'].isin(state.selected_age)]
+
     # Filtrer par site d'origine
     if state.selected_sites:
         site_pit = df_filtered[(df_filtered['SITE_DEPART'].isin(state.selected_sites)) | (df_filtered['SITE_ARRIVEE'].isin(state.selected_sites))]['NUM_PIT'].unique()        
@@ -93,6 +105,16 @@ def refresh_map_button(state):
         end_date = pd.Timestamp(state.selected_dates[1])
         df_filtered = df_filtered[(df_filtered['DATE_DEPART'] >= start_date) & (df_filtered['DATE_ARRIVEE'] <= end_date)]
     
+    # Filtrage en fonction des périodes
+    mask = pd.Series([False] * len(df_filtered), index = df_filtered.index)
+    if "Transit" in state.selected_period:
+        mask |= df_filtered['DATE_ARRIVEE'].dt.month.isin(transit_months)
+    if "Parturition" in state.selected_period:
+        mask |= df_filtered['DATE_ARRIVEE'].dt.month.isin(parturition_months)
+    if "Hivernale" in state.selected_period:
+        mask |= df_filtered['DATE_ARRIVEE'].dt.month.isin(hivernale_months)
+    df_filtered = df_filtered[mask]
+
     # Rafraichir la carte
     state.m = generate_map(df_filtered, df_sites)
 

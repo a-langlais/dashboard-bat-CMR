@@ -16,8 +16,8 @@ def load_data_antenna():
     # Ajout du SEXE sur df_controls
     df_controls = df_controls.merge(df_individus[['NUM_PIT', 'SEXE']], left_on='NUM_PIT', right_on='NUM_PIT', how='left')
 
-    # Ajout du SEXE sur df_distances
-    df_distances = df_distances.merge(df_individus[['NUM_PIT', 'SEXE']], left_on='NUM_PIT', right_on='NUM_PIT', how='left')
+    # Ajout du SEXE et de l'AGE sur df_distances
+    df_distances = df_distances.merge(df_individus[['NUM_PIT', 'SEXE', 'AGE']], left_on='NUM_PIT', right_on='NUM_PIT', how='left')
 
     # Nettoyer df_distances
     df_distances = (
