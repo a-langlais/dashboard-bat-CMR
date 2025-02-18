@@ -225,4 +225,4 @@ pages = {
 
 Gui.register_content_provider(Map, expose_folium)
 gui = Gui(pages = pages, css_file = "assets/styles.css")
-gui.run(host = '0.0.0.0', port = 5000, use_session = True, dark_mode = False, stylekit = False)
+gui.run(host = '0.0.0.0', port = 5000, use_session = True, dark_mode = False, stylekit = False, watermark = "")
