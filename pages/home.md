@@ -1,5 +1,3 @@
-# 🦇 CCPNA Dashboard
-
 <|navbar|>
 
 <|content|>
