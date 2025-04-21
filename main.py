@@ -182,6 +182,7 @@ plot_detection_year_fiche = detection_by_year(df_controls_fiche)      # Barplot 
 plot_capture_year_fiche = capture_by_year(df_individus_fiche)         # Barplot du nombre de captures par an et par espèces
 plot_control_year_fiche = control_by_year(df_controls_fiche)          # Barplot du nombre de contrôles par an et par espèces
 plot_frequencies_fiche = detection_frequencies(df_controls_fiche)     # Courbes de fréquences de détections par jour de l'année et par site
+plot_frequencies_global_fiche = detection_frequencies_global(df_controls_fiche)     # Courbes de fréquences de détections totales par jour de l'année
 plot_pie_controled_fiche = pie_controled(df_controls_fiche)           # Pieplot des individus contrôlés
 plot_pie_marked_fiche = pie_marked(df_individus_fiche)                # Pieplot des individus marqués
 
