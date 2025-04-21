@@ -35,6 +35,22 @@ button {
     border-radius: 4px;
 }
 
+/* Footer global */
+.footer {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f9f9f9;
+    color: #333;
+    text-align: center;
+    padding: 12px 20px;
+    border-top: 1px solid #ddd;
+    box-shadow: 0 -2px 4px rgba(0,0,0,0.05);
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+    z-index: 1000;
+}
+
 /* Texte principal et secondaire */
 p,
 li,
@@ -116,8 +132,9 @@ select:focus {
 
 /* Titre avec ligne */
 .titre-container {
-    display: flex;
+    display: block;
     align-items: center;
+    text-align: center;
     gap: 10px; /* Espace entre le titre et la ligne */
     width: 100%;
 }
@@ -176,15 +193,15 @@ select:focus {
   
   /* Titre de chaque KPI */
   .kpi-title {
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: #666;
+    text-align: center;
     margin-bottom: 5px;
   }
 
   .kpi-value {
     text-align: center; /* Pour centrer horizontalement */
-    font-size: 3em; /* Pour agrandir la taille de la police */
-    font-weight: bold; /* Pour mettre en gras, si nécessaire */
+    font-size: 2.5em; /* Pour agrandir la taille de la police */
     display: block;
     width: 100%;
 }
