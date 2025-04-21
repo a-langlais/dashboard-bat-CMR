@@ -3,12 +3,15 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
+import plotly.io as pio
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 import matplotlib.cm as cm
 
 from functions import *
 from dashboard import *
+
+pio.templates.default = "simple_white"
 
 # CHARGEMENT DES DONNEES
 df_controls, df_individus, df_sites, df_distances, df_mapping = load_data_antenna()
@@ -151,6 +154,7 @@ plot_detection_year = detection_by_year(df_controls_valide)      # Barplot du no
 plot_capture_year = capture_by_year(df_individus_valide)         # Barplot du nombre de captures par an et par espèces
 plot_control_year = control_by_year(df_controls_valide)          # Barplot du nombre de contrôles par an et par espèces
 plot_frequencies = detection_frequencies(df_controls_valide)     # Courbes de fréquences de détections par jour de l'année et par site
+plot_frequencies_global = detection_frequencies_global(df_controls_valide)     # Courbes de fréquences de détections totales par jour de l'année
 plot_pie_controled = pie_controled(df_controls_valide)           # Pieplot des individus contrôlés
 plot_pie_marked = pie_marked(df_individus_valide)                # Pieplot des individus marqués
 plot_top_detection = top_detection(df_controls_valide)           # Barplot horizontal des 10 individus les plus détectés
@@ -200,6 +204,7 @@ def update_fiche(state):
     state.plot_capture_year_fiche = capture_by_year(df_individus_fiche)
     state.plot_control_year_fiche = control_by_year(df_controls_fiche)
     state.plot_frequencies_fiche = detection_frequencies(df_controls_fiche)
+    state.plot_frequencies_global_fiche = detection_frequencies_global(df_controls_fiche)
     state.plot_pie_controled_fiche = pie_controled(df_controls_fiche)
     state.plot_pie_marked_fiche = pie_marked(df_individus_fiche)
     state.map_fiche = generate_map(df_distances_fiche, df_sites)
@@ -217,7 +222,7 @@ with open("pages/page5.md", "r", encoding = "utf-8") as file:
 pages = {
     "/": root_md,
     # "presentation": page1,
-    "antennes": page2,
+    "carto_cmr": page2,
     "phenologie": page3,
     "statistiques": page4,
     "fiche_site": page5
