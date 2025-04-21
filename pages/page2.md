@@ -1,4 +1,4 @@
-## Visualisation des données d'antennes
+## Visualisation des données de CMR
 
 <|layout|columns=1 2|gap=50px|
 <|
@@ -40,11 +40,10 @@
 |>
 <|text|value=Ces paramètres permettent de saisir l'échelle de temps globale sur laquelle concentrer l'affichage des trajectoires (par défaut, toute la temporalité est conservée). Il est aussi possible de ne choisir l'affichage de seulement une ou plusieurs période (transit, parturition et hivernale).|class_name=citation|>
 <|date_range|dates={selected_dates}|>
-<|selector|label=Périodes|value={selected_period}|lov={periods}|check|multiple|>
+<|selector|value={selected_period}|lov={periods}|check|multiple|>
 |>
 
 <|part|content={m}|height=1000px|>
-
 <|Mettre à jour la carte|button|class_name=plain|on_action=refresh_map_button|>
 
 |>
