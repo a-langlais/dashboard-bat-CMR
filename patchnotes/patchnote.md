@@ -1,3 +1,29 @@
+**Patch Note - Version 0.4**
+**Date de publication** : 21/04/2025
+
+**Fonctionnalités ajoutées :**
+
+- Ajout de filtres pour les cartes : notamment âge à la capture et période du cycle de vie
+
+**Améliorations et modifications :**
+
+- Refonte graphique du design de l'application en vue de l'intégration future à l'appli de BDD du projet
+- Changement sémantique de titres pour plus de clarté
+- Retrait de la page "PRESENTATION" qui n'apportait pas de plus-value
+- Sur l'onglet "CARTO_CMR" (anciennement "ANTENNES") : ajout de courtes descriptions des filtres
+- sur l'onglet "PHENOLOGIE" : ne concerne maintenant que les données d'antenne fixe
+- Sur l'onglet "STATISTIQUES" : changement du graphique en courbe pour une lecture simplifiée avec la fréquence de détection globale. Les courbes des sites individuels est toujours consultable sur l'onglet "FICHE_SITE"
+
+**Problèmes connus :**
+
+- En raison d'une BASE_SITES non définitive, il peut y avoir quelques erreurs concernant l'intitulé de certains sites, leur localisation ou le nombre de sites de captures et de sites contrôlés affichés dans l'onglet STATISTIQUES, merci de me le faire remonter si vous constatez quelque chose qui empêche l'utilisation de l'appli (ex : "La Brumaudière" <-> "Ancienne citerne à eau" <-> "Citerne de Sainte-Ouenne")
+- La prochaine mise-à-jour portera sur l'ajout de nouveaux indicateurs stats et l'amélioration des cartes, je me base en priorité sur vos remarques et observations centralisée sur le fichier du drive
+
+> **Lien vers l'application en développement (build 0.4)** : https://huggingface.co/spaces/a-langlais/ccpna-taipy-dashboard
+
+_________________________________________________________________________________
+_________________________________________________________________________________
+
 **Patch Note - Version 0.3**
 **Date de publication** : 05/02/2025
 
