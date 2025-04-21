@@ -53,7 +53,7 @@
     <div class="ligne-soulignement"></div>
 </div>
 |>
-<|chart|figure={plot_frequencies}|>
+<|chart|figure={plot_frequencies_global}|>
 |>
 |>
 
@@ -70,15 +70,30 @@
 <|part|class_name=kpi-container|
 <|layout|columns=1 1 1|
 <|part|
-<|text|value=Individus capturés par année et par espèce|class_name=title|>
+<|raw|
+<div class="titre-container">
+    <h1 class="titre-modern">Individus capturés</h1>
+    <div class="ligne-soulignement"></div>
+</div>
+|>
 <|chart|figure={plot_capture_year}|>
 |>
 <|part|
-<|text|value=Individus contrôlés par année et par espèce|class_name=title|>
+<|raw|
+<div class="titre-container">
+    <h1 class="titre-modern">Individus contrôlés</h1>
+    <div class="ligne-soulignement"></div>
+</div>
+|>
 <|chart|figure={plot_control_year}|>
 |>
 <|part|
-<|text|value=Détections par année et par espèce|class_name=title|>
+<|raw|
+<div class="titre-container">
+    <h1 class="titre-modern">Détections enregistrées</h1>
+    <div class="ligne-soulignement"></div>
+</div>
+|>
 <|chart|figure={plot_detection_year}|>
 |>
 |>
