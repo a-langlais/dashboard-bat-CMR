@@ -3,12 +3,15 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
+import plotly.io as pio
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 import matplotlib.cm as cm
 
 from functions import *
 from dashboard import *
+
+pio.templates.default = "simple_white"
 
 # CHARGEMENT DES DONNEES
 df_controls, df_individus, df_sites, df_distances, df_mapping = load_data_antenna()
@@ -22,9 +25,11 @@ selected_dpt = []
 selected_dpt_gant = []
 selected_sp = []
 selected_gender = []
+selected_age = []
 selected_sites = []
 selected_communes = []
 selected_dates = [df_controls['DATE'].min(), df_controls['DATE'].max()]
+selected_period = ['Transit', 'Parturition', 'Hivernale']
 dates_gant = [df_controls['DATE'].min(), df_controls['DATE'].max()]
 df_empty = pd.DataFrame()
 
@@ -46,8 +51,13 @@ communes = sorted(df_controls['COMMUNE'].unique().tolist())
 departements = sorted(df_controls['DEPARTEMENT'].unique().tolist())
 species = sorted(df_distances['CODE_ESP'].unique().tolist())
 genders = sorted(df_individus['SEXE'].dropna().unique().tolist())
+age = sorted(df_individus['AGE'].dropna().unique().tolist())
 sites = sorted(df_controls['LIEU_DIT'].dropna().unique().tolist())
 dates = [df_controls['DATE'].min(), df_controls['DATE'].max()]
+periods = ['Transit', 'Parturition', 'Hivernale']
+transit_months = [3, 4, 5, 9, 10, 11]   # Printemps et Automne
+parturition_months = [6, 7, 8]          # Été
+hivernale_months = [12, 1, 2]           # Hiver
 
 # Callback du sélécteur de sites
 def refresh_sites(state):
@@ -68,6 +78,7 @@ with open("pages/page2.md", "r", encoding = "utf-8") as file:
 # Callback de la carte
 def refresh_map_button(state):
     df_filtered = df_distances.copy()
+    df_filtered['DATE_ARRIVEE'] = pd.to_datetime(df_filtered['DATE_ARRIVEE'])
     
     # Filtrer par département d'origine
     if state.selected_dpt:
@@ -82,6 +93,10 @@ def refresh_map_button(state):
     if state.selected_gender:
         df_filtered = df_filtered[df_filtered['SEXE'].isin(state.selected_gender)]
 
+    # Filtrer par âge
+    if state.selected_age:
+        df_filtered = df_filtered[df_filtered['AGE'].isin(state.selected_age)]
+
     # Filtrer par site d'origine
     if state.selected_sites:
         site_pit = df_filtered[(df_filtered['SITE_DEPART'].isin(state.selected_sites)) | (df_filtered['SITE_ARRIVEE'].isin(state.selected_sites))]['NUM_PIT'].unique()        
@@ -91,8 +106,18 @@ def refresh_map_button(state):
     if state.selected_dates and len(state.selected_dates) == 2:
         start_date = pd.Timestamp(state.selected_dates[0])
         end_date = pd.Timestamp(state.selected_dates[1])
-        df_filtered = df_filtered[(df_filtered['DATE_DEPART'] >= start_date) & (df_filtered['DATE_DEPART'] <= end_date)]
+        df_filtered = df_filtered[(df_filtered['DATE_DEPART'] >= start_date) & (df_filtered['DATE_ARRIVEE'] <= end_date)]
     
+    # Filtrage en fonction des périodes
+    mask = pd.Series([False] * len(df_filtered), index = df_filtered.index)
+    if "Transit" in state.selected_period:
+        mask |= df_filtered['DATE_ARRIVEE'].dt.month.isin(transit_months)
+    if "Parturition" in state.selected_period:
+        mask |= df_filtered['DATE_ARRIVEE'].dt.month.isin(parturition_months)
+    if "Hivernale" in state.selected_period:
+        mask |= df_filtered['DATE_ARRIVEE'].dt.month.isin(hivernale_months)
+    df_filtered = df_filtered[mask]
+
     # Rafraichir la carte
     state.m = generate_map(df_filtered, df_sites)
 
@@ -129,16 +154,17 @@ plot_detection_year = detection_by_year(df_controls_valide)      # Barplot du no
 plot_capture_year = capture_by_year(df_individus_valide)         # Barplot du nombre de captures par an et par espèces
 plot_control_year = control_by_year(df_controls_valide)          # Barplot du nombre de contrôles par an et par espèces
 plot_frequencies = detection_frequencies(df_controls_valide)     # Courbes de fréquences de détections par jour de l'année et par site
+plot_frequencies_global = detection_frequencies_global(df_controls_valide)     # Courbes de fréquences de détections totales par jour de l'année
 plot_pie_controled = pie_controled(df_controls_valide)           # Pieplot des individus contrôlés
 plot_pie_marked = pie_marked(df_individus_valide)                # Pieplot des individus marqués
 plot_top_detection = top_detection(df_controls_valide)           # Barplot horizontal des 10 individus les plus détectés
 plot_box_distances = distance_boxplot(df_distances)              # Boxplot des distances par espèce
 
 # Initialisation des variables à plot
-total_recaptured = df_controls['NUM_PIT'].nunique()       # Individus contrôlés
-total_marked = df_individus['NUM_PIT'].nunique()          # Individus marqués
-sites_capture = df_individus['LIEU_DIT'].nunique()        # Sites capturés au moins une fois
-sites_antennes = df_sites['LIEU_DIT'].nunique()           # Sites contrôlés au moins une fois
+total_recaptured = df_controls.query('ACTION == "C"')['NUM_PIT'].nunique()       # Individus contrôlés
+total_marked = df_individus['NUM_PIT'].nunique()                                 # Individus marqués
+sites_capture = df_individus['LIEU_DIT'].nunique()                               # Sites capturés au moins une fois
+sites_antennes = df_sites['LIEU_DIT'].nunique()                                  # Sites contrôlés au moins une fois
 transition_table_plot = df_distances[['NUM_PIT', 'CODE_ESP', 'DATE_DEPART', 'SITE_DEPART', 'DATE_ARRIVEE', 'SITE_ARRIVEE', 'DIST_KM']].sort_values(by='DIST_KM', ascending = False)
 transition_table_plot['DIST_KM'] = transition_table_plot['DIST_KM'].round(2)
 
@@ -156,6 +182,7 @@ plot_detection_year_fiche = detection_by_year(df_controls_fiche)      # Barplot 
 plot_capture_year_fiche = capture_by_year(df_individus_fiche)         # Barplot du nombre de captures par an et par espèces
 plot_control_year_fiche = control_by_year(df_controls_fiche)          # Barplot du nombre de contrôles par an et par espèces
 plot_frequencies_fiche = detection_frequencies(df_controls_fiche)     # Courbes de fréquences de détections par jour de l'année et par site
+plot_frequencies_global_fiche = detection_frequencies_global(df_controls_fiche)     # Courbes de fréquences de détections totales par jour de l'année
 plot_pie_controled_fiche = pie_controled(df_controls_fiche)           # Pieplot des individus contrôlés
 plot_pie_marked_fiche = pie_marked(df_individus_fiche)                # Pieplot des individus marqués
 
@@ -178,6 +205,7 @@ def update_fiche(state):
     state.plot_capture_year_fiche = capture_by_year(df_individus_fiche)
     state.plot_control_year_fiche = control_by_year(df_controls_fiche)
     state.plot_frequencies_fiche = detection_frequencies(df_controls_fiche)
+    state.plot_frequencies_global_fiche = detection_frequencies_global(df_controls_fiche)
     state.plot_pie_controled_fiche = pie_controled(df_controls_fiche)
     state.plot_pie_marked_fiche = pie_marked(df_individus_fiche)
     state.map_fiche = generate_map(df_distances_fiche, df_sites)
@@ -194,8 +222,8 @@ with open("pages/page5.md", "r", encoding = "utf-8") as file:
 # DEMARRAGE DE L'APPLICATION
 pages = {
     "/": root_md,
-    "presentation": page1,
-    "antennes": page2,
+    # "presentation": page1,
+    "carto_cmr": page2,
     "phenologie": page3,
     "statistiques": page4,
     "fiche_site": page5
@@ -203,4 +231,4 @@ pages = {
 
 Gui.register_content_provider(Map, expose_folium)
 gui = Gui(pages = pages, css_file = "assets/styles.css")
-gui.run(host = '0.0.0.0', port = 5000, use_session = True)
+gui.run(host = '0.0.0.0', port = 5000, use_session = True, dark_mode = False, stylekit = False, watermark = "")

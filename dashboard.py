@@ -1,6 +1,7 @@
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+import plotly.io as pio
 
 def detection_by_year(df_controls):
     df_controls['YEAR'] = df_controls['DATE'].dt.year
@@ -117,6 +118,36 @@ def detection_frequencies(df_controls):
         site_data = site_data.sort_values('MONTH_DAY')
         fig.add_trace(go.Scatter(x = site_data['MONTH_DAY'], y = site_data['Detections'],
                                  mode = 'lines', name = site))
+
+    # Mise à jour du layout
+    fig.update_layout(
+        xaxis_title = 'Jour de l\'année',
+        yaxis_title = 'Nombre de détections',
+        xaxis = dict(type = 'category', categoryorder = 'array', categoryarray = [md for md in months_days]),
+        legend = dict(bgcolor = 'rgba(0, 0, 0, 0)'),
+        #yaxis = dict(range = [0, global_freq['Global Detections'].max() + 10])
+    )
+    return fig
+
+def detection_frequencies_global(df_controls):
+    df_controls['DATE'] = pd.to_datetime(df_controls['DATE'], errors='coerce')
+    df_controls['MONTH_DAY'] = df_controls['DATE'].dt.strftime('%m-%d')
+    global_freq = df_controls.groupby('MONTH_DAY').size().reset_index(name = 'Global Detections')
+
+    # Calculer les fréquences par site
+    site_freq = df_controls.groupby(['MONTH_DAY', 'LIEU_DIT']).size().reset_index(name = 'Detections')
+    sites = site_freq['LIEU_DIT'].unique()
+
+    # Préparer l'ordre chronologique
+    months_days = pd.date_range('2021-01-01', '2021-12-31').strftime('%m-%d')
+    global_freq['MONTH_DAY'] = pd.Categorical(global_freq['MONTH_DAY'], categories = months_days, ordered = True)
+    global_freq = global_freq.sort_values('MONTH_DAY')
+
+    # Création du graphique
+    fig = go.Figure()
+
+    # Ajouter la courbe globale
+    fig.add_trace(go.Scatter(x = global_freq['MONTH_DAY'], y = global_freq['Global Detections'], mode = 'lines', name = 'Global'))
 
     # Mise à jour du layout
     fig.update_layout(

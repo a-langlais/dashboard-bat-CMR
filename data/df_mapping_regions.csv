@@ -1,31 +1,105 @@
-Département,Ancienne Région,Nouvelle Région
-17,Poitou-Charentes,Nouvelle-Aquitaine
-79,Poitou-Charentes,Nouvelle-Aquitaine
-85,Pays de la Loire,Pays de la Loire
-16,Poitou-Charentes,Nouvelle-Aquitaine
-49,Pays de la Loire,Pays de la Loire
-19,Limousin,Nouvelle-Aquitaine
-86,Poitou-Charentes,Nouvelle-Aquitaine
-63,Auvergne,Auvergne-Rhône-Alpes
-47,Aquitaine,Nouvelle-Aquitaine
-33,Aquitaine,Nouvelle-Aquitaine
-46,Midi-Pyrénées,Occitanie
-24,Aquitaine,Nouvelle-Aquitaine
-64,Aquitaine,Nouvelle-Aquitaine
-40,Aquitaine,Nouvelle-Aquitaine
-43,Auvergne,Auvergne-Rhône-Alpes
-Aragon,Espagne,Espagne
-Araba,Espagne,Espagne
-Gipuzkoa,Espagne,Espagne
-65,Midi-Pyrénées,Occitanie
-37,Centre,Centre-Val de Loire
-62,Nord-Pas-de-Calais,Hauts-de-France
-72,Pays de la Loire,Pays de la Loire
-23,Limousin,Nouvelle-Aquitaine
-15,Auvergne,Auvergne-Rhône-Alpes
-32,Midi-Pyrénées,Occitanie
-87,Limousin,Nouvelle-Aquitaine
-Navarra,Espagne,Espagne
-9,Midi-Pyrénées,Occitanie
-Bizkaia,Espagne,Espagne
-11,Languedoc-Roussillon,Occitanie
+Département,Ancienne Région,Nouvelle Région,DPT_str
+01,Rhône-Alpes,Auvergne-Rhône-Alpes,Ain
+02,Picardie,Hauts-de-France,Aisne
+03,Auvergne,Auvergne-Rhône-Alpes,Allier
+04,Provence-Alpes-Côte d'Azur,Provence-Alpes-Côte d'Azur,Alpes-de-Haute-Provence
+05,Provence-Alpes-Côte d'Azur,Provence-Alpes-Côte d'Azur,Hautes-Alpes
+06,Provence-Alpes-Côte d'Azur,Provence-Alpes-Côte d'Azur,Alpes-Maritimes
+07,Rhône-Alpes,Auvergne-Rhône-Alpes,Ardèche
+08,Champagne-Ardenne,Grand Est,Ardennes
+09,Midi-Pyrénées,Occitanie,Ariège
+10,Champagne-Ardenne,Grand Est,Aube
+11,Languedoc-Roussillon,Occitanie,Aude
+12,Midi-Pyrénées,Occitanie,Aveyron
+13,Provence-Alpes-Côte d'Azur,Provence-Alpes-Côte d'Azur,Bouches-du-Rhône
+14,Basse-Normandie,Normandie,Calvados
+15,Auvergne,Auvergne-Rhône-Alpes,Cantal
+16,Poitou-Charentes,Nouvelle-Aquitaine,Charente
+17,Poitou-Charentes,Nouvelle-Aquitaine,Charente-Maritime
+18,Centre,Centre-Val de Loire,Cher
+19,Limousin,Nouvelle-Aquitaine,Correze
+20,Corse,Corse,Corse
+21,Bourgogne,Bourgogne-Franche-Comté,Côte-d'Or
+22,Bretagne,Bretagne,Côtes-d'Armor
+23,Limousin,Nouvelle-Aquitaine,Creuse
+24,Aquitaine,Nouvelle-Aquitaine,Dordogne
+25,Bourgogne,Bourgogne-Franche-Comté,Doubs
+26,Rhône-Alpes,Auvergne-Rhône-Alpes,Drôme
+27,Haute-Normandie,Normandie,Eure
+28,Centre,Centre-Val de Loire,Eure-et-Loir
+29,Bretagne,Bretagne,Finistère
+30,Languedoc-Roussillon,Occitanie,Gard
+31,Midi-Pyrénées,Occitanie,Gers
+32,Midi-Pyrénées,Occitanie,Hautes-Pyrénées
+33,Aquitaine,Nouvelle-Aquitaine,Gironde
+34,Languedoc-Roussillon,Occitanie,Hérault
+35,Bretagne,Bretagne,Ille-et-Vilaine
+36,Centre,Centre-Val de Loire,Indre
+37,Centre,Centre-Val de Loire,Indre-et-Loire
+38,Rhône-Alpes,Auvergne-Rhône-Alpes,Isère
+39,Bourgogne,Bourgogne-Franche-Comté,Jura
+40,Aquitaine,Nouvelle-Aquitaine,Landes
+41,Centre,Centre-Val de Loire,Loir-et-Cher
+42,Rhône-Alpes,Auvergne-Rhône-Alpes,Loire
+43,Auvergne,Auvergne-Rhône-Alpes,Haute-Loire
+44,Pays de la Loire,Pays de la Loire,Loire-Atlantique
+45,Centre,Centre-Val de Loire,Loiret
+46,Midi-Pyrénées,Occitanie,Lot
+47,Aquitaine,Nouvelle-Aquitaine,Lot-et-Garonne
+48,Languedoc-Roussillon,Occitanie,Lozère
+49,Pays de la Loire,Pays de la Loire,Maine-et-Loire
+50,Normandie,Normandie,Manche
+51,Champagne-Ardenne,Grand Est,Marne
+52,Champagne-Ardenne,Grand Est,Haute-Marne
+53,Mayenne,Pays de la Loire,Mayenne
+54,Champagne-Ardenne,Grand Est,Meurthe-et-Moselle
+55,Lorraine,Grand Est,Meuse
+56,Bretagne,Bretagne,Morbihan
+57,Lorraine,Grand Est,Moselle
+58,Bourgogne,Bourgogne-Franche-Comté,Nièvre
+59,Nord-Pas-de-Calais,Hauts-de-France,Nord
+60,Oise,Hauts-de-France,Oise
+61,Basse-Normandie,Normandie,Orne
+62,Nord-Pas-de-Calais,Hauts-de-France,Pas-de-Calais
+63,Auvergne,Auvergne-Rhône-Alpes,Puy-de-Dôme
+64,Aquitaine,Nouvelle-Aquitaine,Pyrénées-Atlantiques
+65,Midi-Pyrénées,Occitanie,Hautes-Pyrénées
+66,Languedoc-Roussillon,Occitanie,Pyrénées-Orientales
+67,Alsace,Grand Est,Bas-Rhin
+68,Alsace,Grand Est,Haut-Rhin
+69,Rhône-Alpes,Auvergne-Rhône-Alpes,Rhône
+70,Bourgogne,Bourgogne-Franche-Comté,Saône-et-Loire
+71,Bourgogne,Bourgogne-Franche-Comté,Saône-et-Loire
+72,Pays de la Loire,Pays de la Loire,Sarthe
+73,Provence-Alpes-Côte d'Azur,Provence-Alpes-Côte d'Azur,Savoie
+74,Provence-Alpes-Côte d'Azur,Provence-Alpes-Côte d'Azur,Haute-Savoie
+75,Île-de-France,Île-de-France,Paris
+76,Haute-Normandie,Normandie,Seine-Maritime
+77,Île-de-France,Île-de-France,Seine-Saint-Denis
+78,Île-de-France,Île-de-France,Yvelines
+79,Poitou-Charentes,Nouvelle-Aquitaine,Charente-Maritime
+80,Picardie,Hauts-de-France,Aisne
+81,Midi-Pyrénées,Occitanie,Tarn
+82,Midi-Pyrénées,Occitanie,Tarn-et-Garonne
+83,Provence-Alpes-Côte d'Azur,Provence-Alpes-Côte d'Azur,Var
+84,Provence-Alpes-Côte d'Azur,Provence-Alpes-Côte d'Azur,Vaucluse
+85,Pays de la Loire,Pays de la Loire,Vendée
+86,Poitou-Charentes,Nouvelle-Aquitaine,Vienne
+87,Limousin,Nouvelle-Aquitaine,Haute-Vienne
+88,Lorraine,Grand Est,Meurthe-et-Moselle
+89,Bourgogne,Bourgogne-Franche-Comté,Yonne
+90,Franche-Comté,Bourgogne-Franche-Comté,Jura
+91,Île-de-France,Île-de-France,Essonne
+92,Île-de-France,Île-de-France,Val-de-Marne
+93,Île-de-France,Île-de-France,Seine-Saint-Denis
+94,Île-de-France,Île-de-France,Val-de-Marne
+95,Île-de-France,Île-de-France,Val-d'Oise
+96,DOM,DOM,Guadeloupe
+97,DOM,DOM,Martinique
+98,DOM,DOM,Guyane
+99,DOM,DOM,La Réunion
+Araba,Espagne,Espagne,Espagne
+Aragon,Espagne,Espagne,Espagne
+Bizkaia,Espagne,Espagne,Espagne
+Gipuzkoa,Espagne,Espagne,Espagne
+Navarra,Espagne,Espagne,Espagne
