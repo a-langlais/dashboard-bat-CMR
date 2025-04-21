@@ -1,43 +1,207 @@
-.card {
-    border-radius: 0.5rem;
-    margin: 5px;
-    display: inline-block;
+/* assets/styles.css */
+
+/* Thème clair */
+body {
+    background-color: #ffffff;
+    color: #333333;
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+/* Couleurs primaires et secondaires */
+a,
+button,
+input[type="submit"],
+.color-primary {
+    color: #333333;
+}
+
+a:hover,
+button:hover,
+input[type="submit"]:hover {
+    color: #ffffff;
+}
+
+/* Arrière-plan et bordures */
+input,
+textarea,
+select,
+button {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+}
+
+/* Footer global */
+.footer {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f9f9f9;
+    color: #333;
+    text-align: center;
+    padding: 12px 20px;
+    border-top: 1px solid #ddd;
+    box-shadow: 0 -2px 4px rgba(0,0,0,0.05);
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+    z-index: 1000;
+}
+
+/* Texte principal et secondaire */
+p,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #333333;
+}
+
+.text-light,
+.small-text {
+    color: #666666;
+}
+
+/* Espacements */
+.mt-small {
+    margin-top: 8px;
+}
+
+.mt-medium {
+    margin-top: 16px;
+}
+
+.mt-large {
+    margin-top: 24px;
+}
+
+.mb-small {
+    margin-bottom: 8px;
+}
+
+.mb-medium {
+    margin-bottom: 16px;
+}
+
+.mb-large {
+    margin-bottom: 24px;
+}
+
+/* Styles des boutons */
+button,
+.btn {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover,
+.btn:hover {
+    background-color: #004fa0;
+}
+
+/* Formulaires et champs de texte */
+input,
+textarea,
+select {
+    color: #333333;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    box-sizing: border-box;
+    width: 80%;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #004fa0;
+    box-shadow: 0 0 4px rgba(0, 79, 160, 0.3);
+}
+
+/* Titre avec ligne */
+.titre-container {
+    display: block;
+    align-items: center;
+    text-align: center;
+    gap: 10px; /* Espace entre le titre et la ligne */
     width: 100%;
 }
 
-.title {
-    font-size: 1rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    text-align: left;
+.titre-modern {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    color: #333;
+    white-space: nowrap; /* Empêche le titre de se couper en plusieurs lignes */
 }
 
-.values {
-    font-size: 2.5rem;
-    text-align: right;
-    display: block; /* Ensure it takes up the full width */
+.ligne-soulignement {
+    flex-grow: 1; /* Prend tout l'espace restant */
+    height: 2px;
+    background-color: #007bff;
 }
 
-.percent {
+/* Encadré citation */
+.citation {
+    border-left: 4px solid #ccc;      /* Bordure à gauche pour l'effet de citation */
+    background-color: #f7f7f7;        /* Couleur de fond */
+    padding: 10px 15px;               /* Espace intérieur */
+    margin: 10px 0;                   /* Marge autour de l'encadré */
+    font-size: 12px;
+    font-style: italic;               /* Style de police italic */
+    color: #666;                      /* Couleur du texte */
+    line-height: 1.5;                 /* Espacement entre les lignes */
+    overflow-wrap: break-word;        /* Retour à la ligne automatique */
+    word-wrap: break-word;            /* Compatibilité pour anciens navigateurs */
+    box-sizing: border-box;           /* Inclut le padding dans la largeur totale */
+    border-radius: 4px;               /* Bords légèrement arrondis */
+    display: block;                   /* Assure que c'est bien un container */
+    width: 95%;                      /* Utilisation de toute la largeur disponible */
+    max-width: 800px;                 /* Limite la largeur maximale pour ne pas étirer trop */
+}
+
+/* Conteneur global pour les KPI */
+.kpi-container {
+    background: #fff;
+    border-color: #818181;
+    padding: 10px; /* Marge intérieure */
+    margin: 15px; /* Marge extérieure */
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+  
+  /* Chaque KPI dans le container */
+  .kpi-card {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .kpi-card:last-child {
+    border-bottom: none;
+  }
+  
+  /* Titre de chaque KPI */
+  .kpi-title {
     font-size: 1rem;
+    color: #666;
     text-align: center;
-}
+    margin-bottom: 5px;
+  }
 
-.styled-text {
-    margin: 20px;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #ffffff18;
-    font-family: Arial, sans-serif;
-}
-
-.styled-text h3 {
-    margin-bottom: 10px;
-    font-weight: bold;
-    border-bottom: 2px solid #ffffff; /* Add horizontal line */
-    padding-bottom: 5px; /* Space between text and line */
-}
-
-.styled-text p {
-    text-align: justify;
+  .kpi-value {
+    text-align: center; /* Pour centrer horizontalement */
+    font-size: 2.5em; /* Pour agrandir la taille de la police */
+    display: block;
+    width: 100%;
 }

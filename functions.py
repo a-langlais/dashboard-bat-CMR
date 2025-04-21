@@ -16,8 +16,8 @@ def load_data_antenna():
     # Ajout du SEXE sur df_controls
     df_controls = df_controls.merge(df_individus[['NUM_PIT', 'SEXE']], left_on='NUM_PIT', right_on='NUM_PIT', how='left')
 
-    # Ajout du SEXE sur df_distances
-    df_distances = df_distances.merge(df_individus[['NUM_PIT', 'SEXE']], left_on='NUM_PIT', right_on='NUM_PIT', how='left')
+    # Ajout du SEXE et de l'AGE sur df_distances
+    df_distances = df_distances.merge(df_individus[['NUM_PIT', 'SEXE', 'AGE']], left_on='NUM_PIT', right_on='NUM_PIT', how='left')
 
     # Nettoyer df_distances
     df_distances = (
@@ -39,6 +39,11 @@ def generate_map(df_distances, df_sites):
     if df_distances.empty:
         m = folium.Map(location=[46.493889, 2.602778], zoom_start=6, tiles='CartoDB positron')
         return m
+
+    df_distances = (
+        df_distances
+        .drop_duplicates(subset=['CODE_ESP', 'SITE_DEPART', 'SITE_ARRIVEE'], keep='last')
+    )
 
     # Calcul du centre de la carte
     lat_mean = df_distances[['LAT_DEPART', 'LAT_ARRIVEE']].mean().mean()
