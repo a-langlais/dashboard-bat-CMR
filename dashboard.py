@@ -3,11 +3,21 @@ import plotly.express as px
 import plotly.graph_objects as go
 import plotly.io as pio
 
+COULEURS_ESPECES = {
+    'MINSCH': '#1f77b4',  # Bleu
+    'RHIFER': '#2ca02c',  # Vert
+    'MYOEMA': '#d62728',  # Rouge
+    'RHIEUR': '#9467bd',  # Violet
+    'MYONAT': '#ff7f0e',  # Orange
+    'MYODAU': '#8c564b'   # Brun
+}
+
 def detection_by_year(df_controls):
+    df_controls['DATE'] = pd.to_datetime(df_controls['DATE'], errors='coerce')
     df_controls['YEAR'] = df_controls['DATE'].dt.year
-    grouped_data = df_controls.groupby(['YEAR', 'CODE_ESP']).size().reset_index(name = 'Detections')
+    grouped_data = df_controls.groupby(['YEAR', 'CODE_ESP']).size().reset_index(name = 'Detections').sort_values('YEAR')
     
-    fig = px.bar(grouped_data, x = 'YEAR', y = 'Detections', color = 'CODE_ESP',
+    fig = px.bar(grouped_data, x = 'YEAR', y = 'Detections', color = 'CODE_ESP', color_discrete_map = COULEURS_ESPECES,
                  labels = {'Detections': 'Nombre de détections', 'CODE_ESP': 'Espèce'},
                  )
 
@@ -16,7 +26,7 @@ def detection_by_year(df_controls):
         width = 400,
         yaxis_title = 'Nombre de détections',
         xaxis_title = None,
-        xaxis = {'type': 'category', 'tickmode': 'linear'},  # Afficher toutes les années
+        xaxis = {'type': 'linear', 'tickmode': 'linear', 'dtick': 1},
         barmode = 'stack',
         legend = dict(
             bgcolor = 'rgba(0, 0, 0, 0)',
@@ -34,10 +44,10 @@ def detection_by_year(df_controls):
 def capture_by_year(df_captures):
     df_filtre = df_captures.copy()
     df_filtre['YEAR'] = df_filtre['DATE'].dt.year
-    df_grouped = df_filtre.groupby(['YEAR', 'CODE_ESP'])['NUM_PIT'].nunique().reset_index()
+    df_grouped = df_filtre.groupby(['YEAR', 'CODE_ESP'])['NUM_PIT'].nunique().reset_index().sort_values('YEAR')
     df_grouped.rename(columns = {'NUM_PIT': 'Nombre d\'individus uniques'}, inplace = True)
     
-    fig = px.bar(df_grouped, x = 'YEAR', y = 'Nombre d\'individus uniques', color = 'CODE_ESP',
+    fig = px.bar(df_grouped, x = 'YEAR', y = 'Nombre d\'individus uniques', color = 'CODE_ESP', color_discrete_map = COULEURS_ESPECES,
                  labels = {'Nombre d\'individus uniques': 'Nombre d\'individus uniques', 'CODE_ESP': 'Espèce'}
                  )
 
@@ -46,7 +56,7 @@ def capture_by_year(df_captures):
         width = 400,
         yaxis_title = 'Nombre d\'individus uniques',
         xaxis_title = None,
-        xaxis = {'type': 'category', 'tickmode': 'linear'},  # Afficher toutes les années
+        xaxis = {'type': 'linear', 'tickmode': 'linear', 'dtick': 1},
         legend = dict(
             bgcolor ='rgba(0, 0, 0, 0)',
             orientation = 'h',  # Légende horizontale
@@ -62,11 +72,12 @@ def capture_by_year(df_captures):
 
 def control_by_year(df_controls):
     df_filtre = df_controls.copy()
+    df_filtre['DATE'] = pd.to_datetime(df_filtre['DATE'], errors='coerce')
     df_filtre['YEAR'] = df_filtre['DATE'].dt.year
-    df_grouped = df_filtre.groupby(['YEAR', 'CODE_ESP'])['NUM_PIT'].nunique().reset_index()
+    df_grouped = df_filtre.groupby(['YEAR', 'CODE_ESP'])['NUM_PIT'].nunique().reset_index().sort_values('YEAR')
     df_grouped.rename(columns = {'NUM_PIT': 'Nombre d\'individus'}, inplace = True)
     
-    fig = px.bar(df_grouped, x = 'YEAR', y = 'Nombre d\'individus', color = 'CODE_ESP',
+    fig = px.bar(df_grouped, x = 'YEAR', y = 'Nombre d\'individus', color = 'CODE_ESP', color_discrete_map = COULEURS_ESPECES,
                  labels = {'Nombre d\'individus': 'Nombre d\'individus', 'CODE_ESP': 'Espèce'},
                  )
 
@@ -75,7 +86,7 @@ def control_by_year(df_controls):
         width = 400,
         yaxis_title = 'Nombre d\'individus',
         xaxis_title = None,
-        xaxis = {'type': 'category', 'tickmode': 'linear'},  # Afficher toutes les années
+        xaxis = {'type': 'linear', 'tickmode': 'linear', 'dtick': 1},
         legend = dict(
             bgcolor = 'rgba(0, 0, 0, 0)',
             orientation = 'h',  # Légende horizontale
@@ -165,8 +176,8 @@ def pie_controled(df_controls):
 
     # Créer un diagramme circulaire
     fig = px.pie(species_counts, 
-                values = 'Count', names = 'Species', 
-                color_discrete_sequence = px.colors.qualitative.Pastel,
+                values = 'Count', names = 'Species', color = 'Species',
+                color_discrete_map = COULEURS_ESPECES,
                 hole = 0.5,)
 
     # Personnalisation supplémentaire
@@ -183,8 +194,8 @@ def pie_marked(df_individus):
 
     # Créer un diagramme circulaire
     fig = px.pie(species_counts, 
-                values = 'Count', names = 'Species', 
-                color_discrete_sequence = px.colors.qualitative.Pastel,
+                values = 'Count', names = 'Species', color = 'Species',
+                color_discrete_map = COULEURS_ESPECES,
                 hole = 0.5)
 
     # Personnalisation supplémentaire
@@ -220,6 +231,24 @@ def top_detection(df_controls):
         showlegend = False,
         margin = dict(l = 200),         # Augmenter la marge gauche pour mieux lire les annotations
         legend = dict(bgcolor = 'rgba(0, 0, 0, 0)')
+    )
+
+    return fig
+
+def distance_boxplot(df_distances):
+    fig = px.box(
+        df_distances,
+        x = 'CODE_ESP',
+        y = 'DIST_KM',
+        color = 'CODE_ESP',  # Utilisation des couleurs basées sur les espèces
+        color_discrete_map = COULEURS_ESPECES,
+        title = ''
+    )
+
+    fig.update_layout(
+        xaxis_title = '',
+        yaxis_title = 'Distance entre deux sites (km)',
+        showlegend = False
     )
 
     return fig
