@@ -48,7 +48,8 @@ with open("pages/page1.md", "r", encoding = "utf-8") as file:
 
 ## VISUALISATION DES DONNEES D'ANTENNES
 communes = sorted(df_controls['COMMUNE'].unique().tolist())
-departements = sorted(df_controls['DEPARTEMENT'].unique().tolist())
+departements = sorted(df_controls['DEPARTEMENT'].dropna().unique().astype(str).tolist())
+dpt_gant = sorted(df_controls[df_controls['LIEU_DIT'].isin(liste_sites_antennes)]['DEPARTEMENT'].dropna().unique().astype(str).tolist())
 species = sorted(df_distances['CODE_ESP'].unique().tolist())
 genders = sorted(df_individus['SEXE'].dropna().unique().tolist())
 age = sorted(df_individus['AGE'].dropna().unique().tolist())
@@ -130,6 +131,7 @@ with open("pages/page3.md", "r", encoding = "utf-8") as file:
 # Callbacks du diagramme de Gant
 def update_gant(state):
     df_filtered_gant = df_controls.copy()
+    df_filtered_gant['DEPARTEMENT'] = df_filtered_gant['DEPARTEMENT'].fillna(0).astype(str)
     df_filtered_gant = df_filtered_gant[df_filtered_gant['LIEU_DIT'].isin(liste_sites_antennes)]
 
     # Convertir les dates sélectionnées en objets Timestamp
