@@ -1,3 +1,24 @@
+**Patch Note - Version 0.5**
+**Date de publication** : 10/02/2026
+
+**Fonctionnalités ajoutées :**
+
+- Aucun ajout
+
+**Améliorations et modifications :**
+
+- Ajout des données de contrôles de 2025
+
+**Problèmes connus :**
+
+- En raison d'une BASE_SITES non définitive, il peut y avoir quelques erreurs concernant l'intitulé de certains sites, leur localisation ou le nombre de sites de captures et de sites contrôlés affichés dans l'onglet STATISTIQUES, merci de me le faire remonter si vous constatez quelque chose qui empêche l'utilisation de l'appli (ex : "La Brumaudière" <-> "Ancienne citerne à eau" <-> "Citerne de Sainte-Ouenne")
+- La prochaine mise-à-jour portera sur l'ajout de nouveaux indicateurs stats et l'amélioration des cartes, je me base en priorité sur vos remarques et observations centralisée sur le fichier du drive
+
+> **Lien vers l'application en développement (build 0.5)** : https://huggingface.co/spaces/a-langlais/ccpna-taipy-dashboard
+
+_________________________________________________________________________________
+_________________________________________________________________________________
+
 **Patch Note - Version 0.4**
 **Date de publication** : 21/04/2025
 
