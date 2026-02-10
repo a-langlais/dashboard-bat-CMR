@@ -54,12 +54,12 @@ def generate_map(df_distances, df_sites):
 
     # Couleurs pour chaque espèce
     color_map = {
-        'RHIFER': 'blue',
-        'MYOEMA': 'green',
-        'RHIEUR': 'red',
-        'MINSCH': 'purple',
-        'MYOMYO': 'pink',
-        'MYODAU': 'black'
+        'MINSCH': '#1f77b4',
+        'RHIFER': '#2ca02c',
+        'MYOEMA': '#d62728',
+        'RHIEUR': '#9467bd',
+        'MYONAT': '#ff7f0e',
+        'MYODAU': '#8c564b'
     }
 
     # Tracer les lignes de déplacement
@@ -277,34 +277,6 @@ def gant_diagram_concat(df_original, concat_year = True, year_reference=2023):
         xaxis = dict(tickformat = '%m'),
         yaxis = dict(showgrid = True, zeroline = False, title = "Phase de présence"),
         height = 300
-    )
-
-    return fig
-
-def distance_boxplot(df_distances):
-    # Couleurs pour chaque espèce
-    color_map = {
-        'RHIFER' : 'blue',
-        'MYOEMA' : 'green',
-        'RHIEUR' : 'red',
-        'MINSCH' : 'purple',
-        'MYOMYO' : 'pink',
-        'MYODAU' : 'black'
-    }
-
-    fig = px.box(
-        df_distances,
-        x = 'CODE_ESP',
-        y = 'DIST_KM',
-        color = 'CODE_ESP',  # Utilisation des couleurs basées sur les espèces
-        color_discrete_map = color_map,
-        title = ''
-    )
-
-    fig.update_layout(
-        xaxis_title = '',
-        yaxis_title = 'Distance entre deux sites (km)',
-        showlegend = False
     )
 
     return fig
