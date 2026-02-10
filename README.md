@@ -1,4 +1,4 @@
-# Tableau de bords d'analyse des données de CMR des chauves-souris (v0.4 - 2025)
+# Tableau de bords d'analyse des données de CMR des chauves-souris (v0.5 - 2026)
 
 ## Présentation
 
