@@ -8,6 +8,15 @@ Département,Ancienne Région,Nouvelle Région,DPT_str
 07,Rhône-Alpes,Auvergne-Rhône-Alpes,Ardèche
 08,Champagne-Ardenne,Grand Est,Ardennes
 09,Midi-Pyrénées,Occitanie,Ariège
+1,Rhône-Alpes,Auvergne-Rhône-Alpes,Ain
+2,Picardie,Hauts-de-France,Aisne
+3,Auvergne,Auvergne-Rhône-Alpes,Allier
+4,Provence-Alpes-Côte d'Azur,Provence-Alpes-Côte d'Azur,Alpes-de-Haute-Provence
+5,Provence-Alpes-Côte d'Azur,Provence-Alpes-Côte d'Azur,Hautes-Alpes
+6,Provence-Alpes-Côte d'Azur,Provence-Alpes-Côte d'Azur,Alpes-Maritimes
+7,Rhône-Alpes,Auvergne-Rhône-Alpes,Ardèche
+8,Champagne-Ardenne,Grand Est,Ardennes
+9,Midi-Pyrénées,Occitanie,Ariège
 10,Champagne-Ardenne,Grand Est,Aube
 11,Languedoc-Roussillon,Occitanie,Aude
 12,Midi-Pyrénées,Occitanie,Aveyron
@@ -98,8 +107,10 @@ Département,Ancienne Région,Nouvelle Région,DPT_str
 97,DOM,DOM,Martinique
 98,DOM,DOM,Guyane
 99,DOM,DOM,La Réunion
+Alava/Araba,Espagne,Espagne,Espagne
 Araba,Espagne,Espagne,Espagne
 Aragon,Espagne,Espagne,Espagne
 Bizkaia,Espagne,Espagne,Espagne
+Catalunya,Espagne,Espagne,Espagne
 Gipuzkoa,Espagne,Espagne,Espagne
 Navarra,Espagne,Espagne,Espagne
