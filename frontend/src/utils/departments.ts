@@ -104,13 +104,13 @@ const DEPARTMENTS: Record<string, DepartmentMetadata> = {
   "07": { label: "Ardèche", color: "#ca8a04" },
   "08": { label: "Ardennes", color: "#be185d" },
   "09": { label: "Ariège", color: "#2563eb" },
-  "Alava/Araba": { label: "Alava/Araba", color: "#2563eb" },
-  "Araba": { label: "Araba", color: "#0891b2" },
-  "Aragon": { label: "Aragon", color: "#ea580c" },
-  "Bizkaia": { label: "Bizkaia", color: "#16a34a" },
-  "Catalunya": { label: "Catalunya", color: "#7c3aed" },
-  "Gipuzkoa": { label: "Gipuzkoa", color: "#dc2626" },
-  "Navarra": { label: "Navarra", color: "#ca8a04" },
+  "Alava/Araba": { label: "Alava/Araba (ES)", color: "#2563eb" },
+  "Araba": { label: "Araba (ES)", color: "#0891b2" },
+  "Aragon": { label: "Aragon (ES)", color: "#ea580c" },
+  "Bizkaia": { label: "Bizkaia (ES)", color: "#16a34a" },
+  "Catalunya": { label: "Catalunya (ES)", color: "#7c3aed" },
+  "Gipuzkoa": { label: "Gipuzkoa (ES)", color: "#dc2626" },
+  "Navarra": { label: "Navarra (ES)", color: "#ca8a04" },
 };
 
 const UNKNOWN_DEPARTMENT_COLOR = "#78909c";
