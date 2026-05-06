@@ -1,99 +1,86 @@
-# Tableau de bords d'analyse des données de CMR des chauves-souris (v0.3 - 2025)
+# Dashboard CMR CCPNA
 
-## Présentation
+Application web pour explorer les donnees CMR du programme CCPNA : statistiques, phenologie, fiches sites et carte interactive des trajectoires.
 
-Le projet CCPNA, mené par France Nature Environnement Nouvelle-Aquitaine depuis 2016, vise à étudier diverses espèces de chauves-souris selon quatre axes : génétique, écotoxicologie, épidémiologie et déplacements. Il utilise des méthodes telles que la génétique pour définir les populations, l'écotoxicologie pour identifier les polluants, l'épidémiologie pour comprendre la circulation des virus, et le suivi des déplacements via des puces sous-cutanées. De nombreux sites équipés d'antennes automatiques permettent de collecter une très grande quantité données sur le passage des individus marqués. Un tableau de bord interactif permet aux associations d’explorer les données pour leur prise de décision.
+Le projet a ete nettoye de l'ancienne application Taipy. La structure cible est maintenant :
 
-Porté par France Nature Environnement Nouvelle-Aquitaine, le projet [Chiroptères Cavernicoles Prioritaires de Nouvelle-Aquitaine](https://vimeo.com/435059221/7a3f18d6ba) (CCPNA) est un programme à large échelle démarré en 2016 dans l’objectif d’étudier plusieurs espèces de chauves-souris afin d’aborder quatre thématiques : 
-
-- **La génétique**, afin de définir les contours des populations et mettre en évidence d’éventuelles frein aux échanges génétiques ;
-- L’**écotoxicologie,** pour tenter d’aborder à quels polluants les espèces peuvent être exposées ;
-- L’**épidémiologie**, ou l’étude de la circulation des
-virus, permet de mettre en lumière d’éventuels risques d’exposition pour ces dernières comme de comprendre des mécanismes de circulation couplés au paysage ou à leurs mœurs ;
-- **Les déplacements**, avec la pose de puces sous cutanées, RFID ou Pit-tag, inertes avec un identifiant unique chez les Grands Rhinolophes, Murin à oreilles échancrées et le Minioptère de
-Schreibers. Les contrôles d’individus marqués permettent de retracer leurs déplacements. À terme, ces données pourraient permettre d’établir des taux de survie et de comprendre comment les individus utilisent les différents connus au cours de leur vie.
-
-## Organisation du répértoire
-
-Ce répertoire suit une hiérarchie classique et facile à explorer. Les données étant volumineuses, elles ne sont pas disponibles sur ce repo mais sur [le repo du Hugging-Face](https://huggingface.co/spaces/a-langlais/ccpna-taipy-dashboard/tree/main/data).
-
-```shell
-dashboard-bat-CMR/
-├── assets/                 # Scripts de customisation visuelle
-├── data/                   # Données brutes et traitées
-├── images/                 # Images utilisées sur l'application
-├── notebooks/              # Notebooks de test et d'expérimentation
-├── pages/                  # Pages de l'application Taipy
-├── patchnotes/             # Listes des modifications suite aux MàJ
-├── plots/                  # Figures fixes
-|
-├── functions.py            # Fonctions du backend
-├── dashboard.py            # Fonctions du dashboard
-├── main.py                 # Script de l'application Taipy
-|
-├── dockerfile              # Fichier docker pour containeurisation
-├── requirements.txt        # Liste des packages nécessaires pour le projet
-|
-├── .dockerignore
-├── .gitignore
-└── README.md               # Lisez-moi
+```text
+bat_CMR_dashboard_rework/
+|-- backend/       # API FastAPI, lecture CSV aujourd'hui, futur branchement SQL
+|-- frontend/      # Application React + Vite
+|-- data/          # Donnees CSV locales, ignorees si volumineuses
+`-- README.md
 ```
 
-## Installation
-### Environnement virtuel
+## Backend
 
-Dans un premier temps, clonez le dépôt sur votre machine locale via votre méthode préférée ou en utilisant la commande suivante :
+Installation depuis la racine :
 
-```shell
-git clone https://github.com/a-langlais/dashboard-bat-CMR.git
+```powershell
+cd backend
+python -m pip install -e .
 ```
 
-Ensuite, deux solutions s'offrent à vous si vous souhaitez relancer ce projet dans les mêmes conditions que lorsqu'il a été conçu.
+Lancement :
 
-Vous pouvez créer un environnement virtuel en téléchargeant spécifiquement les dépéndances Python nécessaires via le fichier `requirements.txt`.
-
-```shell
-pip install -r requirements.txt
+```powershell
+cd backend
+python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
 ```
 
-Si vous utilisez Conda, vous pouvez tout simplement recréer un environnement en utiliser le fichier `environment.yml`.
+Endpoints principaux :
 
-```shell
-conda env create -f environment.yml
-conda activate environment
+- `GET /api/health`
+- `GET /api/filters`
+- `POST /api/map/trajectories`
+- `GET /api/stats/global`
+- `GET /api/phenology`
+- `GET /api/sites/{site}/summary`
+
+Documentation detaillee des contrats API :
+
+- [backend/API.md](backend/API.md)
+
+Documentation interactive :
+
+- http://127.0.0.1:8000/docs
+- http://127.0.0.1:8000/redoc
+
+## Frontend
+
+Installation :
+
+```powershell
+cd frontend
+npm install
 ```
 
-### Docker
+Lancement :
 
-Si vous préférez utiliser Docker pour exécuter le projet dans un environnement isolé, vous pouvez construire l'image Docker à partir du fichier `Dockerfile` situé à la racine du projet.
-
-Construisez l'image Docker :
-
-```shell
-docker build -t dashboard-bat-cmr .
+```powershell
+cd frontend
+npm run dev -- --host 127.0.0.1 --port 5173
 ```
 
-Puis lancez l'image :
+Application :
 
-```shell
-docker run -d -p 5000:5000 dashboard-bat-cmr
+- http://127.0.0.1:5173/
+
+## Docker
+
+L'application peut etre lancee avec Docker Compose. Le frontend est servi par Nginx sur le port `5173`, avec un proxy `/api` vers le backend FastAPI.
+
+```powershell
+docker compose up --build
 ```
 
-## Taipy app
+Services :
 
-L'application Taipy est constituée de quatre onglets :
-- **Présentation** : afin de présenter le programme dans sa globalité
-- **Antennes** : permet de filtrer les données pour afficher une carte des trajectoires empruntées par les individus marqués.
-- **Phénologie** : permet de visualiser les données temporelles phénologiques de présence des individus marqués sur les différents sites étudiés.
-- **Statistiques** : tableau de bord des différentes métriques statistiques, principalement descriptives, du projet.
+- frontend : http://127.0.0.1:5173/
+- backend : http://127.0.0.1:8000/docs
 
-Pour lancer l'application Taipy :
+Le dossier `data/` est monte en lecture seule dans le conteneur backend sur `/data`.
 
-```shell
-conda create --name ccpna_dashboard python=3.11.9
-conda activate ccpna_dashboard
-pip install -r requirements.txt
-python run main.py
-```
+## Donnees
 
-L'application devrait être disponible à [localhost:5000](http://localhost:5000).
+Les CSV actuels restent dans `data/`. Le backend encapsule leur lecture dans `backend/app/repositories/`, ce qui permettra de remplacer progressivement cette couche par des extractions SQL sans modifier le frontend.
