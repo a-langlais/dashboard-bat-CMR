@@ -20,7 +20,14 @@ export function StatsPage() {
     api.globalStats().then(setStats);
   }, []);
 
-  if (!stats) return <div className="loading">Chargement des statistiques...</div>;
+  if (!stats) {
+    return (
+      <div className="loading">
+        <span className="spinner" aria-hidden="true" />
+        <span>Chargement des statistiques...</span>
+      </div>
+    );
+  }
 
   const filteredTransitions = stats.transitions.filter((row) => {
     const distanceFilter = Number.parseFloat(tableFilters.distance.replace(",", "."));

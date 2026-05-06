@@ -9,13 +9,19 @@ export function PhenologyPage({ filters }: { filters: FilterOptions }) {
   const [dateStart, setDateStart] = useState(filters.date_min ?? "");
   const [dateEnd, setDateEnd] = useState(filters.date_max ?? "");
   const [sites, setSites] = useState<SitePhenology[]>([]);
+  const [loading, setLoading] = useState(false);
 
   async function refresh() {
     const params = new URLSearchParams();
     departements.forEach((departement) => params.append("departements", departement));
     if (dateStart) params.set("date_start", dateStart);
     if (dateEnd) params.set("date_end", dateEnd);
-    setSites(await api.phenology(params));
+    setLoading(true);
+    try {
+      setSites(await api.phenology(params));
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -62,8 +68,17 @@ export function PhenologyPage({ filters }: { filters: FilterOptions }) {
           <span>Fin</span>
           <input type="date" value={dateEnd} onChange={(event) => setDateEnd(event.target.value)} />
         </label>
-        <button className="primary-action" onClick={refresh}>Mettre à jour</button>
+        <button className="primary-action" onClick={refresh} disabled={loading}>
+          {loading ? <span className="spinner spinner-light" aria-hidden="true" /> : null}
+          {loading ? "Mise à jour..." : "Mettre à jour"}
+        </button>
       </div>
+      {loading && !sites.length ? (
+        <div className="loading">
+          <span className="spinner" aria-hidden="true" />
+          <span>Chargement de la phénologie...</span>
+        </div>
+      ) : null}
       <article className="panel">
         <h3>Présence sur chaque site</h3>
         <div className="timeline-year-header">

@@ -188,7 +188,7 @@ export function MapPage({ filters }: MapPageProps) {
             Réinitialiser
           </button>
           <button className="primary-action" onClick={refresh} disabled={loading}>
-            <RefreshCw size={18} />
+            {loading ? <span className="spinner spinner-light" aria-hidden="true" /> : <RefreshCw size={18} />}
             {loading ? "Mise à jour..." : "Mettre à jour"}
           </button>
         </div>

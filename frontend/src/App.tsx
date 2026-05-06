@@ -34,7 +34,7 @@ export function App() {
         <div>
           <span className="brand-mark">🦇</span>
           <div>
-            <strong>Tableau de bord</strong>
+            <strong>TABLEAU DE BORD</strong>
             <small>Chiroptères Cavernicoles Prioritaires de Nouvelle-Aquitaine</small>
           </div>
         </div>
@@ -54,7 +54,12 @@ export function App() {
 
       <main>
         {error ? <div className="error">API indisponible : {error}</div> : null}
-        {!filters && !error ? <div className="loading">Chargement des filtres...</div> : null}
+        {!filters && !error ? (
+          <div className="loading">
+            <span className="spinner" aria-hidden="true" />
+            <span>Chargement des filtres...</span>
+          </div>
+        ) : null}
         {filters ? (
           <>
             {activeTab === "home" && <HomePage />}

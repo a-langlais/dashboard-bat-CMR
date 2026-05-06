@@ -10,6 +10,7 @@ export function SitePage({ filters }: { filters: FilterOptions }) {
   const [summary, setSummary] = useState<SiteSummary | null>(null);
 
   useEffect(() => {
+    setSummary(null);
     if (site) api.siteSummary(site).then(setSummary);
   }, [site]);
 
@@ -25,7 +26,10 @@ export function SitePage({ filters }: { filters: FilterOptions }) {
         </select>
       </label>
       {!summary ? (
-        <div className="loading">Chargement de la fiche site...</div>
+        <div className="loading">
+          <span className="spinner" aria-hidden="true" />
+          <span>Chargement de la fiche site...</span>
+        </div>
       ) : (
         <>
           <KpiGrid kpis={summary.kpis} />

@@ -63,12 +63,12 @@ button {
 .brand-mark {
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
+  width: 54px;
+  height: 54px;
   border-radius: 8px;
-  background: #16697a;
-  color: #fff;
-  font-weight: 800;
+  background: transparent;
+  font-size: 2.5rem;
+  line-height: 1;
 }
 
 .topbar nav {
@@ -1050,6 +1050,35 @@ th {
   border-radius: 8px;
   background: #fff;
   padding: 18px;
+}
+
+.loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  border: 2px solid #d8e3df;
+  border-top-color: #16697a;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.spinner-light {
+  width: 16px;
+  height: 16px;
+  border-color: rgba(255, 255, 255, 0.45);
+  border-top-color: #fff;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .error {
