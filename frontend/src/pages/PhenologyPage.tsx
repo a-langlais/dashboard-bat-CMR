@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { api } from "../api/client";
+import { DateField } from "../components/DateField";
 import { MultiSelect } from "../components/MultiSelect";
 import { SectionTitle } from "../components/SectionTitle";
 import type { FilterOptions, SitePhenology } from "../types/api";
@@ -62,11 +63,11 @@ export function PhenologyPage({ filters }: { filters: FilterOptions }) {
         <MultiSelect label="Département" values={departements} options={filters.departements_antennes} onChange={setDepartements} compact />
         <label>
           <span>Début</span>
-          <input type="date" value={dateStart} onChange={(event) => setDateStart(event.target.value)} />
+          <DateField label="" value={dateStart} onChange={(value) => setDateStart(value ?? "")} />
         </label>
         <label>
           <span>Fin</span>
-          <input type="date" value={dateEnd} onChange={(event) => setDateEnd(event.target.value)} />
+          <DateField label="" value={dateEnd} onChange={(value) => setDateEnd(value ?? "")} />
         </label>
         <button className="primary-action" onClick={refresh} disabled={loading}>
           {loading ? <span className="spinner spinner-light" aria-hidden="true" /> : null}

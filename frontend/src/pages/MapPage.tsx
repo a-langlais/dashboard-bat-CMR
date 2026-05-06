@@ -2,6 +2,7 @@ import { Download, FileJson, RefreshCw } from "lucide-react";
 import { toPng } from "html-to-image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { api } from "../api/client";
+import { DateField } from "../components/DateField";
 import { FilterChecklist } from "../components/FilterChecklist";
 import { MapLegend, OptimizedMap } from "../components/OptimizedMap";
 import { SectionTitle } from "../components/SectionTitle";
@@ -174,11 +175,11 @@ export function MapPage({ filters }: MapPageProps) {
           <div className="date-row">
             <label>
               <span>Début</span>
-              <input type="date" value={form.date_start ?? ""} onChange={(event) => setForm({ ...form, date_start: event.target.value || null })} />
+              <DateField label="" value={form.date_start} onChange={(date_start) => setForm({ ...form, date_start })} />
             </label>
             <label>
               <span>Fin</span>
-              <input type="date" value={form.date_end ?? ""} onChange={(event) => setForm({ ...form, date_end: event.target.value || null })} />
+              <DateField label="" value={form.date_end} onChange={(date_end) => setForm({ ...form, date_end })} />
             </label>
           </div>
           <FilterChecklist label="Périodes" values={form.periods} options={filters.periods} onChange={(periods) => setForm({ ...form, periods })} maxHeight={120} />

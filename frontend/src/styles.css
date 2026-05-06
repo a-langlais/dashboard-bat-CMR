@@ -278,6 +278,7 @@ main {
 
 .field,
 .date-row label,
+.date-field,
 .phenology-controls label,
 .site-selector {
   display: grid;
@@ -289,7 +290,8 @@ main {
 }
 
 select,
-input[type="date"] {
+input[type="date"],
+.date-input {
   width: 100%;
   border: 1px solid #cbd8d5;
   border-radius: 8px;
@@ -310,6 +312,11 @@ option {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+}
+
+.date-input {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
 }
 
 .primary-action {
@@ -969,6 +976,21 @@ th {
   grid-template-columns: minmax(260px, 1.4fr) repeat(3, minmax(140px, 0.7fr));
   gap: 12px;
   align-items: end;
+  border: 1px solid #dce6e3;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 12px 34px rgba(36, 48, 54, 0.07);
+  padding: 16px;
+}
+
+.phenology-controls .field,
+.phenology-controls .date-field,
+.phenology-controls label {
+  margin-bottom: 0;
+}
+
+.phenology-controls .primary-action {
+  min-height: 42px;
 }
 
 .timeline {
