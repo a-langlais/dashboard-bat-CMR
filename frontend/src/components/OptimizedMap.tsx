@@ -2,6 +2,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect, useRef } from "react";
 import type { TrajectoryMapResponse } from "../types/api";
+import { formatDepartment as formatDepartmentLabel, normalizeDepartmentCode } from "../utils/departments";
 
 type OptimizedMapProps = {
   data: TrajectoryMapResponse | null;
@@ -10,6 +11,122 @@ type OptimizedMapProps = {
 
 type MapLegendProps = OptimizedMapProps & {
   onToggleSiteLabels?: (visible: boolean) => void;
+};
+
+const DEPARTMENT_COLORS = [
+  "#2563eb",
+  "#16a34a",
+  "#dc2626",
+  "#9333ea",
+  "#ea580c",
+  "#0891b2",
+  "#65a30d",
+  "#be123c",
+  "#7c3aed",
+  "#0f766e",
+];
+
+const UNKNOWN_DEPARTMENT = "Non renseigné";
+
+const DEPARTMENT_LABELS: Record<string, string> = {
+  "01": "Ain",
+  "02": "Aisne",
+  "03": "Allier",
+  "04": "Alpes-de-Haute-Provence",
+  "05": "Hautes-Alpes",
+  "06": "Alpes-Maritimes",
+  "07": "Ardèche",
+  "08": "Ardennes",
+  "09": "Ariège",
+  "10": "Aube",
+  "11": "Aude",
+  "12": "Aveyron",
+  "13": "Bouches-du-Rhône",
+  "14": "Calvados",
+  "15": "Cantal",
+  "16": "Charente",
+  "17": "Charente-Maritime",
+  "18": "Cher",
+  "19": "Correze",
+  "20": "Corse",
+  "21": "Côte-d'Or",
+  "22": "Côtes-d'Armor",
+  "23": "Creuse",
+  "24": "Dordogne",
+  "25": "Doubs",
+  "26": "Drôme",
+  "27": "Eure",
+  "28": "Eure-et-Loir",
+  "29": "Finistère",
+  "30": "Gard",
+  "32": "Gers",
+  "65": "Hautes-Pyrénées",
+  "33": "Gironde",
+  "34": "Hérault",
+  "35": "Ille-et-Vilaine",
+  "36": "Indre",
+  "37": "Indre-et-Loire",
+  "38": "Isère",
+  "39": "Jura",
+  "40": "Landes",
+  "41": "Loir-et-Cher",
+  "42": "Loire",
+  "43": "Haute-Loire",
+  "44": "Loire-Atlantique",
+  "45": "Loiret",
+  "46": "Lot",
+  "47": "Lot-et-Garonne",
+  "48": "Lozère",
+  "49": "Maine-et-Loire",
+  "50": "Manche",
+  "51": "Marne",
+  "52": "Haute-Marne",
+  "53": "Mayenne",
+  "54": "Meurthe-et-Moselle",
+  "55": "Meuse",
+  "56": "Morbihan",
+  "57": "Moselle",
+  "58": "Nièvre",
+  "59": "Nord",
+  "60": "Oise",
+  "61": "Orne",
+  "62": "Pas-de-Calais",
+  "63": "Puy-de-Dôme",
+  "64": "Pyrénées-Atlantiques",
+  "66": "Pyrénées-Orientales",
+  "67": "Bas-Rhin",
+  "68": "Haut-Rhin",
+  "69": "Rhône",
+  "71": "Saône-et-Loire",
+  "72": "Sarthe",
+  "73": "Savoie",
+  "74": "Haute-Savoie",
+  "75": "Paris",
+  "76": "Seine-Maritime",
+  "93": "Seine-Saint-Denis",
+  "78": "Yvelines",
+  "81": "Tarn",
+  "82": "Tarn-et-Garonne",
+  "83": "Var",
+  "84": "Vaucluse",
+  "85": "Vendée",
+  "86": "Vienne",
+  "87": "Haute-Vienne",
+  "89": "Yonne",
+  "91": "Essonne",
+  "94": "Val-de-Marne",
+  "95": "Val-d'Oise",
+  "971": "Guadeloupe",
+  "972": "Martinique",
+  "973": "Guyane",
+  "974": "La Réunion",
+  "Alava/Araba": "Espagne",
+  "Araba": "Espagne",
+  "Aragon": "Espagne",
+  "Bizkaia": "Espagne",
+  "Catalunya": "Espagne",
+  "Gipuzkoa": "Espagne",
+  "Navarra": "Espagne",
 };
 
 export function OptimizedMap({ data, showSiteLabels = false }: OptimizedMapProps) {
@@ -33,6 +150,17 @@ export function OptimizedMap({ data, showSiteLabels = false }: OptimizedMapProps
       maxZoom: 18,
     }).addTo(map.current);
     layer.current = L.layerGroup().addTo(map.current);
+  }, []);
+
+  useEffect(() => {
+    if (!mapNode.current) return;
+
+    const observer = new ResizeObserver(() => {
+      map.current?.invalidateSize();
+    });
+    observer.observe(mapNode.current);
+
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -70,7 +198,7 @@ export function OptimizedMap({ data, showSiteLabels = false }: OptimizedMapProps
         },
       );
       line.bindTooltip(
-        `<strong>${species}</strong><br>${individualText}<br>${trajectory.departure.site ?? "Site départ inconnu"} → ${trajectory.arrival.site ?? "Site arrivée inconnu"}<br>${trajectory.distance_km.toLocaleString("fr-FR")} km`,
+        `<strong>${species}</strong><br>${individualText}<br>${trajectory.departure.site ?? "Site départ inconnu"} -> ${trajectory.arrival.site ?? "Site arrivée inconnu"}<br>${trajectory.distance_km.toLocaleString("fr-FR")} km`,
         { sticky: true },
       );
       line.addTo(layer.current!);
@@ -78,14 +206,14 @@ export function OptimizedMap({ data, showSiteLabels = false }: OptimizedMapProps
 
     data.sites.forEach((site) => {
       const marker = L.circleMarker([site.lat, site.lon], {
-        radius: site.role === "both" ? 4.5 : 3.5,
-        color: "#7f1d1d",
-        fillColor: site.role === "arrival" ? "#f59e0b" : "#dc2626",
+        radius: 4,
+        color: "#1f2937",
+        fillColor: getDepartmentColor(site.departement, data),
         fillOpacity: 0.95,
         weight: 1,
       });
       marker.bindTooltip(
-        `<strong>${site.site}</strong><br>${site.commune ?? ""}${site.departement ? ` (${site.departement})` : ""}`,
+        `<strong>${site.site}</strong><br>${site.commune ?? ""}${site.departement ? ` (${formatDepartment(site.departement)})` : ""}`,
         { sticky: true },
       );
       marker.addTo(layer.current!);
@@ -131,6 +259,23 @@ function escapeHtml(value: string) {
   });
 }
 
+function getDepartmentColor(departement: string | null, data: TrajectoryMapResponse) {
+  const departements = getVisibleDepartements(data);
+  const key = normalizeDepartmentCode(departement) ?? UNKNOWN_DEPARTMENT;
+  const index = Math.max(0, departements.indexOf(key));
+  return DEPARTMENT_COLORS[index % DEPARTMENT_COLORS.length];
+}
+
+function getVisibleDepartements(data: TrajectoryMapResponse) {
+  return Array.from(new Set(data.sites.map((site) => normalizeDepartmentCode(site.departement) ?? UNKNOWN_DEPARTMENT))).sort((a, b) =>
+    formatDepartment(a).localeCompare(formatDepartment(b), "fr-FR", { numeric: true }),
+  );
+}
+
+function formatDepartment(departement: string) {
+  return formatDepartmentLabel(departement);
+}
+
 export function MapLegend({ data, showSiteLabels = false, onToggleSiteLabels }: MapLegendProps) {
   if (!data || !Object.keys(data.species_colors).length) return null;
 
@@ -139,9 +284,10 @@ export function MapLegend({ data, showSiteLabels = false, onToggleSiteLabels }: 
     acc[species] = (acc[species] ?? 0) + 1;
     return acc;
   }, {});
+  const departements = getVisibleDepartements(data);
 
   return (
-    <div className="map-legend" aria-label="Légende des espèces">
+    <div className="map-legend" aria-label="Légende de la carte">
       <strong>Légende</strong>
       <label className="map-label-toggle">
         <input
@@ -151,15 +297,32 @@ export function MapLegend({ data, showSiteLabels = false, onToggleSiteLabels }: 
         />
         <span>Nom des sites</span>
       </label>
-      {Object.entries(data.species_colors)
-        .filter(([species]) => counts[species])
-        .map(([species, color]) => (
-          <div className="map-legend-row" key={species}>
-            <i style={{ backgroundColor: color }} />
-            <span>{species}</span>
-            <em>{counts[species].toLocaleString("fr-FR")}</em>
+      <div className={legendSectionClass(Object.keys(counts).length)}>
+        <strong>Espèces</strong>
+        {Object.entries(data.species_colors)
+          .filter(([species]) => counts[species])
+          .map(([species, color]) => (
+            <div className="map-legend-row" key={species}>
+              <i style={{ backgroundColor: color }} />
+              <span>{species}</span>
+              <em>{counts[species].toLocaleString("fr-FR")}</em>
+            </div>
+          ))}
+      </div>
+      <div className={legendSectionClass(departements.length)}>
+        <strong>Départements</strong>
+        {departements.map((departement, index) => (
+            <div className="map-legend-row" key={departement}>
+              <i style={{ backgroundColor: DEPARTMENT_COLORS[index % DEPARTMENT_COLORS.length] }} />
+            <span>{formatDepartment(departement)}</span>
+            <em>{data.sites.filter((site) => (normalizeDepartmentCode(site.departement) ?? UNKNOWN_DEPARTMENT) === departement).length}</em>
           </div>
         ))}
+      </div>
     </div>
   );
+}
+
+function legendSectionClass(itemCount: number) {
+  return itemCount > 6 ? "map-legend-section map-legend-section-wide" : "map-legend-section";
 }

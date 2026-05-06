@@ -4,9 +4,10 @@ type MultiSelectProps = {
   options: string[];
   onChange: (values: string[]) => void;
   compact?: boolean;
+  optionLabel?: (option: string) => string;
 };
 
-export function MultiSelect({ label, values, options, onChange, compact }: MultiSelectProps) {
+export function MultiSelect({ label, values, options, onChange, compact, optionLabel = (option) => option }: MultiSelectProps) {
   return (
     <label className="field">
       <span>{label}</span>
@@ -20,7 +21,7 @@ export function MultiSelect({ label, values, options, onChange, compact }: Multi
       >
         {options.map((option) => (
           <option key={option} value={option}>
-            {option}
+            {optionLabel(option)}
           </option>
         ))}
       </select>

@@ -477,6 +477,9 @@ option {
 .map-stage {
   position: relative;
   overflow: hidden;
+  resize: vertical;
+  min-height: 420px;
+  max-height: calc(100vh - 170px);
   border: 1px solid #d8e3df;
   border-radius: 8px;
   background:
@@ -556,6 +559,26 @@ option {
 
 .map-legend strong {
   color: #23363b;
+}
+
+.map-legend-section {
+  display: grid;
+  gap: 7px;
+  border-top: 1px solid #e4ece9;
+  padding-top: 8px;
+}
+
+.map-legend-section strong {
+  font-size: 0.86rem;
+}
+
+.map-legend-section-wide {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 14px;
+}
+
+.map-legend-section-wide strong {
+  grid-column: 1 / -1;
 }
 
 .map-legend-row {

@@ -4,6 +4,7 @@ import { DateField } from "../components/DateField";
 import { MultiSelect } from "../components/MultiSelect";
 import { SectionTitle } from "../components/SectionTitle";
 import type { FilterOptions, SitePhenology } from "../types/api";
+import { formatDepartment, sortDepartmentsByLabel } from "../utils/departments";
 
 export function PhenologyPage({ filters }: { filters: FilterOptions }) {
   const [departements, setDepartements] = useState<string[]>([]);
@@ -11,6 +12,10 @@ export function PhenologyPage({ filters }: { filters: FilterOptions }) {
   const [dateEnd, setDateEnd] = useState(filters.date_max ?? "");
   const [sites, setSites] = useState<SitePhenology[]>([]);
   const [loading, setLoading] = useState(false);
+  const departmentOptions = useMemo(
+    () => sortDepartmentsByLabel(filters.departements_antennes),
+    [filters.departements_antennes],
+  );
 
   async function refresh() {
     const params = new URLSearchParams();
@@ -60,7 +65,7 @@ export function PhenologyPage({ filters }: { filters: FilterOptions }) {
     <section className="content-stack">
       <SectionTitle title="Phénologie temporelle des sites" subtitle="Présence par site équipé, filtrable par département et plage de dates." />
       <div className="phenology-controls">
-        <MultiSelect label="Département" values={departements} options={filters.departements_antennes} onChange={setDepartements} compact />
+        <MultiSelect label="Département" values={departements} options={departmentOptions} onChange={setDepartements} optionLabel={formatDepartment} compact />
         <label>
           <span>Début</span>
           <DateField label="" value={dateStart} onChange={(value) => setDateStart(value ?? "")} />

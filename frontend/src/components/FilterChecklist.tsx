@@ -8,6 +8,7 @@ type FilterChecklistProps = {
   onChange: (values: string[]) => void;
   placeholder?: string;
   maxHeight?: number;
+  optionLabel?: (option: string) => string;
 };
 
 export function FilterChecklist({
@@ -17,6 +18,7 @@ export function FilterChecklist({
   onChange,
   placeholder = "Rechercher",
   maxHeight = 180,
+  optionLabel = (option) => option,
 }: FilterChecklistProps) {
   const [query, setQuery] = useState("");
   const selected = new Set(values);
@@ -25,9 +27,9 @@ export function FilterChecklist({
   const visibleOptions = useMemo(() => {
     if (!normalizedQuery) return options.slice(0, 140);
     return options
-      .filter((option) => option.toLocaleLowerCase("fr-FR").includes(normalizedQuery))
+      .filter((option) => optionLabel(option).toLocaleLowerCase("fr-FR").includes(normalizedQuery))
       .slice(0, 180);
-  }, [normalizedQuery, options]);
+  }, [normalizedQuery, optionLabel, options]);
 
   function toggle(option: string) {
     if (selected.has(option)) {
@@ -61,7 +63,7 @@ export function FilterChecklist({
         <div className="selected-chips">
           {values.slice(0, 6).map((value) => (
             <button key={value} type="button" onClick={() => toggle(value)}>
-              {value}
+              {optionLabel(value)}
               <X size={12} />
             </button>
           ))}
@@ -76,7 +78,7 @@ export function FilterChecklist({
               checked={selected.has(option)}
               onChange={() => toggle(option)}
             />
-            <span>{option}</span>
+            <span>{optionLabel(option)}</span>
           </label>
         ))}
         {!visibleOptions.length ? <em>Aucun résultat</em> : null}

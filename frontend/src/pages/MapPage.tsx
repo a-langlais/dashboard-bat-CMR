@@ -7,6 +7,7 @@ import { FilterChecklist } from "../components/FilterChecklist";
 import { MapLegend, OptimizedMap } from "../components/OptimizedMap";
 import { SectionTitle } from "../components/SectionTitle";
 import type { FilterOptions, TrajectoryFilters, TrajectoryMapResponse } from "../types/api";
+import { formatDepartment, sortDepartmentsByLabel } from "../utils/departments";
 
 type MapPageProps = {
   filters: FilterOptions;
@@ -53,6 +54,7 @@ export function MapPage({ filters }: MapPageProps) {
     });
     return Array.from(siteSet).sort();
   }, [filters.sites, filters.sites_by_commune, form.communes]);
+  const departmentOptions = useMemo(() => sortDepartmentsByLabel(filters.departements), [filters.departements]);
 
   async function refresh() {
     setLoading(true);
@@ -152,8 +154,9 @@ export function MapPage({ filters }: MapPageProps) {
           <FilterChecklist
             label="Département"
             values={form.departements}
-            options={filters.departements}
+            options={departmentOptions}
             onChange={(departements) => setForm({ ...form, departements })}
+            optionLabel={formatDepartment}
             maxHeight={150}
           />
         </div>
