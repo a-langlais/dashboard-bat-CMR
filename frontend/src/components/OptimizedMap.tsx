@@ -1,6 +1,7 @@
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { useEffect, useRef } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import type { TrajectoryMapResponse } from "../types/api";
 import { formatDepartment as formatDepartmentLabel, normalizeDepartmentCode } from "../utils/departments";
 
@@ -277,6 +278,8 @@ function formatDepartment(departement: string) {
 }
 
 export function MapLegend({ data, showSiteLabels = false, onToggleSiteLabels }: MapLegendProps) {
+  const [collapsed, setCollapsed] = useState(false);
+
   if (!data || !Object.keys(data.species_colors).length) return null;
 
   const counts = data.trajectories.reduce<Record<string, number>>((acc, trajectory) => {
@@ -287,38 +290,52 @@ export function MapLegend({ data, showSiteLabels = false, onToggleSiteLabels }: 
   const departements = getVisibleDepartements(data);
 
   return (
-    <div className="map-legend" aria-label="Légende de la carte">
-      <strong>Légende</strong>
-      <label className="map-label-toggle">
-        <input
-          type="checkbox"
-          checked={showSiteLabels}
-          onChange={(event) => onToggleSiteLabels?.(event.target.checked)}
-        />
-        <span>Nom des sites</span>
-      </label>
-      <div className={legendSectionClass(Object.keys(counts).length)}>
-        <strong>Espèces</strong>
-        {Object.entries(data.species_colors)
-          .filter(([species]) => counts[species])
-          .map(([species, color]) => (
-            <div className="map-legend-row" key={species}>
-              <i style={{ backgroundColor: color }} />
-              <span>{species}</span>
-              <em>{counts[species].toLocaleString("fr-FR")}</em>
-            </div>
-          ))}
+    <div className={`map-legend${collapsed ? " map-legend-collapsed" : ""}`} aria-label="Légende de la carte">
+      <div className="map-legend-header">
+        <strong>Légende</strong>
+        <button
+          type="button"
+          onClick={() => setCollapsed((current) => !current)}
+          title={collapsed ? "Afficher la légende" : "Réduire la légende"}
+          aria-expanded={!collapsed}
+        >
+          {collapsed ? <ChevronDown size={16} /> : <ChevronUp size={16} />}
+        </button>
       </div>
-      <div className={legendSectionClass(departements.length)}>
-        <strong>Départements</strong>
-        {departements.map((departement, index) => (
-            <div className="map-legend-row" key={departement}>
-              <i style={{ backgroundColor: DEPARTMENT_COLORS[index % DEPARTMENT_COLORS.length] }} />
-            <span>{formatDepartment(departement)}</span>
-            <em>{data.sites.filter((site) => (normalizeDepartmentCode(site.departement) ?? UNKNOWN_DEPARTMENT) === departement).length}</em>
+      {!collapsed ? (
+        <>
+          <label className="map-label-toggle">
+            <input
+              type="checkbox"
+              checked={showSiteLabels}
+              onChange={(event) => onToggleSiteLabels?.(event.target.checked)}
+            />
+            <span>Nom des sites</span>
+          </label>
+          <div className={legendSectionClass(Object.keys(counts).length)}>
+            <strong>Espèces</strong>
+            {Object.entries(data.species_colors)
+              .filter(([species]) => counts[species])
+              .map(([species, color]) => (
+                <div className="map-legend-row" key={species}>
+                  <i style={{ backgroundColor: color }} />
+                  <span>{species}</span>
+                  <em>{counts[species].toLocaleString("fr-FR")}</em>
+                </div>
+              ))}
           </div>
-        ))}
-      </div>
+          <div className={legendSectionClass(departements.length)}>
+            <strong>Départements</strong>
+            {departements.map((departement, index) => (
+              <div className="map-legend-row" key={departement}>
+                <i style={{ backgroundColor: DEPARTMENT_COLORS[index % DEPARTMENT_COLORS.length] }} />
+                <span>{formatDepartment(departement)}</span>
+                <em>{data.sites.filter((site) => (normalizeDepartmentCode(site.departement) ?? UNKNOWN_DEPARTMENT) === departement).length}</em>
+              </div>
+            ))}
+          </div>
+        </>
+      ) : null}
     </div>
   );
 }

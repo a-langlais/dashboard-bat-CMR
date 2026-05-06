@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { api } from "../api/client";
 import { DateField } from "../components/DateField";
-import { MultiSelect } from "../components/MultiSelect";
+import { FilterChecklist } from "../components/FilterChecklist";
 import { SectionTitle } from "../components/SectionTitle";
 import type { FilterOptions, SitePhenology } from "../types/api";
 import { formatDepartment, sortDepartmentsByLabel } from "../utils/departments";
@@ -65,15 +65,24 @@ export function PhenologyPage({ filters }: { filters: FilterOptions }) {
     <section className="content-stack">
       <SectionTitle title="Phénologie temporelle des sites" subtitle="Présence par site équipé, filtrable par département et plage de dates." />
       <div className="phenology-controls">
-        <MultiSelect label="Département" values={departements} options={departmentOptions} onChange={setDepartements} optionLabel={formatDepartment} compact />
-        <label>
-          <span>Début</span>
-          <DateField label="" value={dateStart} onChange={(value) => setDateStart(value ?? "")} />
-        </label>
-        <label>
-          <span>Fin</span>
-          <DateField label="" value={dateEnd} onChange={(value) => setDateEnd(value ?? "")} />
-        </label>
+        <FilterChecklist
+          label="Département"
+          values={departements}
+          options={departmentOptions}
+          onChange={setDepartements}
+          optionLabel={formatDepartment}
+          maxHeight={190}
+        />
+        <div className="phenology-date-stack">
+          <label>
+            <span>Début</span>
+            <DateField label="" value={dateStart} onChange={(value) => setDateStart(value ?? "")} />
+          </label>
+          <label>
+            <span>Fin</span>
+            <DateField label="" value={dateEnd} onChange={(value) => setDateEnd(value ?? "")} />
+          </label>
+        </div>
         <button className="primary-action" onClick={refresh} disabled={loading}>
           {loading ? <span className="spinner spinner-light" aria-hidden="true" /> : null}
           {loading ? "Mise à jour..." : "Mettre à jour"}

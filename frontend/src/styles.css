@@ -279,7 +279,7 @@ main {
 .field,
 .date-row label,
 .date-field,
-.phenology-controls label,
+.phenology-date-stack > label,
 .site-selector {
   display: grid;
   gap: 7px;
@@ -559,6 +559,30 @@ option {
 
 .map-legend strong {
   color: #23363b;
+}
+
+.map-legend-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.map-legend-header button {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #cbd8d5;
+  border-radius: 8px;
+  background: #fff;
+  color: #33474d;
+  padding: 0;
+}
+
+.map-legend-collapsed {
+  min-width: 132px;
+  padding: 8px 10px;
 }
 
 .map-legend-section {
@@ -996,7 +1020,7 @@ th {
 
 .phenology-controls {
   display: grid;
-  grid-template-columns: minmax(260px, 1.4fr) repeat(3, minmax(140px, 0.7fr));
+  grid-template-columns: minmax(280px, 1.4fr) minmax(180px, 0.7fr) minmax(150px, 0.5fr);
   gap: 12px;
   align-items: end;
   border: 1px solid #dce6e3;
@@ -1008,8 +1032,14 @@ th {
 
 .phenology-controls .field,
 .phenology-controls .date-field,
-.phenology-controls label {
+.phenology-date-stack > label,
+.phenology-controls .checklist-field {
   margin-bottom: 0;
+}
+
+.phenology-date-stack {
+  display: grid;
+  gap: 12px;
 }
 
 .phenology-controls .primary-action {

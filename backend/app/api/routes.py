@@ -7,7 +7,9 @@ limite le cout de validation sur les gros payloads tout en conservant des
 contrats internes types.
 """
 
-from fastapi import APIRouter, Depends
+from typing import Annotated
+
+from fastapi import APIRouter, Depends, Query
 
 from app.repositories.csv_repository import CmrData, get_cmr_data
 from app.schemas.filters import TrajectoryFilters
@@ -47,7 +49,7 @@ def global_stats(data: CmrData = Depends(get_cmr_data)):
 
 @router.get("/phenology")
 def phenology(
-    departements: list[str] | None = None,
+    departements: Annotated[list[str] | None, Query()] = None,
     date_start: str | None = None,
     date_end: str | None = None,
     gap_days: int = 7,
