@@ -1,5 +1,6 @@
-import { RefreshCw } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { Download, FileJson, RefreshCw } from "lucide-react";
+import { toPng } from "html-to-image";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { api } from "../api/client";
 import { FilterChecklist } from "../components/FilterChecklist";
 import { MapLegend, OptimizedMap } from "../components/OptimizedMap";
@@ -11,6 +12,7 @@ type MapPageProps = {
 };
 
 export function MapPage({ filters }: MapPageProps) {
+  const mapStageRef = useRef<HTMLDivElement | null>(null);
   const defaultForm: TrajectoryFilters = {
     departements: [],
     species: [],
@@ -27,6 +29,8 @@ export function MapPage({ filters }: MapPageProps) {
   });
   const [mapData, setMapData] = useState<TrajectoryMapResponse | null>(null);
   const [loading, setLoading] = useState(false);
+  const [exportingPng, setExportingPng] = useState(false);
+  const [exportError, setExportError] = useState<string | null>(null);
   const [showSiteLabels, setShowSiteLabels] = useState(false);
 
   const activeFilterCount =
@@ -56,6 +60,73 @@ export function MapPage({ filters }: MapPageProps) {
     } finally {
       setLoading(false);
     }
+  }
+
+  async function exportMapPng() {
+    if (!mapStageRef.current) return;
+
+    setExportError(null);
+    setExportingPng(true);
+    try {
+      const dataUrl = await toPng(mapStageRef.current, {
+        backgroundColor: "#f6faf9",
+        cacheBust: true,
+        pixelRatio: 2,
+      });
+      downloadUrl(dataUrl, `carte-trajectoires-${getExportDate()}.png`);
+    } catch {
+      setExportError("L'export PNG a echoue. Certaines tuiles cartographiques peuvent bloquer la capture du navigateur.");
+    } finally {
+      setExportingPng(false);
+    }
+  }
+
+  function exportTrajectoriesGeoJson() {
+    if (!mapData?.trajectories.length) return;
+
+    setExportError(null);
+    const featureCollection = {
+      type: "FeatureCollection",
+      name: `trajectoires-${getExportDate()}`,
+      crs: {
+        type: "name",
+        properties: {
+          name: "urn:ogc:def:crs:OGC:1.3:CRS84",
+        },
+      },
+      features: mapData.trajectories.map((trajectory) => ({
+        type: "Feature",
+        properties: {
+          id: trajectory.id,
+          num_pit: trajectory.num_pit,
+          species: trajectory.species,
+          gender: trajectory.gender,
+          age: trajectory.age,
+          individual_count: trajectory.individual_count,
+          departure_site: trajectory.departure.site,
+          departure_departement: trajectory.departure.departement,
+          departure_date: trajectory.departure.date,
+          arrival_site: trajectory.arrival.site,
+          arrival_departement: trajectory.arrival.departement,
+          arrival_date: trajectory.arrival.date,
+          distance_km: trajectory.distance_km,
+          color: trajectory.color,
+        },
+        geometry: {
+          type: "LineString",
+          coordinates: [
+            [trajectory.departure.lon, trajectory.departure.lat],
+            [trajectory.arrival.lon, trajectory.arrival.lat],
+          ],
+        },
+      })),
+    };
+
+    downloadBlob(
+      JSON.stringify(featureCollection, null, 2),
+      `trajectoires-affichees-${getExportDate()}.geojson`,
+      "application/geo+json",
+    );
   }
 
   useEffect(() => {
@@ -122,14 +193,45 @@ export function MapPage({ filters }: MapPageProps) {
           </button>
         </div>
       </aside>
-      <div className="map-stage">
-        <div className="map-toolbar">
-          <strong>{mapData?.count.toLocaleString("fr-FR") ?? "..."}</strong>
+      <div className="map-column">
+        <div className="map-stage" ref={mapStageRef}>
+          <div className="map-toolbar">
+            <strong>{mapData?.count.toLocaleString("fr-FR") ?? "..."}</strong>
           <span>liaisons agrégées affichées</span>
         </div>
-        <MapLegend data={mapData} showSiteLabels={showSiteLabels} onToggleSiteLabels={setShowSiteLabels} />
-        <OptimizedMap data={mapData} showSiteLabels={showSiteLabels} />
+          <MapLegend data={mapData} showSiteLabels={showSiteLabels} onToggleSiteLabels={setShowSiteLabels} />
+          <OptimizedMap data={mapData} showSiteLabels={showSiteLabels} />
+        </div>
+        <div className="map-export-actions">
+          <button className="secondary-action" onClick={exportMapPng} disabled={!mapData || loading || exportingPng}>
+            <Download size={18} />
+            {exportingPng ? "Export PNG..." : "Exporter la carte PNG"}
+          </button>
+          <button className="secondary-action" onClick={exportTrajectoriesGeoJson} disabled={!mapData?.trajectories.length || loading}>
+            <FileJson size={18} />
+            Exporter les trajectoires GeoJSON
+          </button>
+        </div>
+        {exportError ? <p className="map-export-error">{exportError}</p> : null}
       </div>
     </section>
   );
+}
+
+function getExportDate() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function downloadUrl(url: string, filename: string) {
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  link.click();
+}
+
+function downloadBlob(content: string, filename: string, type: string) {
+  const blob = new Blob([content], { type });
+  const url = URL.createObjectURL(blob);
+  downloadUrl(url, filename);
+  URL.revokeObjectURL(url);
 }

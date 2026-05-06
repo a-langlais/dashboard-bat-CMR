@@ -7,6 +7,7 @@ import { PhenologyPage } from "./pages/PhenologyPage";
 import { SitePage } from "./pages/SitePage";
 import { StatsPage } from "./pages/StatsPage";
 import type { FilterOptions } from "./types/api";
+import biocenaLogo from "../images/biocena.svg";
 
 type Tab = "home" | "map" | "phenology" | "stats" | "site";
 
@@ -65,7 +66,8 @@ export function App() {
         ) : null}
       </main>
       <footer className="app-footer">
-        Outil créé par Alexandre LANGLAIS (Biocena) - (c) 2026 - v 0.6
+        <img src={biocenaLogo} alt="Biocena" />
+        <span>© 2026 - Biocena (Alexandre LANGLAIS) - v0.6</span>
       </footer>
     </div>
   );

@@ -29,6 +29,7 @@ export function OptimizedMap({ data, showSiteLabels = false }: OptimizedMapProps
     L.control.zoom({ position: "bottomright" }).addTo(map.current);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution: "&copy; OpenStreetMap",
+      crossOrigin: "anonymous",
       maxZoom: 18,
     }).addTo(map.current);
     layer.current = L.layerGroup().addTo(map.current);
