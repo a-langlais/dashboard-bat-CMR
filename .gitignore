@@ -168,6 +168,10 @@ data/df_cmr_clean.csv
 data/df_antenna_clean.csv
 data/df_capture_clean.csv
 data/df_controls.csv
+data/df_distances.csv
+data/df_individus.csv
+data/df_mapping_regions.csv
+data/df_sites.csv
 data/df_error_HEURE.csv
 streamlit_old/df_cmr.csv
 streamlit_old/df_cmr_clean.csv
