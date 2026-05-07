@@ -9,5 +9,4 @@ backend/.pytest_cache
 frontend/dist
 frontend/node_modules
 frontend/*.tsbuildinfo
-data
 patchnote.md

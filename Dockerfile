@@ -25,6 +25,7 @@ WORKDIR /app
 COPY backend ./backend
 RUN pip install --no-cache-dir -e ./backend
 
+COPY data /data
 COPY --from=frontend-build /app/frontend/dist ./frontend_dist
 
 EXPOSE 8000
