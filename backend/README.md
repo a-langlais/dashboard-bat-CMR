@@ -1,8 +1,15 @@
 # Backend FastAPI
 
-Ce dossier contient le backend Python de l'application CMR CCPNA. Il expose les donnees CSV actuelles via FastAPI et isole l'acces aux donnees pour faciliter un futur branchement SQL.
+Ce dossier contient l'API Python du dashboard CMR CCPNA. Elle expose les données CSV au frontend React et regroupe la logique métier de filtres, trajectoires, statistiques, phénologie et fiches sites.
 
-## Installation
+## Rôle
+
+- Charger les CSV depuis `CCPNA_DATA_DIR`.
+- Normaliser les dates et enrichir les tables nécessaires aux calculs.
+- Exposer des endpoints JSON sous le préfixe `/api`.
+- Servir le frontend compilé lorsque `FRONTEND_DIST_DIR` pointe vers un build Vite disponible.
+
+## Installation Locale
 
 Depuis la racine du projet :
 
@@ -11,87 +18,57 @@ cd backend
 python -m pip install -e .
 ```
 
-## Lancement
+## Lancement Local
 
 ```powershell
 cd backend
 python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
 ```
 
-La documentation interactive est disponible sur :
+Documentation interactive :
 
-- http://127.0.0.1:8000/docs
-- http://127.0.0.1:8000/redoc
-
-## Endpoints disponibles
-
-Une documentation exhaustive des payloads, parametres et reponses est disponible dans [`API.md`](API.md).
-
-### `GET /api/health`
-
-Verifie que l'API repond.
-
-### `GET /api/filters`
-
-Expose les options de filtres issues des CSV actuels :
-
-- departements
-- communes
-- especes
-- sexes
-- ages
-- sites
-- sites equipes d'antennes
-- periodes
-- bornes temporelles
-
-### `POST /api/map/trajectories`
-
-Retourne les trajectoires cartographiques pretes a afficher dans un frontend JavaScript.
-
-Payload minimal :
-
-```json
-{
-  "species": ["RHIFER"],
-  "periods": ["Transit"]
-}
+```text
+http://127.0.0.1:8000/docs
+http://127.0.0.1:8000/redoc
 ```
 
-Payload complet :
+## Configuration
 
-```json
-{
-  "departements": ["16", "17"],
-  "species": ["RHIFER"],
-  "genders": ["M"],
-  "ages": ["AD"],
-  "communes": ["VERTEUIL-SUR-CHARENTE"],
-  "sites": ["Chateau de Verteuil"],
-  "date_start": "2018-01-01",
-  "date_end": "2024-12-31",
-  "periods": ["Transit", "Parturition", "Hivernale"]
-}
+Variables prises en compte :
+
+```text
+CCPNA_DATA_DIR      # dossier contenant les CSV, par défaut ../data en local
+FRONTEND_DIST_DIR   # dossier du frontend compilé, par défaut ../frontend/dist
 ```
 
-La reponse contient :
+En Docker racine, ces variables valent :
 
-- `center` et `bounds` pour cadrer la carte
-- `species_colors` pour harmoniser les couleurs cote frontend
-- `trajectories` pour tracer les lignes
-- `sites` pour afficher les marqueurs
+```text
+CCPNA_DATA_DIR=/data
+FRONTEND_DIST_DIR=/app/frontend_dist
+```
 
-### `GET /api/stats/global`
+## CSV Attendus
 
-Retourne les KPI, séries temporelles, répartitions par espèces, distances et table des trajectoires.
+```text
+df_individus.csv
+df_sites.csv
+df_distances.csv
+df_controls.csv
+```
 
-### `GET /api/phenology`
+Le backend charge ces fichiers une seule fois par processus grâce à un cache `lru_cache`. Les réponses API peuvent ensuite être mises en cache côté frontend pour éviter de rappeler les mêmes endpoints lors des changements d'onglets.
 
-Retourne les périodes de présence des sites équipés, avec filtres optionnels `departements`, `date_start` et `date_end`.
+## Endpoints
 
-### `GET /api/sites/{site}/summary`
+Une documentation exhaustive des payloads, paramètres et réponses est disponible dans [API.md](API.md).
 
-Retourne les KPI et séries d'une fiche site.
+- `GET /api/health`
+- `GET /api/filters`
+- `POST /api/map/trajectories`
+- `GET /api/stats/global`
+- `GET /api/phenology`
+- `GET /api/sites/{site}/summary`
 
 ## Organisation
 
@@ -99,9 +76,11 @@ Retourne les KPI et séries d'une fiche site.
 backend/
 |-- app/
 |   |-- api/             # Routes FastAPI
-|   |-- core/            # Configuration et constantes metier
-|   |-- repositories/    # Acces aux donnees CSV, futur point de remplacement SQL
-|   |-- schemas/         # Contrats Pydantic exposes a l'API
-|   `-- services/        # Logique metier de filtres et trajectoires
-`-- pyproject.toml
+|   |-- core/            # Configuration et constantes métier
+|   |-- repositories/    # Accès aux CSV
+|   |-- schemas/         # Contrats Pydantic
+|   `-- services/        # Logique métier
+|-- Dockerfile           # Image backend seule, conservée pour usage séparé
+|-- pyproject.toml
+`-- README.md
 ```

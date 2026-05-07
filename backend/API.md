@@ -4,13 +4,14 @@ Cette API FastAPI expose les donnees CMR actuelles au frontend React. Elle lit
 aujourd'hui les CSV du dossier `data/`, mais la logique est isolee dans
 `app/repositories/` pour permettre un futur branchement SQL.
 
-Base locale :
+Base locale en développement séparé :
 
 ```text
 http://127.0.0.1:8000/api
 ```
 
-En Docker, le frontend Nginx proxifie les appels vers :
+En Docker unique ou sur Hugging Face Spaces, FastAPI sert le frontend compilé
+et l'API depuis le même domaine. Le frontend appelle alors :
 
 ```text
 /api
@@ -23,6 +24,7 @@ En Docker, le frontend Nginx proxifie les appels vers :
 - Les codes especes utilisent les codes metier des CSV, par exemple `RHIFER`, `MINSCH`, `MYOEMA`.
 - Les distances sont exprimees en kilometres.
 - Les coordonnees sont en latitude/longitude WGS84.
+- Les reponses peuvent etre reutilisees par le cache memoire du frontend quand la meme cle de requete est demandee plusieurs fois.
 
 ## Endpoints
 
@@ -82,7 +84,9 @@ Champs importants :
 ## `POST /map/trajectories`
 
 Retourne les donnees pretes pour la carte Leaflet : trajectoires, sites,
-bornes de cadrage et palette d'especes.
+bornes de cadrage et palette d'especes. Les couleurs de departements visibles
+dans la legende sont gerees cote frontend dans la table de reference des
+departements.
 
 Payload minimal :
 
@@ -340,6 +344,10 @@ FastAPI renvoie automatiquement :
 - `422 Unprocessable Entity` si un payload ou parametre ne respecte pas les types attendus.
 - `500 Internal Server Error` si les CSV attendus sont absents ou si une colonne obligatoire manque.
 
+En deploiement Docker ou Hugging Face Spaces, un `500` sur `/api/filters`
+indique souvent que le dossier `data/` n'a pas ete copie dans l'image ou que
+`CCPNA_DATA_DIR` ne pointe pas vers le bon emplacement.
+
 ## Fichiers CSV attendus
 
 Le repository CSV attend notamment :
@@ -351,3 +359,9 @@ Le repository CSV attend notamment :
 
 Ces fichiers sont lus depuis `Settings.data_dir`, configurable avec la variable
 `CCPNA_DATA_DIR`.
+
+Le Dockerfile racine utilise par defaut :
+
+```text
+CCPNA_DATA_DIR=/data
+```
