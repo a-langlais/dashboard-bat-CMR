@@ -5,9 +5,8 @@ WORKDIR /app/frontend
 ARG VITE_API_BASE_URL=/api
 ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
 
-RUN apt-get update \
-    && apt-get upgrade -y \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk upgrade --no-cache \
+    && npm install -g npm@latest
 
 COPY frontend/package*.json ./
 RUN npm ci
