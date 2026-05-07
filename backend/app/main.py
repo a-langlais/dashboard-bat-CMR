@@ -7,8 +7,13 @@ dans `repositories/`, afin de pouvoir remplacer les CSV par SQL sans toucher a
 la couche HTTP.
 """
 
+import os
+from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 
 from app.api.routes import router
 from app.core.config import get_settings
@@ -41,3 +46,22 @@ app.add_middleware(
 # prefixe est centralise dans la configuration pour rester modifiable si l'API
 # doit un jour cohabiter avec d'autres services.
 app.include_router(router, prefix=settings.api_prefix)
+
+frontend_dist = Path(
+    os.getenv(
+        "FRONTEND_DIST_DIR",
+        Path(__file__).resolve().parents[3] / "frontend" / "dist",
+    )
+)
+
+if frontend_dist.exists():
+    assets_dir = frontend_dist / "assets"
+    if assets_dir.exists():
+        app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
+
+    @app.get("/{full_path:path}", include_in_schema=False)
+    def serve_frontend(full_path: str):
+        requested_file = frontend_dist / full_path
+        if requested_file.is_file():
+            return FileResponse(requested_file)
+        return FileResponse(frontend_dist / "index.html")
