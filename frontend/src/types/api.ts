@@ -69,6 +69,8 @@ export type Kpis = {
   total_recaptured: number;
   capture_sites: number;
   antenna_sites: number;
+  local_control_rate?: number | null;
+  follow_up_years?: number | null;
 };
 
 export type YearCount = { year: number; species: string; count: number };

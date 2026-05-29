@@ -12,6 +12,8 @@ class Kpis(BaseModel):
     total_recaptured: int
     capture_sites: int
     antenna_sites: int
+    local_control_rate: float | None = None
+    follow_up_years: int | None = None
 
 
 class YearCount(BaseModel):

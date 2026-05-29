@@ -104,7 +104,7 @@ def get_site_summary(data: CmrData, site: str) -> SiteSummary:
 
     return SiteSummary(
         site=site,
-        kpis=_kpis(controls, individus, data.sites),
+        kpis=_site_kpis(controls, individus, data.sites),
         detections_by_year=_counts_by_year(controls, unique_individuals=False),
         captures_by_year=_counts_by_year(individus, unique_individuals=True),
         controls_by_year=_counts_by_year(controls, unique_individuals=True),
@@ -155,6 +155,45 @@ def _kpis(controls: pd.DataFrame, individus: pd.DataFrame, sites: pd.DataFrame) 
         capture_sites=int(individus["LIEU_DIT"].nunique()) if "LIEU_DIT" in individus else 0,
         antenna_sites=int(sites["LIEU_DIT"].nunique()) if "LIEU_DIT" in sites else 0,
     )
+
+
+def _site_kpis(controls: pd.DataFrame, individus: pd.DataFrame, sites: pd.DataFrame) -> Kpis:
+    """Calcule les KPI d'une fiche site."""
+    kpis = _kpis(controls, individus, sites)
+    return kpis.model_copy(
+        update={
+            "local_control_rate": _local_control_rate(controls, individus),
+            "follow_up_years": _follow_up_years(controls),
+        }
+    )
+
+
+def _local_control_rate(controls: pd.DataFrame, individus: pd.DataFrame) -> float | None:
+    """Part des individus equipes sur le site recontroles au moins une fois sur ce meme site."""
+    if individus.empty or "NUM_PIT" not in individus or "NUM_PIT" not in controls or "ACTION" not in controls:
+        return None
+
+    equipped = _pit_values(individus["NUM_PIT"])
+    if not equipped:
+        return None
+
+    local_recaptures = controls[controls["ACTION"] == "C"]
+    recaptured = _pit_values(local_recaptures["NUM_PIT"])
+    return round((len(equipped & recaptured) / len(equipped)) * 100, 1)
+
+
+def _pit_values(series: pd.Series) -> set[str]:
+    return set(series.dropna().astype(str).str.replace(r"\.0$", "", regex=True))
+
+
+def _follow_up_years(controls: pd.DataFrame) -> int:
+    """Nombre d'annees avec au moins un individu controle sur le site."""
+    if controls.empty or "DATE" not in controls or "NUM_PIT" not in controls:
+        return 0
+    scoped = controls.dropna(subset=["DATE", "NUM_PIT"]).copy()
+    if scoped.empty:
+        return 0
+    return int(pd.to_datetime(scoped["DATE"], errors="coerce").dt.year.dropna().nunique())
 
 
 def _counts_by_year(df: pd.DataFrame, unique_individuals: bool) -> list[YearCount]:
