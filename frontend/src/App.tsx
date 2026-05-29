@@ -72,7 +72,7 @@ export function App() {
       </main>
       <footer className="app-footer">
         <img src={biocenaLogo} alt="Biocena" />
-        <span>© 2026 - Biocena (Alexandre LANGLAIS) - v0.6</span>
+        <span>© 2026 - Alexandre LANGLAIS (Biocena) - v0.6</span>
         <span>Dernière actualisation des données : 2026-02-10</span>
       </footer>
     </div>
