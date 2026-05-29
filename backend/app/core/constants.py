@@ -20,6 +20,7 @@ ANTENNA_SITES = sorted(
         "Gouffre de la Fage",
         "Ancienne citerne à eau",
         "Château de Verteuil",
+        "Grotte de Rancogne",
         "Les Dames",
         "Château de Hautefort",
         "Les Tours de Merle - Tour Fulcon",
